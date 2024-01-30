@@ -1,8 +1,23 @@
+// import Login from "./pages/login";
+// import Register from "./pages/register";
+import Profile from "./pages/profile";
+
+
 function App() {
   return (
+  <>
     <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      {/* <Login /> */}
     </>
+    <>
+        {/* <Register /> */}
+    </>
+    <>
+        <Profile/>
+    </>
+      
+  </>
+    
   );
 }
 
