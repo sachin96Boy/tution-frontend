@@ -6,9 +6,7 @@ export default {
   ],
   theme: {
     extend: {
-      
 
-      
       width: {
         '200': '40rem',
       },
@@ -23,12 +21,15 @@ export default {
         'blue': '#3B5079 ',
         'regal-blue': '#7383A1',
         'bg-red': 'background: #DE5353',
-        'bg-white': 'bg:background: #FDFDFD, '
-
-
+        'bg-white': 'bg:background: #FDFDFD',
       }
     },
+
   },
-  plugins:[require("daisyui")],
+  daisyui: {
+    themes: ["light"],
+  },
+ 
+ plugins: [require("daisyui")],
 }
 
