@@ -2,6 +2,7 @@ import RegiaterImg from "../assets/Images/register.jpg.png";
 import { Formik } from "formik";
 import Input from "../components/input";
 import * as yup from "yup";
+import { Link } from "react-router-dom";
 
 const initialValues = {
   first_name: "",
@@ -157,9 +158,16 @@ export default function Register() {
 <br />
 
 
-                <label className="font-size-[13px] font-style:normal font-weight:500">By clicking Sign Up, you agree to our Terms of Use and our Privacy Policy.</label>
+                <label className="font-size-[13px] font-style:normal font-weight:500">By clicking Sign Up, you agree to our 
+                  <span className='m-4 text-red-600 font-medium'>Terms of Use</span> and our 
+                  <span className='m-4 text-red-600 font-medium'>Privacy Policy.</span>
+                </label>
 <br />
-                <label htmlFor="">Already have an account? Log in</label>
+                <label htmlFor="">Already have an account? 
+                  <span className='m-4 text-red-600 font-medium'>
+                    <Link to ='/'>Log in</Link>
+                  </span>
+                </label>
 <br />
 <br />
 <br />
