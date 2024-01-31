@@ -16,11 +16,11 @@ const initialValues = {
 };
 
 const validationSchema = yup.object({
-    school: yup.string().required(""),
-    subject_stream: yup.string().required(""),
-    exam_year: yup.string().required(""),
-    district: yup.string().email("").required(""),
-    nfc_code: yup.string().required(""),
+    school: yup.string().required("Required"),
+    subject_stream: yup.string().required("Required"),
+    exam_year: yup.string().required("Required"),
+    district: yup.string().email("").required("Required"),
+    nfc_code: yup.string().required("Required"),
     nic: yup.string().required("Required"),
     parents_mobile: yup.string().required("Required"),
     upload_images: yup.string().required("Required"),
@@ -50,14 +50,11 @@ export default function Profile() {
             <div className="  bg-regal-light  rounded-xl  border-[1px] shadow  sm:rounded-md p-8">
               <form autoComplete="off" onSubmit={formik.handleSubmit}>
                 <br />
-                <br />
-                
 
                 <span className="text-3xl  font-bold text-center mt-5 ">
                   Profile update
                 </span>
-                
-                
+
                 <br />
                 <br />
                 <div className="grid grid-cols-2 gap-6">
@@ -73,7 +70,7 @@ export default function Profile() {
                         value={formik.values.school}
                       />
                     </div>
-
+<br />
                    <div className="col-span-6 sm:col-span-3 w-[347.5px] h-[82.81px] top-[397.92px] left-[932px] radius-[5px] border-[1px solid]">
                       <Input
                         className="input input-bordered w-full max-w-xs"
@@ -85,7 +82,7 @@ export default function Profile() {
                         value={formik.values.exam_year}
                       />
                     </div>
-
+<br />
                     <div className="col-span-6 sm:col-span-3 w-[347.5px] h-[82.81px] top-[397.92px] left-[932px] radius-[5px] border-[1px solid]">
                       <Input
                         className="input input-bordered w-full max-w-xs"
@@ -97,7 +94,7 @@ export default function Profile() {
                         value={formik.values.address}
                       />
                     </div>
-
+<br />
                     <div className="col-span-6 sm:col-span-3 w-[347.5px] h-[82.81px] top-[397.92px] left-[932px] radius-[5px] border-[1px solid]">
                       <Input
                         className="input input-bordered w-full max-w-xs"
@@ -125,7 +122,7 @@ export default function Profile() {
                         value={formik.values.subject_stream}
                       />
                     </div>
-
+<br />
                   <div className="col-span-6 sm:col-span-3 w-[347.5px] h-[82.81px] top-397.92px] left-[564.5px] radius-[5px] border-[1px solid]">
                     <Input
                       className="input input-bordered w-full max-w-xs"
@@ -137,7 +134,7 @@ export default function Profile() {
                       value={formik.values.district}
                     />
                   </div>
-
+<br />
                   <div className="col-span-6 sm:col-span-3 w-[347.5px] h-[82.81px] top-[496px] left-[564px] radius-[5px] border-[1px solid]">
                     <Input
                       className="input input-bordered w-full max-w-xs"
@@ -149,7 +146,7 @@ export default function Profile() {
                       value={formik.values.nfc_code}
                     />
                   </div>
-
+<br />
                   <div className="col-span-6 sm:col-span-3 w-[347.5px] h-[82.81px] top-[496px] left-[564px] radius-[5px] border-[1px solid]">
                     <Input
                       className="input input-bordered w-full max-w-xs"
@@ -176,30 +173,18 @@ export default function Profile() {
                   </div>
                 </div>
 <br />
-                <div className="md:col-span-5">
-                <div className="inline-flex items-center">
-                  <input type="checkbox" name="billing_same" id="billing_same" className="form-checkbox w-[21.31px] h-[21.31px] flex-shrink-0 border-[1px]" />
-                  <label className="ml-2">I agree to all the Terms, Privacy Policy and Fees</label>
-                </div>
-              </div>
+                
 
 
                 <button
                   type="submit"
-                  className="w-full my-5 py-3 bg-regal-red shadow-lg shadow-red-500/50 hover:shadow-red-500/40 text-white font-semibold   rounded-sm "
+                  className="w-[150px] my-2 py-2 bg-regal-red shadow-lg shadow-red-500/50 hover:shadow-red-500/40 text-white font-semibold   rounded-sm "
                 >
                   UPDATE
                 </button>
 <br />
 
 
-                <label className="font-size-[13px] font-style:normal font-weight:500">By clicking Sign Up, you agree to our Terms of Use and our Privacy Policy.</label>
-<br />
-                <label htmlFor="">Already have an account? Log in</label>
-<br />
-<br />
-<br />
-<br />
 
               </form>
             </div>

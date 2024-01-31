@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import loginImg from '../assets/Images/login.jpg.png'
 import { BiHide } from "react-icons/bi";
 
+
 export default function Login() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 min-h-screen w-full bg-regal-gray">
@@ -26,7 +27,9 @@ export default function Login() {
           <button className='w-full my-5 py-3 bg-regal-red shadow-lg shadow-red-500/50 hover:shadow-red-500/40 text-white font-semibold   rounded-sm '>LOGIN</button>
           <div className='text-center'>
             <span className='text-stone-400 font-medium'>Don't have an account? </span>
-            <span className='m-4 text-red-600 font-medium'><Link to ='/Register'></Link>Sign up</span>
+            <span className='m-4 text-red-600 font-medium'>
+              <Link to ='/Register'>Sign up</Link>
+              </span>
             <br />
             <span className=' text-red-600 font-medium'>Forgot Password?</span>
           </div>
