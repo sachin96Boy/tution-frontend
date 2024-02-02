@@ -6,7 +6,7 @@ function Classes() {
   return (
     <TemplateDashboard>
       <form>
-        <p className="text-2xl text-left pl-2 pt-5 pb-5">My Classes</p>
+        <p className="text-2xl text-left pl-2 pt-2 pb-3">My Classes</p>
         <div className="cart inline-flex  p-2 rounded-lg space-x-4 bg-slate-100 w-full">
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-6 ">
             <ClassComponent

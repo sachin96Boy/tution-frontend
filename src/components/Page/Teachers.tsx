@@ -6,11 +6,11 @@ function Teachers() {
   return (
     <TemplateDashboard>
     <form>
-      <p className="text-2xl text-left pl-7 pt-5 pb-5">Teachers</p>
+      <p className="text-2xl text-left pl-3 pt-2 pb-2">Teachers</p>
         <div className="cart inline-flex  p-2 rounded-lg space-x-4 bg-slate-100 w-full">
       
        
-        <div className="grid grid-cols-5 gap-4">
+        <div className="grid grid-cols-5 gap-6">
          <CardComponent imageUrl={"./src/assets/bio.png"} name={"John Doe"} possiotion={"Architect & Engineer"} />
          <CardComponent imageUrl={"./src/assets/bio.png"} name={"Hello Doe"} possiotion={"Teacher6"}/>
          <CardComponent imageUrl={"./src/assets/bio.png"} name={"Hello Doe"} possiotion={"Teacher7"}/>

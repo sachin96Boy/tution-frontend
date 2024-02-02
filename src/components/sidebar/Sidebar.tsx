@@ -44,7 +44,7 @@ const Sidebar = () => {
                   open && "rotate-[360deg]"
                 }`}
               />
-              Classes
+              
             </Link>
     
           </li>
@@ -74,8 +74,7 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <a
-              href="#"
+           <Link to={"/ShoppingCart"}
               className="flex items-center p-3 text-gray-900 rounded-lg dark:text-white  hover:bg-red-500 dark:hover:bg-red-500 group"
             >
               <img
@@ -84,7 +83,7 @@ const Sidebar = () => {
                   open && "rotate-[360deg]"
                 }`}
               />
-            </a>
+            </Link>
           </li>
           <li>
            <Link to={""}

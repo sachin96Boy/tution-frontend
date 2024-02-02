@@ -5,6 +5,7 @@ import Teachers from "./components/Page/Teachers";
 import Navbar from "./components/navbar/Navbar";
 import Sidebar from "./components/sidebar/Sidebar";
 import TemplateDashboard from "./components/TemplateDashboard";
+import ShoppingCart from "./components/Page/ShoppingCart";
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
           <Route path="/Classes" element={<Classes />}></Route>
           <Route path="/Revision" element={<Revision />} />
           <Route path="/Teachers" element={<Teachers />}></Route>
+          <Route path="/ShoppingCart" element={<ShoppingCart />}></Route>
+
           <Route path="/Test" element={<TemplateDashboard />}></Route>
 
         </Routes>
