@@ -12,16 +12,19 @@ const CardComponent: React.FunctionComponent<CardComponentProps> = ({
   possiotion,
 }) => {
   return (
-    <div className="container static rounded-lg  bg-white">
+    <div className="container rounded-lg  bg-white ">
+      <div className="">
       <img
         src={imageUrl}
         className="size-26 rounded-lg p-3"
         alt="Profile Picture"
       />
+      
       <h4 className="pl-3 text-[#3B5079] text-[14px]">
         <b>{name}</b>
       </h4>
       <p className="pl-3 text-[#7383A1] text-[12px] pb-3">{possiotion}</p>
+      </div>
     </div>
   );
 };

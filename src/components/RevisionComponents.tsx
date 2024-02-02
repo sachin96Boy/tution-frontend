@@ -33,7 +33,7 @@ const RevisionComponents: React.FunctionComponent<RevisionComponentProps> = ({
           </div>
         </div>
         <div
-          className=" space-x-9 ml-7 p-5 
+          className=" space-x-5 ml-7 p-4 w-auto 
 "
         >
           <button className="btn bg-[#3B5079] text-white">{Bbname}</button>
