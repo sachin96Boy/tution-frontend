@@ -10,24 +10,24 @@ const initialValues = {
   district: "",
   address: "",
   nfc_code: "",
-  nic:"",
-  parents_mobile:"",
-  upload_images:"",
+  nic: "",
+  parents_mobile: "",
+  upload_images: "",
 };
 
 const validationSchema = yup.object({
-    school: yup.string().required("Required"),
-    subject_stream: yup.string().required("Required"),
-    exam_year: yup.string().required("Required"),
-    district: yup.string().email("").required("Required"),
-    nfc_code: yup.string().required("Required"),
-    nic: yup.string().required("Required"),
-    parents_mobile: yup.string().required("Required"),
-    upload_images: yup.string().required("Required"),
+  school: yup.string().required("Required"),
+  subject_stream: yup.string().required("Required"),
+  exam_year: yup.string().required("Required"),
+  district: yup.string().email("").required("Required"),
+  nfc_code: yup.string().required("Required"),
+  nic: yup.string().required("Required"),
+  parents_mobile: yup.string().required("Required"),
+  upload_images: yup.string().required("Required"),
 });
 
 export default function Profile() {
-  const handleFormSubmit = (values: any) => {
+  const handleFormSubmit = (values: unknown) => {
     alert(JSON.stringify(values, null, 2));
   };
   return (
@@ -70,8 +70,8 @@ export default function Profile() {
                         value={formik.values.school}
                       />
                     </div>
-<br />
-                   <div className="col-span-6 sm:col-span-3 w-[347.5px] h-[82.81px] top-[397.92px] left-[932px] radius-[5px] border-[1px solid]">
+                    <br />
+                    <div className="col-span-6 sm:col-span-3 w-[347.5px] h-[82.81px] top-[397.92px] left-[932px] radius-[5px] border-[1px solid]">
                       <Input
                         className="input input-bordered w-full max-w-xs"
                         label="Exam year"
@@ -82,7 +82,7 @@ export default function Profile() {
                         value={formik.values.exam_year}
                       />
                     </div>
-<br />
+                    <br />
                     <div className="col-span-6 sm:col-span-3 w-[347.5px] h-[82.81px] top-[397.92px] left-[932px] radius-[5px] border-[1px solid]">
                       <Input
                         className="input input-bordered w-full max-w-xs"
@@ -94,7 +94,7 @@ export default function Profile() {
                         value={formik.values.address}
                       />
                     </div>
-<br />
+                    <br />
                     <div className="col-span-6 sm:col-span-3 w-[347.5px] h-[82.81px] top-[397.92px] left-[932px] radius-[5px] border-[1px solid]">
                       <Input
                         className="input input-bordered w-full max-w-xs"
@@ -108,10 +108,8 @@ export default function Profile() {
                     </div>
                   </div>
 
-
-
-                <div>
-                <div className="col-span-6 sm:col-span-3 lg:col-span-2 w-[347.5px] h-[82.81px] top-[300.27pxpx] left-[932px] radius-[5px] border-[1px solid]">
+                  <div>
+                    <div className="col-span-6 sm:col-span-3 lg:col-span-2 w-[347.5px] h-[82.81px] top-[300.27pxpx] left-[932px] radius-[5px] border-[1px solid]">
                       <Input
                         className="input input-bordered w-full max-w-xs"
                         label="Subject Stream"
@@ -122,45 +120,45 @@ export default function Profile() {
                         value={formik.values.subject_stream}
                       />
                     </div>
-<br />
-                  <div className="col-span-6 sm:col-span-3 w-[347.5px] h-[82.81px] top-397.92px] left-[564.5px] radius-[5px] border-[1px solid]">
-                    <Input
-                      className="input input-bordered w-full max-w-xs"
-                      label="District"
-                      type="text"
-                      name="district"
-                      placeholder="ex: District"
-                      onChange={formik.handleChange}
-                      value={formik.values.district}
-                    />
+                    <br />
+                    <div className="col-span-6 sm:col-span-3 w-[347.5px] h-[82.81px] top-397.92px] left-[564.5px] radius-[5px] border-[1px solid]">
+                      <Input
+                        className="input input-bordered w-full max-w-xs"
+                        label="District"
+                        type="text"
+                        name="district"
+                        placeholder="ex: District"
+                        onChange={formik.handleChange}
+                        value={formik.values.district}
+                      />
+                    </div>
+                    <br />
+                    <div className="col-span-6 sm:col-span-3 w-[347.5px] h-[82.81px] top-[496px] left-[564px] radius-[5px] border-[1px solid]">
+                      <Input
+                        className="input input-bordered w-full max-w-xs"
+                        label="NFC Code"
+                        type="text"
+                        name="nfc_code"
+                        placeholder="ex: NFC code"
+                        onChange={formik.handleChange}
+                        value={formik.values.nfc_code}
+                      />
+                    </div>
+                    <br />
+                    <div className="col-span-6 sm:col-span-3 w-[347.5px] h-[82.81px] top-[496px] left-[564px] radius-[5px] border-[1px solid]">
+                      <Input
+                        className="input input-bordered w-full max-w-xs"
+                        label="Parent's Mobile"
+                        type="text"
+                        name="parents_mobile"
+                        placeholder="ex: 07********"
+                        onChange={formik.handleChange}
+                        value={formik.values.parents_mobile}
+                      />
+                    </div>
                   </div>
-<br />
-                  <div className="col-span-6 sm:col-span-3 w-[347.5px] h-[82.81px] top-[496px] left-[564px] radius-[5px] border-[1px solid]">
-                    <Input
-                      className="input input-bordered w-full max-w-xs"
-                      label="NFC Code"
-                      type="text"
-                      name="nfc_code"
-                      placeholder="ex: NFC code"
-                      onChange={formik.handleChange}
-                      value={formik.values.nfc_code}
-                    />
-                  </div>
-<br />
-                  <div className="col-span-6 sm:col-span-3 w-[347.5px] h-[82.81px] top-[496px] left-[564px] radius-[5px] border-[1px solid]">
-                    <Input
-                      className="input input-bordered w-full max-w-xs"
-                      label="Parent's Mobile"
-                      type="text"
-                      name="parents_mobile"
-                      placeholder="ex: 07********"
-                      onChange={formik.handleChange}
-                      value={formik.values.parents_mobile}
-                    />
-                  </div>
-                </div>
 
-                <div className="col-span-6 sm:col-span-3 w-[347.5px] h-[82.81px] top-[496px] left-[564px] radius-[5px] border-[1px solid]">
+                  <div className="col-span-6 sm:col-span-3 w-[347.5px] h-[82.81px] top-[496px] left-[564px] radius-[5px] border-[1px solid]">
                     <Input
                       className="input input-bordered w-full max-w-xs"
                       label="Upload images"
@@ -172,9 +170,7 @@ export default function Profile() {
                     />
                   </div>
                 </div>
-<br />
-                
-
+                <br />
 
                 <button
                   type="submit"
@@ -182,10 +178,7 @@ export default function Profile() {
                 >
                   UPDATE
                 </button>
-<br />
-
-
-
+                <br />
               </form>
             </div>
           );
