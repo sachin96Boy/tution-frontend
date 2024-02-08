@@ -10,7 +10,7 @@ function Teachers() {
         <div className="cart inline-flex  p-2 rounded-lg space-x-4 bg-slate-100 w-full">
       
        
-        <div className="grid grid-cols-5 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-6">
          <CardComponent imageUrl={"./src/assets/bio.png"} name={"John Doe"} possiotion={"Architect & Engineer"} />
          <CardComponent imageUrl={"./src/assets/bio.png"} name={"Hello Doe"} possiotion={"Teacher6"}/>
          <CardComponent imageUrl={"./src/assets/bio.png"} name={"Hello Doe"} possiotion={"Teacher7"}/>

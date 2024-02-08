@@ -6,6 +6,9 @@ import Navbar from "./components/navbar/Navbar";
 import Sidebar from "./components/sidebar/Sidebar";
 import TemplateDashboard from "./components/TemplateDashboard";
 import ShoppingCart from "./components/Page/ShoppingCart";
+import TotalComponents from "../TotalComponent";
+import RevitionLimit from "./components/Page/RevitionLimit";
+
 
 function App() {
   return (
@@ -16,8 +19,10 @@ function App() {
           <Route path="/Revision" element={<Revision />} />
           <Route path="/Teachers" element={<Teachers />}></Route>
           <Route path="/ShoppingCart" element={<ShoppingCart />}></Route>
+          <Route path="/RevitionLimit" element={<RevitionLimit />}></Route>
 
-          <Route path="/Test" element={<TemplateDashboard />}></Route>
+
+          <Route path="/" element={<TemplateDashboard />}></Route>
 
         </Routes>
       </BrowserRouter>
