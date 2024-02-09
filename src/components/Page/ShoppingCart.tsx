@@ -18,7 +18,7 @@ function ShoppingCart() {
               name2={"38 Downloadble Resorces"}
               Auther={"by gueer"}
               Month={"January"}
-              price={"LKR 2000"}
+              price={"LKR 3000"}
             />
             <ShoppingCartComponents
               name={"2022 Biology Revision"}
