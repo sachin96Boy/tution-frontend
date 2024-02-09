@@ -14,17 +14,13 @@ const ShoppingCartComponents: React.FunctionComponent<
 > = ({ name, Month, name1, name2, Auther, price }) => {
   return (
     <>
-    
       <div className="inline-block	">
-        
         <div className=" cart w-auto mt-4">
-          
           <div className="container bg-[#368DF3] size-24 text-center p-5">
             {Month}
           </div>
-          
-          <div>
 
+          <div>
             <h2 className="p-2 font-bold  text-[#3B5079]">
               {name}{" "}
               <span className="ml-3 text-[#7383A1] font-bold">{Auther}</span>{" "}
@@ -36,13 +32,7 @@ const ShoppingCartComponents: React.FunctionComponent<
             <h2 className="p-2  text-[#3B5079] font-bold">{name2}</h2>
           </div>
         </div>
-        
-        
       </div>
-
-      
-      
-   
     </>
   );
 };
