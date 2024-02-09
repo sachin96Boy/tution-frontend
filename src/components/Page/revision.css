@@ -1,0 +1,29 @@
+.cart {
+    display: inline-flex;
+    margin-top: 7px;
+    padding: 5px;
+    align-items: center;
+    border-radius: 0.5rem;
+    background-color: rgb(235, 233, 239);
+    width: 18rem;
+    height: auto;
+    margin-left: 1.5rem;
+    
+    
+}
+.container {
+    background-color: #FFFFFF;
+    border-radius: 0.5rem;
+    padding: 1px;
+    padding-left: 0.1rem;
+    width:auto;
+    display: inline-flex;
+
+}
+.btn {
+   
+    color: rgb(255 255 255);
+    font-size: 13px;
+    
+    
+}
