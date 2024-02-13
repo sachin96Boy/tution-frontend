@@ -13,7 +13,7 @@ const TotalComponents: React.FunctionComponent<TotalComponentProps> = ({
 }) => {
   return (
     <>
-      <div className=" w-[385px] h-[240.03px] rounded-[10px] bg-white text-primary-content mt-4">
+      <div className=" w-[385px] h-[240.03px] rounded-[10px] bg-white text-primary-content mt-2">
         <h2 className="card-title text-[#3B5079] p-3 pt-4 font-bold">
           {Title}
         </h2>
