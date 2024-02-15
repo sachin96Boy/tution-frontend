@@ -22,7 +22,7 @@ const RevisionComponents: React.FunctionComponent<RevisionComponentProps> = ({
   return (
     <>
       <div className="">
-        <div className="cart">
+        <div className="cart bg-white">
           <div className="rounded-[10px] bg-[#368DF3] text-center p-5 w-[93px] h-[95.34px]	">
             {Month}
           </div>

@@ -15,7 +15,7 @@ const RevitionLimitComponents: React.FunctionComponent<
   return (
     <>
       <div className="w-[284px] h-[112.62px]">
-        <div className="cart w-auto">
+        <div className="cart w-auto bg-white">
           <div className=" bg-[#368DF3] rounded-[10px] size-24 text-center pt-6 margin-left-[3px] font-bold	">
             {Month}
           </div>
