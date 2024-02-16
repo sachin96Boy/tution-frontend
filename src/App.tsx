@@ -5,6 +5,9 @@ import Teachers from "./components/Page/Teachers";
 import ShoppingCart from "./components/Page/ShoppingCart";
 import RevitionLimit from "./components/Page/RevitionLimit";
 import Profile from "./components/Page/Profile";
+import Note from "./components/Page/Note";
+import Tab from "./components/Page/Tab";
+
 
 function App() {
   return (
@@ -17,6 +20,10 @@ function App() {
           <Route path="/ShoppingCart" element={<ShoppingCart />}></Route>
           <Route path="/RevitionLimit" element={<RevitionLimit />}></Route>
           <Route path="/Profile" element={<Profile />}></Route>
+          <Route path="/Note" element={<Note/>}></Route>
+          <Route path="/Tab" element={<Tab/>}></Route>
+
+
 
 
           {/* <Route path="/" element={<TemplateDashboard />}></Route> */}
