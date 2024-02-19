@@ -11,8 +11,8 @@ function Revision() {
         </p>
         <h1 className="p-3 text-[#7383A1] font-bold  text-2xl ">By Lusia Guer</h1>
 
-        <div className="p-5 rounded-[10px] bg-slate-100 text-white w-full ">
-          <div className="grid grid-cols-1 xl:grid-cols-3 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 gap-4">
+        <div className="p-3 rounded-[10px] bg-slate-100 text-white w-auto mr-2 ">
+          <div className="grid grid-cols xl:grid-cols-3 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 gap-4">
             <RevisionComponents
               Month="January"
               name="2022 Biology Revision "

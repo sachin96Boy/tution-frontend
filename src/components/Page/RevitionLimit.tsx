@@ -12,8 +12,8 @@ function RevitionLimit() {
           </span>{" "}
         </h2>
 
-        <div className="p-2 rounded-lg  pt-5 bg-slate-100 text-white">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2s lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-6">
+        <div className="p-2 rounded-lg  pt-5 bg-slate-100 text-white w-auto">
+          <div className="grid grid-cols sm:grid-cols-2 md:grid-cols-2s lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-6">
             <RevisionLimitComponents
               name="2022 Biology Revision"
               Auther="By Lusia Gueera"
