@@ -11,7 +11,7 @@ function ShoppingCart() {
         <p className="text-left pl-5 pt-2 pb-2 font-bold  text-[#3B5079]  text-3xl">Shopping Cart</p>
         <h1 className="p-3 text-[#7383A1] font-bold  text-2xl">02 courses in Cart</h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-5 rounded-lg pt-5 bg-slate-100 text-white">
+        <div className="grid grid-cols md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 p-2 rounded-lg pt-5 bg-slate-100 text-white">
           <div className="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-3">
             <ShoppingCartComponents
               name={"2022 Biology Revision"}

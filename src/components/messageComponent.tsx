@@ -21,7 +21,7 @@ const MessageComponent: React.FunctionComponent<MessageComponentProps> = ({
 }) => {
   return (
     <div className="grid grid-rows-1">
-      <div className="inline-flex mr-auto ml-40 w-full mt-6">
+      <div className="inline-flex mr-auto ml-[2rem] md:ml-[4rem] lg:ml-[8rem] w-full mt-6">
         <img
           src={imageUrl}
           className=" rounded-[10px] w-[47px] h-[47px]"
@@ -36,11 +36,11 @@ const MessageComponent: React.FunctionComponent<MessageComponentProps> = ({
           </p>
         </div>
       </div>
-      <p className="mr-auto ml-40 mt-5 text-[14px] leading-4 font-bold text-[#3B5079]">
+      <p className="mr-auto ml-[2rem] md:ml-[4rem] lg:ml-[8rem] mt-5 text-[14px] leading-4 font-bold text-[#3B5079]">
         {reply}
       </p>
 
-      <div className="inline-flex mr-auto ml-40 w-full mt-6">
+      <div className="inline-flex mr-auto ml-[2rem] md:ml-[4rem] lg:ml-[8rem] w-full mt-6">
         <img
           src={imageUrl1}
           className=" rounded-[10px] w-[47px] h-[47px]"

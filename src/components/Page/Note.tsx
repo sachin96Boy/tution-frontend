@@ -19,7 +19,7 @@ function Note() {
             March
           </span>{" "}
         </h2>
-      <div className="grid grid-cols-1 gap-4 bg-slate-100 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 ">
+      <div className="grid grid-cols gap-4 bg-slate-100 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 ">
         {/* Pass the array of items to NoteComponent */}
         <NoteComponent
           imageURL="./src/assets/bio.png"

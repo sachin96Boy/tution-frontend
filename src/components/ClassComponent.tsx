@@ -12,9 +12,9 @@ const ClassComponent: React.FunctionComponent<ClassComponentProps> = ({
   subject,
 }) => {
   return (
-    <div className="rounded-[10px] w-[183px] h-[255px] bg-white p-5 top-[225.26px] left-[157px] text-center">
+    <div className="rounded-[10px] w-[183px] h-[255px] bg-white p-5 top-[225.26px]  text-center">
       <div className="">
-        <div className=" rounded-[10px]  bg-blue w-[150px] h-[164.14px] top-[233.57px] left-[165.41px]">
+        <div className=" rounded-[10px]  bg-blue w-[150px] h-[164.14px] top-[233.57px]">
           <h1 className="p-10  font-bold text-center  text-white ">
             {subject}
           </h1>
