@@ -8,7 +8,7 @@ const Sidebar = () => {
     <div
       className={` ${
         open ? "w-50" : "w-20 "
-      } bg-dark-purple h-screen p-[13px] margin-[5px]  pt-8 relative duration-300`}
+      } bg-dark-purple margin-[5px] relative duration-300 `}
     >
       <img
         src="./src/assets/control.png"
@@ -16,22 +16,6 @@ const Sidebar = () => {
            border-2 rounded-full  ${!open && "rotate-180"}`}
         onClick={() => setOpen(!open)}
       />
-      {/* <div className="flex gap-x-4 items-center">
-          <img
-            src="./src/assets/logo.png"
-            className={`cursor-pointer duration-500 ${
-              open && "rotate-[360deg]"
-            }`}
-          />
-          <h1
-          
-            className={`text-white origin-left font-medium text-xl duration-200 ${
-              !open && "scale-0"
-            }`}
-          >
-            Designer
-          </h1>
-        </div> */}
       <ul>
         <li>
           <Link
@@ -98,7 +82,6 @@ const Sidebar = () => {
             />
           </Link>
         </li>
-
         <li>
           <Link
             to={"/Profile"}
@@ -111,7 +94,8 @@ const Sidebar = () => {
               }`}
             />
           </Link>
-        </li>   <li>
+        </li>{" "}
+        <li>
           <Link
             to={"/Note"}
             className="flex items-center p-3 rounded-lg dark:text-white hover:bg-red-500 dark:hover:bg-red-500 group"
@@ -124,9 +108,6 @@ const Sidebar = () => {
             />
           </Link>
         </li>
-
-
-
         <li className="mt-12  mb-4">
           <Link
             to={"/"}

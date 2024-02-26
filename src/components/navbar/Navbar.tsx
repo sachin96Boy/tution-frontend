@@ -4,7 +4,7 @@ import { GoBell } from "react-icons/go";
 function Navbar() {
   return (
     <>
-      <div className="bg-white h-16  items-center flex justify-between">
+      <div className="bg-white h-16  items-center flex justify-between sticky top-0">
         <div>
           <img
             src="https://res.cloudinary.com/speedwares/image/upload/v1659284687/windframe-logo-main_daes7r.png"
@@ -54,7 +54,7 @@ function Navbar() {
             className="object-cover btn- h-9 w-9  mr-2 bg-gray-300"
             alt=""
           />
-          <p className="font-semibold text-sm">S</p>
+          <p className="font-semibold text-sm">Shani</p>
         </div>
       </div>
     </>

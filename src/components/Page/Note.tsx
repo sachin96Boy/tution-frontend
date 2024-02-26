@@ -1,29 +1,24 @@
+import React from "react";
 import TemplateDashboard from "../TemplateDashboard";
 import NoteComponent from "../NoteComponents";
 import QAComponent from "../QAComponents";
 import MessageComponent from "../messageComponent";
 
 function Note() {
-  // Define an array of items
   const items = [
     "Resources sample 01",
     "Resources sample 02",
     "Resources sample 03",
   ];
-  const items2 = [
-    "Resources sample ",
-    "Resources sample ",
-    "Resources sample ",
-  ];
+  const items2 = ["Resources sample ", "Resources sample ", "Resources sample "];
 
   return (
     <TemplateDashboard>
-      <h2 className="p-2 font-bold  text-[#3B5079]  text-3xl">
+      <h2 className="p-2 font-bold text-[#3B5079] text-3xl">
         2022 Biology Revision{" "}
-        <span className="ml-3 text-[#7383A1] font-bold  text-2xl">March</span>{" "}
+        <span className="ml-3 text-[#7383A1] font-bold text-2xl">March</span>{" "}
       </h2>
       <div className="grid grid-cols gap-4 bg-slate-100 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 ">
-        {/* Pass the array of items to NoteComponent */}
         <NoteComponent
           imageURL="./src/assets/bio.png"
           button1="OverView"
@@ -31,8 +26,7 @@ function Note() {
           items={items}
           items2={items2}
         />
-        {/* Add other components or elements if needed */}
-        <div className="grid grid-rows-1">
+        <div className="grid grid-rows-1 gap-4 md:gap-2">
           <QAComponent
             Title="QA Announcement"
             button="Ask New Questions"
