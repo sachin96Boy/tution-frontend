@@ -5,7 +5,7 @@ interface NoteComponentProps {
   button1: string;
   button2: string;
   items: string[];
-  items2: string[]; // Update to accept an array of items
+  items2: string[]; 
 }
 
 const NoteComponent: React.FunctionComponent<NoteComponentProps> = ({
