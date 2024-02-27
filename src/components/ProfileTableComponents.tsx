@@ -18,7 +18,7 @@ const ProfileTableComponent: React.FunctionComponent<
       <table className="table w-full bg-white mb-5">
         <tbody>
           {rows.map((row, index) => (
-            <tr key={index} className="text-[20px]">
+            <tr key={index} className="text-lg sm:text-base">
               <td className="font-bold text-[#546B99]">{row.details}</td>
               <td className="font-bold text-[#484848]">{row.input}</td>
               <td className="font-bold text-[#0085FF]">
