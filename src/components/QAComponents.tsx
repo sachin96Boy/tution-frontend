@@ -17,7 +17,7 @@ const QAComponent: React.FunctionComponent<QAComponentProps> = ({
         <p className="font-bold text-[#798DB2] text-[20px] ml-5">{Title}</p>
       </div>
       <div className="flex gap-3 p-3">
-        <div className="lg:block mr-auto ml-40 relative w-[587px] h-[52.7pxs]">
+        <div className="relative flex-1">
           <p className="pl-3 items-center flex absolute inset-y-0 left-0 pointer-events-none">
             <svg
               className="w-5 h-5 text-gray-400"
@@ -36,7 +36,7 @@ const QAComponent: React.FunctionComponent<QAComponentProps> = ({
           <input
             placeholder="Type to search"
             type="search"
-            className="border border-gray-300 focus:ring-red-600 focus:border--600 sm:text-sm rounded-lg pt-2 pb-2 pl-10 px-8 py-8 w-[587px] h-[52.7px]"
+            className="border border-gray-300 focus:ring-red-600 w-full h-[52.7px] focus:border--600 sm:text-sm rounded-lg pt-2 pb-2 pl-10 pr-8 md:max-w-md lg:max-w-lg xl:max-w-xl"
           />
         </div>
         <button className="btn w-[182px] h-[52.7px] rounded-[10px] bg-[#3B5079] text-[#FFFFFF] text-[16px] leading-4 font-bold">
@@ -44,9 +44,7 @@ const QAComponent: React.FunctionComponent<QAComponentProps> = ({
         </button>
       </div>
 
-      <p className="mr-auto ml-40 text-[#3B5079] font-bold text-[20px]">
-        {subTitle}
-      </p>
+      <p className="text-[#3B5079] font-bold text-[20px] ml-5">{subTitle}</p>
     </div>
   );
 };

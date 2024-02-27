@@ -1,4 +1,3 @@
-import React from "react";
 import TemplateDashboard from "../TemplateDashboard";
 import NoteComponent from "../NoteComponents";
 import QAComponent from "../QAComponents";
@@ -18,7 +17,7 @@ function Note() {
         2022 Biology Revision{" "}
         <span className="ml-3 text-[#7383A1] font-bold text-2xl">March</span>{" "}
       </h2>
-      <div className="grid grid-cols gap-4 bg-slate-100 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 ">
+      <div className="grid grid-cols-1 gap-4 bg-slate-100 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 m-5">
         <NoteComponent
           imageURL="./src/assets/bio.png"
           button1="OverView"
@@ -26,7 +25,7 @@ function Note() {
           items={items}
           items2={items2}
         />
-        <div className="grid grid-rows-1 gap-4 md:gap-2">
+        <div className=" grid-rows-1 gap-4 md:grid-rows-1 lg:grid-rows-1">
           <QAComponent
             Title="QA Announcement"
             button="Ask New Questions"
