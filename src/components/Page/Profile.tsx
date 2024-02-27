@@ -1,3 +1,4 @@
+import React from "react";
 import TemplateDashboard from "../TemplateDashboard";
 import ProfileComponent from "../ProfileComponents";
 import ProfileTableComponent from "../ProfileTableComponents";
@@ -15,15 +16,16 @@ function Profile() {
     { details: "NIC", input: "Tzoo", button: "Edit" },
     { details: "Mobile", input: "Tzoo", button: "Edit" },
     { details: "Parent Mobile", input: "Tzoo", button: "Edit" },
-
     // Add more rows as needed
   ];
 
   return (
-    <>
-      <TemplateDashboard>
-        <p className="text-[#3B5079] font-bold text-[30px]">My Profile</p>
-        <div className="grid grid-cols md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-3 2xl:grid-cols-3 gap-10 p-5 bg-slate-100">
+    <TemplateDashboard>
+      <p className="text-[#3B5079] font-bold text-3xl sm:text-4xl lg:text-5xl">
+        My Profile
+      </p>
+      <div className="p-5 bg-slate-100">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
           <ProfileComponent
             imageUrl="./src/assets/bio.png"
             name={"Pathum Tzoo"}
@@ -36,8 +38,8 @@ function Profile() {
           />
           <ProfileTableComponent rows={rows} />
         </div>
-      </TemplateDashboard>
-    </>
+      </div>
+    </TemplateDashboard>
   );
 }
 
