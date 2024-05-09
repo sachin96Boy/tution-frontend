@@ -1,11 +1,14 @@
 import React from "react";
 import CardComponent from "../CardComponents";
+import TemplateDashboard from "../TemplateDashboard";
 
 function Teachers() {
   return (
+    <TemplateDashboard>
     <form>
       <p className="text-2xl text-left pl-7 pt-5 pb-5">Teachers</p>
-      <div className="cart inline-flex  p-5 rounded-lg space-x-4 pt-5 bg-slate-100">
+        <div className="cart inline-flex  p-2 rounded-lg space-x-4 bg-slate-100 w-full">
+      
        
         <div className="grid grid-cols-5 gap-4">
          <CardComponent imageUrl={"./src/assets/bio.png"} name={"John Doe"} possiotion={"Architect & Engineer"} />
@@ -20,6 +23,7 @@ function Teachers() {
         
       </div>
     </form>
+    </TemplateDashboard>
   );
 }
 

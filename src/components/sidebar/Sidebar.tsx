@@ -1,12 +1,11 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
-  
 
   return (
-    <div className="flex">
-      <div
+    <div
         className={` ${
           open ? "w-72" : "w-20 "
         } bg-dark-purple h-screen p-[13px] margin-[5px]  pt-8 relative duration-300`}
@@ -34,72 +33,87 @@ const Sidebar = () => {
           </h1>
         </div> */}
         <ul>
-        <li >
-            <a href="#" className="flex items-center p-3 rounded-lg dark:text-white hover:bg-red-500 dark:hover:bg-red-500 group">
-            <img
-            src="./src/assets/men.png"
-            className={`cursor-pointer duration-500 ${
-              open && "rotate-[360deg]"
-            }`}
-          />
+          <li>
+            <Link
+              to={"/Teachers"}
+              className="flex items-center p-3 rounded-lg dark:text-white hover:bg-red-500 dark:hover:bg-red-500 group"
+            >
+              <img
+                src="./src/assets/men.png"
+                className={`cursor-pointer duration-500 ${
+                  open && "rotate-[360deg]"
+                }`}
+              />
+              Classes
+            </Link>
+    
+          </li>
+          <li>
+           <Link
+           to={"/Classes"}
+              className="flex items-center p-3 text-gray-900 rounded-lg dark:text-white hover:bg-red-500 dark:hover:bg-red-500 group"
+            >
+              <img
+                src="./src/assets/Tv.png"
+                className={`cursor-pointer duration-500 ${
+                  open && "rotate-[360deg]"
+                }`}
+              />
+            </Link>
+          </li>
+          <li>
+            <Link to={"/Revision"}
+              className="flex items-center p-3 text-gray-900 rounded-lg dark:text-white  hover:bg-red-500 dark:hover:bg-red-500 group"
+            >
+              <img
+                src="./src/assets/tt.png"
+                className={`cursor-pointer duration-500 ${
+                  open && "rotate-[360deg]"
+                }`}
+              />
+            </Link>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="flex items-center p-3 text-gray-900 rounded-lg dark:text-white  hover:bg-red-500 dark:hover:bg-red-500 group"
+            >
+              <img
+                src="./src/assets/cart.png"
+                className={`cursor-pointer duration-500 ${
+                  open && "rotate-[360deg]"
+                }`}
+              />
             </a>
-         </li>
-         <li >
-            <a href="#" className="flex items-center p-3 text-gray-900 rounded-lg dark:text-white hover:bg-red-500 dark:hover:bg-red-500 group">
-            <img
-            src="./src/assets/Tv.png"
-            className={`cursor-pointer duration-500 ${
-              open && "rotate-[360deg]"
-            }`}
-          />
-            </a>
-         </li>
-         <li >
-            <a href="#" className="flex items-center p-3 text-gray-900 rounded-lg dark:text-white  hover:bg-red-500 dark:hover:bg-red-500 group">
-            <img
-            src="./src/assets/tt.png"
-            className={`cursor-pointer duration-500 ${
-              open && "rotate-[360deg]"
-            }`}
-          />
-            </a>
-         </li>
-         <li >
-            <a href="#" className="flex items-center p-3 text-gray-900 rounded-lg dark:text-white  hover:bg-red-500 dark:hover:bg-red-500 group">
-            <img
-            src="./src/assets/cart.png"
-            className={`cursor-pointer duration-500 ${
-              open && "rotate-[360deg]"
-            }`}
-          />
-            </a>
-         </li>
-         <li >
-            <a href="#" className="flex items-center p-3 text-gray-900 rounded-lg dark:text-white hover:bg-red-500 dark:hover:bg-red-500 group">
-            <img
-            src="./src/assets/message.png"
-            className={`cursor-pointer duration-500 ${
-              open && "rotate-[360deg]"
-            }`}
-          />
-            </a>
-         </li>
+          </li>
+          <li>
+           <Link to={""}
+              className="flex items-center p-3 text-gray-900 rounded-lg dark:text-white hover:bg-red-500 dark:hover:bg-red-500 group"
+            >
+              <img
+                src="./src/assets/message.png"
+                className={`cursor-pointer duration-500 ${
+                  open && "rotate-[360deg]"
+                }`}
+              />
+            </Link>
+          </li>
 
-         <li className="mt-12  mb-4"> 
-            <a href="#" className="flex items-center p-6 text-gray-900 rounded-lg dark:text-white hover:bg-red-500 dark:hover:bg-red-500 group">
-            <img
-            src="./src/assets/logout.png"
-            className={`cursor-pointer duration-500 ${
-              open && "rotate-[360deg]"
-            }`}
-          />
+          <li className="mt-12  mb-4">
+            <a
+              href="#"
+              className="flex items-center p-6 text-gray-900 rounded-lg dark:text-white hover:bg-red-500 dark:hover:bg-red-500 group"
+            >
+              <img
+                src="./src/assets/logout.png"
+                className={`cursor-pointer duration-500 ${
+                  open && "rotate-[360deg]"
+                }`}
+              />
             </a>
-         </li>
-      </ul>
-
+          </li>
+        </ul>
       </div>
-
-    </div>
   );
 };
-export default Sidebar
+export default Sidebar;
