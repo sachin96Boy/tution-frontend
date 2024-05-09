@@ -1,13 +1,14 @@
 .cart {
     display: inline-flex;
     margin-top: 7px;
-    padding: 8px;
+    padding: 5px;
     align-items: center;
     border-radius: 0.5rem;
     background-color: rgb(235, 233, 239);
-    width: 23rem;
+    width: 18rem;
     height: auto;
     margin-left: 1.5rem;
+    
     
 }
 .container {
