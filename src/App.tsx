@@ -15,13 +15,13 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/classes" element={<Classes />}></Route>
+          <Route path="/classes" element={<Classes />} />
           <Route path="/revision" element={<Revision />} />
-          <Route path="/teachers" element={<Teachers />}></Route>
-          <Route path="/shoppingCart" element={<ShoppingCart />}></Route>
-          <Route path="/revitionLimit" element={<RevitionLimit />}></Route>
+          <Route path="/teachers" element={<Teachers />} />
+          <Route path="/shoppingCart" element={<ShoppingCart />} />
+          <Route path="/revitionLimit" element={<RevitionLimit />} />
 
-          <Route path="/" element={<h2>hi</h2>}></Route>
+          <Route path="/" element={<h2>hi</h2>} />
         </Routes>
       </BrowserRouter>
     </>
