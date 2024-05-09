@@ -1,6 +1,6 @@
 import RegiaterImg from "../assets/Images/register.jpg.png";
 
-import SignupForm from "../components/formfields/SignupForm";
+import SignupForm from "../../Components/formfields/SignupForm";
 
 export default function Register() {
   return (

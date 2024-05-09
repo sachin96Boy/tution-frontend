@@ -1,4 +1,5 @@
 import * as dasyui from "daisyui";
+import defaultTheme from "tailwindcss/defaultTheme";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -11,8 +12,10 @@ export default {
         "regal-white": "#DCE3F0",
         "regal-red": "#DE5353",
       },
+      fontFamily: {
+        montserrat: ["Montserrat", ...defaultTheme.fontFamily.sans],
+      },
     },
-
   },
   daisyui: {
     themes: ["light"],

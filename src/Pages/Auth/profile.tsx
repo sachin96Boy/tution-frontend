@@ -1,6 +1,6 @@
 import ProfileImg from "../assets/Images/profile.jpg.png";
 
-import ProfileSectionForm from "../components/formfields/ProfileSectionForm";
+import ProfileSectionForm from "../../Components/formfields/ProfileSectionForm";
 
 export default function Profile() {
   return (
