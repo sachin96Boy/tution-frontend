@@ -23,7 +23,7 @@ const CardComponent: React.FunctionComponent<CardComponentProps> = ({
       <h4 className="pl-3 text-[#3B5079] text-[14px]">
         <b>{name}</b>
       </h4>
-      <p className="pl-3 text-[#7383A1] text-[12px] pb-3">{possiotion}</p>
+      <p className="pl-3 text-[rgb(115,131,161)] text-[12px] pb-3">{possiotion}</p>
       </div>
     </div>
   );
