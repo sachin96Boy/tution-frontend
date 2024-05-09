@@ -14,16 +14,16 @@ const CardComponent: React.FunctionComponent<CardComponentProps> = ({
   return (
     <div className=" bg-white w-[183px] h-[240px] rounded-[10px] top-[226px] left-[1169px] gap-5">
       <div className="">
-      <img
-        src={imageUrl}
-        className=" rounded-[10px] w-[183px] p-2 h-[190px]"
-        alt="Profile Picture" 
-      />
-      
-      <h4 className="pl-3 text-[#3B5079] text-[14px]">
-        <b>{name}</b>
-      </h4>
-      <p className="pl-3 text-[rgb(115,131,161)] text-[12px] pb-3">{possiotion}</p>
+        <img
+          src={imageUrl}
+          className="size-26 rounded-lg p-3"
+          alt="Profile Picture"
+        />
+
+        <h4 className="pl-3 text-[#3B5079] text-[14px]">
+          <b>{name}</b>
+        </h4>
+        <p className="pl-3 text-[#7383A1] text-[12px] pb-3">{possiotion}</p>
       </div>
     </div>
   );

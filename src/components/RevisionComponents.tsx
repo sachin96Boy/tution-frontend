@@ -27,8 +27,9 @@ const RevisionComponents: React.FunctionComponent<RevisionComponentProps> = ({
             {Month}
           </div>
           <div>
-            <h2 className="ml-3  text-[#3B5079] font-[1100]">{name}</h2>
-            <span className="ml-3 text-[#7383A1]">{Auther}</span><br></br>
+            <h2 className="p-3  text-[#3B5079]">{name}</h2>
+            <span className="ml-3 text-[#7383A1]">{Auther}</span>
+            <br></br>
             <span className="ml-3 text-[#DE5353]	">{price}</span>
           </div>
         </div>
