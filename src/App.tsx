@@ -1,35 +1,27 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./pages/login";
+import Profile from "./pages/profile";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Register from "./pages/register";
 import Classes from "./components/Page/Classes";
 import Revision from "./components/Page/Revision";
 import Teachers from "./components/Page/Teachers";
 import ShoppingCart from "./components/Page/ShoppingCart";
 import RevitionLimit from "./components/Page/RevitionLimit";
-import Profile from "./components/Page/Profile";
-import Note from "./components/Page/Note";
-// import Tab from "./components/Page/Tab";
-
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/Classes" element={<Classes />}></Route>
-          <Route path="/Revision" element={<Revision />} />
-          <Route path="/Teachers" element={<Teachers />}></Route>
-          <Route path="/ShoppingCart" element={<ShoppingCart />}></Route>
-          <Route path="/RevitionLimit" element={<RevitionLimit />}></Route>
-          <Route path="/Profile" element={<Profile />}></Route>
-          <Route path="/Note" element={<Note/>}></Route>
-          {/* <Route path="/Tab" element={<Tab/>}></Route> */}
-
-
-
-
-          {/* <Route path="/" element={<TemplateDashboard />}></Route> */}
-        </Routes>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/classes" element={<Classes />} />
+        <Route path="/revision" element={<Revision />} />
+        <Route path="/teachers" element={<Teachers />} />
+        <Route path="/shoppingCart" element={<ShoppingCart />} />
+        <Route path="/revisionLimit" element={<RevitionLimit />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

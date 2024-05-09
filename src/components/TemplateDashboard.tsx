@@ -9,7 +9,7 @@ function TemplateDashboard({ children }: { children: React.ReactNode }) {
       <div></div>
       <div className="flex flex-1 h-screen ">
         <Sidebar />
-        <div className="flex-1 p-2 overflow-y-scroll">{children}</div>
+        <div className="flex-1 p-2">{children}</div>
       </div>
     </div>
   );
