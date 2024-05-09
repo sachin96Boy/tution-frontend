@@ -12,6 +12,7 @@ export default {
         "regal-red": "#DE5353",
       },
     },
+
   },
   daisyui: {
     themes: ["light"],
