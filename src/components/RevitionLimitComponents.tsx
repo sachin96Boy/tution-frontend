@@ -14,18 +14,14 @@ const RevitionLimitComponents: React.FunctionComponent<
 > = ({ name, Month, Auther, presentage }) => {
   return (
     <>
-      <div className="w-[284px] h-[112.62px]">
-        <div className="cart w-auto bg-white">
-          <div className=" bg-[#368DF3] rounded-[10px] size-24 text-center pt-6 margin-left-[3px] font-bold	">
+      <div className="w-auto">
+        <div className="cart w-auto">
+          <div className="container bg-[#368DF3] size-24 text-center p-5 font-bold	">
             {Month}
           </div>
           <div className="w-auto ">
-            <h2 className=" ml-2 p-2 text-[#3B5079] font-bold text-sm">
-              {name}
-            </h2>
-            <span className="ml-2 p-2 text-[#7383A1] font-bold text-sm">
-              {Auther}
-            </span>
+            <h2 className=" ml-2 p-2 text-[#3B5079] font-bold">{name}</h2>
+            <span className="ml-3  text-[#7383A1] font-bold">{Auther}</span>
             <br></br>
             <div className="skills html bg-[#DE5353] rounded-full ml-3 leading-4 mt-3 mb-3 text-center	">
               {presentage}
