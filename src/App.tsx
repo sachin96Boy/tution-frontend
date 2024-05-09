@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Layout from "./Layouts/Layout";
 import Register from "./Pages/Auth/register";
+import OTPVerify from "./Pages/Auth/OTPVerify";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="otp-verify" element={<OTPVerify />} />
       </Routes>
     </BrowserRouter>
   );
