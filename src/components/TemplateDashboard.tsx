@@ -9,7 +9,7 @@ function TemplateDashboard({children}:{children:React.ReactNode}) {
 
       <div className="flex">
         <Sidebar />
-        <div className="flex-1 p-4 bg-gray-200">
+        <div className="flex-1 p-2">
             {children}
         </div>
       </div>
