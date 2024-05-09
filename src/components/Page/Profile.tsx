@@ -23,7 +23,7 @@ function Profile() {
     <>
       <TemplateDashboard>
         <p className="text-[#3B5079] font-bold text-[30px]">My Profile</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-10 p-5 bg-slate-100">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-3 2xl:grid-cols-3 gap-10 p-5 bg-slate-100">
           <ProfileComponent
             imageUrl="./src/assets/bio.png"
             name={"Pathum Tzoo"}
