@@ -6,7 +6,7 @@ export default function Login() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <div className=" flex flex-row w-full h-screen">
+    <div className=" flex flex-row w-full h-screen bg-[#f2f6ff]">
       <div className=" max-md:w-full h-full min-w-[340px] w-1/2 bg-[#f2f6ff] flex flex-col justify-center items-center">
         <form
           action=""
@@ -33,6 +33,7 @@ export default function Login() {
             label="Password"
             name="password"
             value={password}
+            type="password"
             onChange={(e) => {
               e.preventDefault();
               setPassword(e.target.value);

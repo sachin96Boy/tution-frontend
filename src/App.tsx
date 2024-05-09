@@ -2,6 +2,7 @@ import Login from "./Pages/Auth/login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Layout from "./Layouts/Layout";
+import Register from "./Pages/Auth/register";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="profile" element={<h1>Profile</h1>} />
         </Route>
         <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );
