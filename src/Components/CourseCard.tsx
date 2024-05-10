@@ -12,7 +12,7 @@ const CourseCard = ({
 }) => {
   return (
     <Link to={"/course/" + course.id}>
-      <div className="w-[182px] h-[230px] shadow-sm bg-[#ffffff] rounded-lg flex flex-col justify-start items-center p-2">
+      <div className="w-[182px] h-[230px] shadow-md hover:scale-105 transition-all duration-200 bg-[#ffffff] rounded-lg flex flex-col justify-start items-center p-2">
         <div className="w-[166px] h-[164px] object-cover rounded-lg bg-[#3B5079] font-montserrat text-[20px] font-[700] text-white flex flex-col justify-center items-center text-center px-4">
           {course.courseName}
         </div>

@@ -7,6 +7,7 @@ import OTPVerify from "./Pages/Auth/OTPVerify";
 import Teachers from "./Pages/Teachers/Teachers";
 import Teacher from "./Pages/Teacher/Teacher";
 import Course from "./Pages/Course/Course";
+import Shopping from "./Pages/Shopping/Shopping";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <Route path="profile" element={<h1>Profile</h1>} />
           <Route path="payment" element={<h1>Payment</h1>} />
           <Route path="contact" element={<h1>Contact</h1>} />
-          <Route path="shopping" element={<h1>Shopping</h1>} />
+          <Route path="shopping" element={<Shopping />} />
           <Route path="notifications" element={<h1>Notifications</h1>} />
         </Route>
         <Route path="login" element={<Login />} />

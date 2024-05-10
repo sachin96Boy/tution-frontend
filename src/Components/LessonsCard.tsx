@@ -3,8 +3,8 @@ import { useState } from "react";
 const LessonsCard = () => {
   const [incart, setInCart] = useState(false);
   return (
-    <div className="font-montserrat">
-      <div className="w-[284px] h-[112px] bg-white rounded-[10px] flex flex-row justify-start items-center pl-2">
+    <div className="font-montserrat ">
+      <div className="w-[284px] h-[112px] bg-white rounded-[10px] flex flex-row justify-start items-center pl-2 shadow-md">
         <div className="w-[95px] h-[95px] bg-[#368DF3] rounded-[10px] text-white text-[16px] font-[500] flex justify-center items-center">
           January
         </div>
@@ -25,7 +25,7 @@ const LessonsCard = () => {
               e.preventDefault();
               setInCart(!incart);
             }}
-            className="w-[138px] h-[52px] bg-[#DE5353] text-[15px] font-[500] text-white rounded-[10px]"
+            className="w-[138px] h-[52px] bg-[#DE5353] text-[15px] font-[500] text-white rounded-[10px] shadow-md hover:scale-105 transition-all duration-200"
           >
             Remove
           </button>
@@ -35,12 +35,12 @@ const LessonsCard = () => {
               e.preventDefault();
               setInCart(!incart);
             }}
-            className="w-[138px] h-[52px] bg-[#3B5079] text-[15px] font-[500] text-white rounded-[10px]"
+            className="w-[138px] h-[52px] bg-[#3B5079] text-[15px] font-[500] text-white rounded-[10px] shadow-md hover:scale-105 transition-all duration-200"
           >
             Add to Cart
           </button>
         )}
-        <button className="w-[138px] h-[52px] bg-[#3B5079] text-[15px] font-[500] text-white rounded-[10px]">
+        <button className="w-[138px] h-[52px] bg-[#3B5079] text-[15px] font-[500] text-white rounded-[10px] shadow-md hover:scale-105 transition-all duration-200">
           Buy Now
         </button>
       </div>

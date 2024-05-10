@@ -7,7 +7,7 @@ const TeacherCard = ({
 }) => {
   return (
     <Link to={"/teacher/" + teacher.id}>
-      <div className="w-[182px] h-[230px] shadow-sm bg-[#ffffff] rounded-lg flex flex-col justify-start items-center p-2">
+      <div className="w-[182px] h-[230px] shadow-md hover:scale-105 transition-all duration-200 bg-[#ffffff] rounded-lg flex flex-col justify-start items-center p-2">
         <img
           src={teacher.image}
           className="w-[166px] h-[164px] object-cover rounded-lg"
