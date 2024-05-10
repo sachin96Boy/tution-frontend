@@ -8,6 +8,7 @@ import Teachers from "./Pages/Teachers/Teachers";
 import Teacher from "./Pages/Teacher/Teacher";
 import Course from "./Pages/Course/Course";
 import Shopping from "./Pages/Shopping/Shopping";
+import ProfileUpdate from "./Pages/Auth/ProfileUpdate";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="otp-verify" element={<OTPVerify />} />
+        <Route path="profile-update" element={<ProfileUpdate />} />
       </Routes>
     </BrowserRouter>
   );
