@@ -27,7 +27,7 @@ const Layout = () => {
   const [active, setActive] = useState("active");
   return (
     <div className="flex flex-row min-h-screen w-full bg-[#f2f6ff]">
-      <div className="w-[120px] flex flex-col justify-start pt-[22px] items-center">
+      <div className="min-w-[120px] flex flex-col justify-start pt-[22px] items-center">
         <ul className="py-8 flex flex-col items-center w-[80px] bg-[#FDFDFD] rounded-[5px] h-[95vh] justify-between fixed">
           <NavItems link="/" icon={home_nav_icon} />
           <div className="flex flex-col items-center h-[50%] justify-between">
@@ -72,7 +72,7 @@ const Layout = () => {
           <NavItems link="/logout" icon={logout_nav_icon} />
         </ul>
       </div>
-      <div className="flex flex-col w-full h-full justify-between items-center pl-4 max-md:pl-1 ">
+      <div className="flex flex-col w-full h-full justify-between items-center pl-4 max-md:pl-1 bg-[#f2f6ff]">
         <div className="flex flex-row w-full min-h-[100px] justify-between items-center mt-[28px] pr-16 max-md:pr-2 flex-wrap gap-y-2  max-md:justify-end">
           <div className="flex flex-row items-center max-md:flex-wrap gap-y-4 max-md:justify-end">
             <SearchBox
@@ -82,8 +82,12 @@ const Layout = () => {
                 setSearch(e.target.value);
               }}
             />
-            <Counter link="/shopping" icon={bell_icon} count={notifications} />
-            <Counter link="/notifications" icon={shop_icon} count={shopCount} />
+            <Counter
+              link="/notifications"
+              icon={bell_icon}
+              count={notifications}
+            />
+            <Counter link="/shopping" icon={shop_icon} count={shopCount} />
           </div>
           <Profile user={user} />
         </div>

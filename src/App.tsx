@@ -9,6 +9,9 @@ import Teacher from "./Pages/Teacher/Teacher";
 import Course from "./Pages/Course/Course";
 import Shopping from "./Pages/Shopping/Shopping";
 import ProfileUpdate from "./Pages/Auth/ProfileUpdate";
+import MyClasses from "./Pages/MyClasses/MyClasses";
+import MyClass from "./Pages/MyClass/MyClass";
+import MyLesson from "./Pages/MyLesson/MyLesson";
 
 function App() {
   return (
@@ -19,7 +22,9 @@ function App() {
           <Route path="teachers" element={<Teachers />} />
           <Route path="teacher/:id" element={<Teacher />} />
           <Route path="course/:id" element={<Course />} />
-          <Route path="classes" element={<h1>Classes</h1>} />
+          <Route path="classes" element={<MyClasses />} />
+          <Route path="mycourse/:id" element={<MyClass />} />
+          <Route path="mylessons/:id" element={<MyLesson />} />
           <Route path="profile" element={<h1>Profile</h1>} />
           <Route path="payment" element={<h1>Payment</h1>} />
           <Route path="contact" element={<h1>Contact</h1>} />
