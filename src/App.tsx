@@ -12,6 +12,7 @@ import ProfileUpdate from "./Pages/Auth/ProfileUpdate";
 import MyClasses from "./Pages/MyClasses/MyClasses";
 import MyClass from "./Pages/MyClass/MyClass";
 import MyLesson from "./Pages/MyLesson/MyLesson";
+import Profile from "./Pages/Auth/Profile";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route path="classes" element={<MyClasses />} />
           <Route path="mycourse/:id" element={<MyClass />} />
           <Route path="mylessons/:id" element={<MyLesson />} />
-          <Route path="profile" element={<h1>Profile</h1>} />
+          <Route path="profile" element={<Profile />} />
           <Route path="payment" element={<h1>Payment</h1>} />
           <Route path="contact" element={<h1>Contact</h1>} />
           <Route path="shopping" element={<Shopping />} />
