@@ -7,6 +7,7 @@ const Teacher = () => {
   const { id } = useParams();
   const [teacher, setTeacher] = useState({});
   const [courses, setCourses] = useState([]);
+
   const course = {
     id: "1",
     courseName: "Biology 2022",

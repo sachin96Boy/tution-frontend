@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
 
-const NavItems = ({ link, icon }: { link: string; icon: string }) => {
+const NavItems = ({
+  link,
+  icon,
+  onClick,
+}: {
+  link: string;
+  icon: string;
+  onClick?: () => void;
+}) => {
   return (
     <li>
       <Link to={link}>
@@ -8,6 +16,7 @@ const NavItems = ({ link, icon }: { link: string; icon: string }) => {
           className="w-[45px] hover:w-[50px] transition-all duration-200"
           src={icon}
           alt=""
+          onClick={onClick}
         />
       </Link>
     </li>
