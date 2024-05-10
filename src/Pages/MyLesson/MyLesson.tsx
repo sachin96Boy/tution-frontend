@@ -1,7 +1,10 @@
 import video from "../../assets/Videos/video.webm";
 import { useState } from "react";
+import Qa from "../../Components/Qa";
+import Announcement from "../../Components/Announcement";
 const MyLesson = () => {
   const [active, setActive] = useState("overview");
+  const [activeB, setActiveB] = useState("q&a");
   return (
     <div className=" font-montserrat flex flex-col items-start h-full w-full">
       <h1 className="text-[30px] font-[700] text-[#3B5079]">
@@ -64,6 +67,31 @@ const MyLesson = () => {
             </div>
           )}
         </div>
+      </div>
+      <div className="w-full h-fit text-[15px] font-[500] text-[#3B5079] font-montserrat transition-all duration-200 mt-16">
+        <div className="flex flex-row justify-start gap-12 items-center h-full w-full">
+          <h1
+            className={
+              "text-[20px] font-[700] " +
+              (activeB === "q&a" ? " text-[#3B5079]" : "text-[#798DB2]")
+            }
+            onClick={() => setActiveB("q&a")}
+          >
+            Q&A
+          </h1>
+          <h1
+            className={
+              "text-[20px] font-[700] " +
+              (activeB === "announcements"
+                ? " text-[#3B5079]"
+                : "text-[#798DB2]")
+            }
+            onClick={() => setActiveB("announcements")}
+          >
+            Announcements
+          </h1>
+        </div>
+        {activeB === "q&a" ? <Qa /> : <Announcement />}
       </div>
     </div>
   );
