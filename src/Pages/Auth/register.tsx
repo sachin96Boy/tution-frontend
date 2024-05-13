@@ -2,22 +2,39 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import TextInput from "../../Components/Elements/TextInput";
 import register_image from "../../assets/Images/login_banner.png";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 export default function Register() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const formik = useFormik({
+    initialValues: {
+      first_name: "",
+      last_name: "",
+      phone_number: "",
+      email: "",
+      password: "",
+      confirm_password: "",
+    },
+    validationSchema: Yup.object({
+      first_name: Yup.string().required("Required"),
+      last_name: Yup.string().required("Required"),
+      phone_number: Yup.string().required("Required"),
+      email: Yup.string().email("Invalid Email").required("Required"),
+      password: Yup.string().required("Required"),
+      confirm_password: Yup.string().required("Required"),
+    }),
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
   useEffect(() => {
-    if (password !== confirmPassword) {
+    if (formik.values.password !== formik.values.confirm_password) {
       setError("Passwords do not match");
     } else {
       setError("");
     }
-  }, [password, confirmPassword]);
+  }, [formik.values.password, formik.values.confirm_password]);
   return (
     <div className=" flex flex-row w-full min-h-screen bg-second">
       <div className="max-md:hidden min-h-full w-1/3 p-4 pr-0">
@@ -33,6 +50,7 @@ export default function Register() {
       </div>
       <div className=" max-md:w-full min-h-full min-w-[340px] w-full bg-second flex flex-col justify-center items-center p-4">
         <form
+          onSubmit={formik.handleSubmit}
           action=""
           className="p-20 min-w-[340px] w-full min-h-full bg-second-alt rounded-[10px] flex flex-col justify-start pt-12 items-left gap-y-4"
         >
@@ -47,72 +65,72 @@ export default function Register() {
             <TextInput
               label="First Name"
               name="first_name"
-              value={firstName}
+              value={formik.values.first_name}
+              error={formik.errors.first_name}
+              touched={formik.touched.first_name}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               classNameD="min-w-[360px] max-md:min-w-[100%]"
               classNameI="min-w-[360px] max-md:min-w-[100%]"
-              onChange={(e) => {
-                e.preventDefault();
-                setFirstName(e.target.value);
-              }}
             />
 
             <TextInput
               label="Last Name"
               name="last_name"
-              value={lastName}
+              value={formik.values.last_name}
+              error={formik.errors.last_name}
+              touched={formik.touched.last_name}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               classNameD="min-w-[360px] max-md:min-w-[100%]"
               classNameI="min-w-[360px] max-md:min-w-[100%]"
-              onChange={(e) => {
-                e.preventDefault();
-                setLastName(e.target.value);
-              }}
             />
             <TextInput
               label="Phone Number"
               name="phone_number"
-              value={phone}
+              value={formik.values.phone_number}
+              error={formik.errors.phone_number}
+              touched={formik.touched.phone_number}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               classNameD="min-w-[360px] max-md:min-w-[100%]"
               classNameI="min-w-[360px] max-md:min-w-[100%]"
-              onChange={(e) => {
-                e.preventDefault();
-                setPhone(e.target.value);
-              }}
             />
             <TextInput
               label="Email"
               name="email"
               type="email"
-              value={email}
+              value={formik.values.email}
+              error={formik.errors.email}
+              touched={formik.touched.email}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               classNameD="min-w-[360px] max-md:min-w-[100%]"
               classNameI="min-w-[360px] max-md:min-w-[100%]"
-              onChange={(e) => {
-                e.preventDefault();
-                setEmail(e.target.value);
-              }}
             />
             <TextInput
               label="Password"
               name="password"
               type="password"
-              value={password}
+              value={formik.values.password}
+              error={formik.errors.password}
+              touched={formik.touched.password}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               classNameD="min-w-[360px] max-md:min-w-[100%]"
               classNameI="min-w-[360px] max-md:min-w-[100%]"
-              onChange={(e) => {
-                e.preventDefault();
-                setPassword(e.target.value);
-              }}
             />
             <TextInput
               label="Confirm Password"
               name="confirm_password"
               type="password"
-              value={confirmPassword}
+              value={formik.values.confirm_password}
+              error={formik.errors.confirm_password}
+              touched={formik.touched.confirm_password}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               classNameD="min-w-[360px] max-md:min-w-[100%]"
               classNameI="min-w-[360px] max-md:min-w-[100%]"
-              onChange={(e) => {
-                e.preventDefault();
-                setConfirmPassword(e.target.value);
-              }}
             />
             <p className="font-[500] font-montserrat text-[13px] text-tertiary-alt w-[45%] max-md:w-[95%] text-left">
               {error}

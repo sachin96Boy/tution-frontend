@@ -7,6 +7,9 @@ interface TextInputProps {
   classNameD?: string;
   classNameL?: string;
   classNameI?: string;
+  error?: string;
+  touched?: boolean;
+  onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -17,6 +20,9 @@ const TextInput = ({
   placeholder,
   value,
   onChange,
+  error,
+  touched,
+  onBlur,
   classNameD,
   classNameL,
   classNameI,
@@ -44,11 +50,15 @@ const TextInput = ({
         placeholder={placeholder || ""}
         value={value}
         onChange={onChange}
+        onBlur={onBlur}
         className={
           "font-[500] font-montserrat text-[16px] p-2 w-[100%]  max-w-[396px] h-[50px] text-prime rounded-[5px] border-[1px] border-[#DCE3F0] focus:border-[#a7a7a7] focus:outline-none " +
           classNameI
         }
       />
+      <p className="text-tertiary-alt text-[12px]">
+        {touched && error ? error : ""}
+      </p>
     </div>
   );
 };

@@ -1,23 +1,51 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import register_image from "../../assets/Images/login_banner.png";
 
 import Dropzone from "react-dropzone";
 import TextInput from "../../Components/Elements/TextInput";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const ProfileUpdate = () => {
-  const file: File = new File([], "");
-  const [school, setSchool] = useState("");
-  const [subject, setSubject] = useState("");
-  const [year, setYear] = useState("");
-  const [district, setDistrict] = useState("");
-  const [address, setAddress] = useState("");
-  const [nfc, setNfc] = useState("");
-  const [nic, setNic] = useState("");
-  const [parentMobile, setParentMobile] = useState("");
-  const [profilePic, setProfilePic] = useState(file);
-  const [nicBack, setNicBack] = useState(file);
-  const [nicFront, setNicFront] = useState(file);
-  const [selfie, setSelfie] = useState(file);
+  const [profilePic, setProfilePic] = useState<File | null>(null);
+  const [nicBack, setNicBack] = useState<File | null>(null);
+  const [nicFront, setNicFront] = useState<File | null>(null);
+  const [selfie, setSelfie] = useState<File | null>(null);
+  const [error1, setError1] = useState("required");
+  const [error2, setError2] = useState("required");
+  const [error3, setError3] = useState("required");
+  const [error4, setError4] = useState("required");
+  useEffect(() => {
+    profilePic && setError1("");
+    nicBack && setError2("");
+    nicFront && setError3("");
+    selfie && setError4("");
+  }, [profilePic, nicBack, nicFront, selfie, error1, error2, error3, error4]);
+  const formik = useFormik({
+    initialValues: {
+      school: "",
+      subject: "",
+      year: "",
+      district: "",
+      address: "",
+      nfc: "",
+      nic: "",
+      parent_mobile: "",
+    },
+    validationSchema: Yup.object({
+      school: Yup.string().required("Required"),
+      subject: Yup.string().required("Required"),
+      year: Yup.string().required("Required"),
+      district: Yup.string().required("Required"),
+      address: Yup.string().required("Required"),
+      nfc: Yup.string().required("Required"),
+      nic: Yup.string().required("Required"),
+      parent_mobile: Yup.string().required("Required"),
+    }),
+    onSubmit: (values) => {
+      console.log(values, profilePic, nicBack, nicFront, selfie);
+    },
+  });
 
   return (
     <div className=" flex flex-row w-full min-h-screen bg-second">
@@ -34,6 +62,7 @@ const ProfileUpdate = () => {
       </div>
       <div className=" max-md:w-full min-h-full min-w-[340px] w-full bg-second flex flex-col justify-center items-center p-4">
         <form
+          onSubmit={formik.handleSubmit}
           action=""
           className="p-20 min-w-[340px] w-full min-h-full bg-second-alt rounded-[10px] flex flex-col justify-start pt-12 items-left gap-y-4"
         >
@@ -45,90 +74,90 @@ const ProfileUpdate = () => {
             <TextInput
               label="School"
               name="school"
-              value={school}
+              value={formik.values.school}
+              error={formik.errors.school}
+              touched={formik.touched.school}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               classNameD="min-w-[360px] max-md:min-w-[100%]"
               classNameI="min-w-[360px] max-md:min-w-[100%]"
-              onChange={(e) => {
-                e.preventDefault();
-                setSchool(e.target.value);
-              }}
             />
             <TextInput
               label="Subject Stream"
               name="subject"
-              value={subject}
+              value={formik.values.subject}
+              error={formik.errors.subject}
+              touched={formik.touched.subject}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               classNameD="min-w-[360px] max-md:min-w-[100%]"
               classNameI="min-w-[360px] max-md:min-w-[100%]"
-              onChange={(e) => {
-                e.preventDefault();
-                setSubject(e.target.value);
-              }}
             />
             <TextInput
               label="Exam Year"
               name="year"
-              value={year}
+              value={formik.values.year}
+              error={formik.errors.year}
+              touched={formik.touched.year}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               classNameD="min-w-[360px] max-md:min-w-[100%]"
               classNameI="min-w-[360px] max-md:min-w-[100%]"
-              onChange={(e) => {
-                e.preventDefault();
-                setYear(e.target.value);
-              }}
             />
             <TextInput
               label="District"
               name="district"
-              value={district}
+              value={formik.values.district}
+              error={formik.errors.district}
+              touched={formik.touched.district}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               classNameD="min-w-[360px] max-md:min-w-[100%]"
               classNameI="min-w-[360px] max-md:min-w-[100%]"
-              onChange={(e) => {
-                e.preventDefault();
-                setDistrict(e.target.value);
-              }}
             />
             <TextInput
               label="Address"
               name="address"
-              value={address}
+              value={formik.values.address}
+              error={formik.errors.address}
+              touched={formik.touched.address}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               classNameD="min-w-[360px] max-md:min-w-[100%]"
               classNameI="min-w-[360px] max-md:min-w-[100%]"
-              onChange={(e) => {
-                e.preventDefault();
-                setAddress(e.target.value);
-              }}
             />
             <TextInput
               label="NFC Code"
               name="nfc"
-              value={nfc}
+              value={formik.values.nfc}
+              error={formik.errors.nfc}
+              touched={formik.touched.nfc}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               classNameD="min-w-[360px] max-md:min-w-[100%]"
               classNameI="min-w-[360px] max-md:min-w-[100%]"
-              onChange={(e) => {
-                e.preventDefault();
-                setNfc(e.target.value);
-              }}
             />
             <TextInput
               label="NIC"
               name="nic"
-              value={nic}
+              value={formik.values.nic}
+              error={formik.errors.nic}
+              touched={formik.touched.nic}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               classNameD="min-w-[360px] max-md:min-w-[100%]"
               classNameI="min-w-[360px] max-md:min-w-[100%]"
-              onChange={(e) => {
-                e.preventDefault();
-                setNic(e.target.value);
-              }}
             />
             <TextInput
               label="Parent's Mobile"
               name="parent_mobile"
-              value={parentMobile}
+              value={formik.values.parent_mobile}
+              error={formik.errors.parent_mobile}
+              touched={formik.touched.parent_mobile}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               classNameD="min-w-[360px] max-md:min-w-[100%]"
               classNameI="min-w-[360px] max-md:min-w-[100%]"
-              onChange={(e) => {
-                e.preventDefault();
-                setParentMobile(e.target.value);
-              }}
             />
 
             <p className="font-[500] font-montserrat text-[13px] text-tertiary-alt w-[45%] max-md:w-[95%] text-left">
@@ -143,7 +172,7 @@ const ProfileUpdate = () => {
               <div className="flex flex-col justify-center items-center gap-x-4 w-fit">
                 <Dropzone
                   onDrop={(acceptedFiles) => {
-                    setProfilePic(acceptedFiles[0]), console.log(profilePic);
+                    setProfilePic(acceptedFiles[0]);
                   }}
                 >
                   {({ getRootProps, getInputProps }) => (
@@ -168,6 +197,9 @@ const ProfileUpdate = () => {
                 </Dropzone>
                 <p className="font-[500] font-montserrat text-[15px] text-prime-alt w-fit text-center ">
                   Profile Pic
+                </p>
+                <p className="font-[500] font-montserrat text-[13px] text-tertiary-alt">
+                  {error1}
                 </p>
               </div>
 
@@ -200,6 +232,9 @@ const ProfileUpdate = () => {
                 <p className="font-[500] font-montserrat text-[15px] text-prime-alt w-fit text-center ">
                   NIC Back
                 </p>
+                <p className="font-[500] font-montserrat text-[13px] text-tertiary-alt">
+                  {error2}
+                </p>
               </div>
 
               <div className="flex flex-col justify-center items-center gap-x-4 w-fit">
@@ -231,6 +266,9 @@ const ProfileUpdate = () => {
                 <p className="font-[500] font-montserrat text-[15px] text-prime-alt w-fit text-center ">
                   NIC Front
                 </p>
+                <p className="font-[500] font-montserrat text-[13px] text-tertiary-alt">
+                  {error3}
+                </p>
               </div>
 
               <div className="flex flex-col justify-center items-center gap-x-4 w-fit">
@@ -261,6 +299,9 @@ const ProfileUpdate = () => {
                 </Dropzone>
                 <p className="font-[500] font-montserrat text-[15px] text-prime-alt w-fit text-center ">
                   Selfie with NIC
+                </p>
+                <p className="font-[500] font-montserrat text-[13px] text-tertiary-alt">
+                  {error4}
                 </p>
               </div>
             </div>

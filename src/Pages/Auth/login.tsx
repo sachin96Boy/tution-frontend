@@ -1,14 +1,27 @@
 import { Link } from "react-router-dom";
 import login_image from "../../assets/Images/login_banner.png";
 import TextInput from "../../Components/Elements/TextInput";
-import { useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 export default function Login() {
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
+  const formik = useFormik({
+    initialValues: {
+      phone_number: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      phone_number: Yup.string().required("Required"),
+      password: Yup.string().required("Required"),
+    }),
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
   return (
     <div className=" flex flex-row w-full h-screen bg-second">
       <div className=" max-md:w-full h-full min-w-[340px] w-1/2 bg-second flex flex-col justify-center items-center">
         <form
+          onSubmit={formik.handleSubmit}
           action=""
           className=" max-w-[80%] p-6 min-w-[340px] w-[486px] min-h-[576px] bg-second-alt rounded-[10px] flex flex-col justify-start pt-12 items-center gap-y-4"
         >
@@ -22,22 +35,22 @@ export default function Login() {
           <TextInput
             label="Phone Number"
             name="phone_number"
-            value={phone}
-            onChange={(e) => {
-              e.preventDefault();
-              setPhone(e.target.value);
-            }}
+            value={formik.values.phone_number}
+            onChange={formik.handleChange}
+            error={formik.errors.phone_number}
+            touched={formik.touched.phone_number}
+            onBlur={formik.handleBlur}
           />
 
           <TextInput
             label="Password"
             name="password"
-            value={password}
+            value={formik.values.password}
             type="password"
-            onChange={(e) => {
-              e.preventDefault();
-              setPassword(e.target.value);
-            }}
+            onChange={formik.handleChange}
+            error={formik.errors.password}
+            touched={formik.touched.password}
+            onBlur={formik.handleBlur}
           />
           <button
             type="submit"

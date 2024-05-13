@@ -2,8 +2,10 @@ import OTPInput, { ResendOTP } from "otp-input-react";
 import login_banner from "../../assets/Images/login_banner.png";
 import otp_clipArt from "../../assets/Images/OTP_clipArt.png";
 import { useState } from "react";
+
 const OTPVerify = () => {
   const [OTP, setOTP] = useState("");
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [phone, setPhone] = useState("071-1234567");
   return (
