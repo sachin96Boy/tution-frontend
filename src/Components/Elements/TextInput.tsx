@@ -31,7 +31,7 @@ const TextInput = ({
       <label
         htmlFor={name}
         className={
-          "font-[500] font-montserrat text-[15px] text-[#647BA9] w-fit text-center " +
+          "font-[500] font-montserrat text-[15px] text-prime w-fit text-center " +
           classNameL
         }
       >
@@ -45,7 +45,7 @@ const TextInput = ({
         value={value}
         onChange={onChange}
         className={
-          "font-[500] font-montserrat text-[16px] p-2 w-[100%]  max-w-[396px] h-[50px] text-[#647BA9] rounded-[5px] border-[1px] border-[#DCE3F0] focus:border-[#a7a7a7] focus:outline-none " +
+          "font-[500] font-montserrat text-[16px] p-2 w-[100%]  max-w-[396px] h-[50px] text-prime rounded-[5px] border-[1px] border-[#DCE3F0] focus:border-[#a7a7a7] focus:outline-none " +
           classNameI
         }
       />

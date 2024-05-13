@@ -7,10 +7,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        "regal-gray": "#F2F6FF",
-        "regal-light": "#FFFFFF",
-        "regal-white": "#DCE3F0",
-        "regal-red": "#DE5353",
+        prime: "#3B5079",
+        "prime-alt": "#7383A1",
+        second: "#f2f6ff",
+        "second-alt": "#FFFFFF",
+        tertiary: "#368DF3",
+        "tertiary-alt": "#DE5353",
       },
       fontFamily: {
         montserrat: ["Montserrat", ...defaultTheme.fontFamily.sans],

@@ -15,16 +15,16 @@ const Qa = () => {
             setSearch(e.target.value);
           }}
         />
-        <button className="w-fit px-8 h-[52px] bg-[#3B5079] text-[16px] font-[600] text-white rounded-[10px] shadow-md hover:scale-105 transition-all duration-200">
+        <button className="w-fit px-8 h-[52px] bg-prime text-[16px] font-[600] text-second-alt rounded-[10px] shadow-md hover:scale-105 transition-all duration-200">
           Ask a New Question
         </button>
       </div>
       <div className="w-full mt-8">
-        <h1 className="text-[20px] font-[600] text-[#3B5079]">
+        <h1 className="text-[20px] font-[600] text-prime">
           All Questions on this Course
         </h1>
         <PostElement />
-        <p className="text-[14px] font-[600] text-[#3B5079] ml-[164px] mt-4">
+        <p className="text-[14px] font-[600] text-prime ml-[164px] mt-4">
           2 reply
         </p>
         <PostReplyElement />

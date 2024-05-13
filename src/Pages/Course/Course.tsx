@@ -5,9 +5,9 @@ const Course = () => {
   const { id } = useParams();
   return (
     <div className=" font-montserrat flex flex-col items-start h-full w-full">
-      <h1 className="text-[30px] font-[700] text-[#3B5079]">
+      <h1 className="text-[30px] font-[700] text-prime">
         {"Course id =" + id}{" "}
-        <span className="text-[20px] font-[500] text-[#3B5079]">
+        <span className="text-[20px] font-[500] text-prime-alt">
           {"Subjectname"}
         </span>
       </h1>

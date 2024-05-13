@@ -11,7 +11,7 @@ const SearchBox = ({
   return (
     <input
       type="text"
-      className="h-[52px] max-w-[80%] mr-6 text-[14px] py-auto px-10 rounded-[5px] border-none text-[#999999] focus:outline-none bg-[#FDFDFD] w-[542px] max-md:w-[200px] max-md:mr-2 shadow-sm"
+      className="h-[52px] max-w-[80%] mr-6 text-[14px] py-auto px-10 rounded-[5px] border-none text-prime-alt focus:outline-none bg-second-alt w-[542px] max-md:w-[200px] max-md:mr-2 shadow-sm"
       placeholder={placeholder}
       value={value}
       onChange={onChange}

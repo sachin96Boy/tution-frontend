@@ -6,10 +6,10 @@ const AnnouncementElement = () => {
       <div className="w-fit flex flex-row justify-start items-start mt-8 py-4 max-md:px-2">
         <img src={profile_pic} alt="" className="w-[47px] h-[47px] mr-4" />
         <div className="w-full mr-4">
-          <p className="text-[14px] font-[600] text-[#3B5079] text-justify px-4 w-[360px] max-md:w-full">
+          <p className="text-[14px] font-[600] text-prime text-justify px-4 w-[360px] max-md:w-full">
             Lucia Greer Post and Announcement
           </p>
-          <p className="text-[14px] font-[400] text-[#7383A1] text-justify mt-2 px-4">
+          <p className="text-[14px] font-[400] text-prime-alt text-justify mt-2 px-4">
             8 hours ago
           </p>
         </div>
@@ -17,10 +17,10 @@ const AnnouncementElement = () => {
           <img src={uparrow} alt="" className="w-[12px] h-[12px]" />
         </div>
       </div>
-      <h1 className="text-[20px] font-[600] text-[#3B5079] px-4 mt-8 mb-4">
+      <h1 className="text-[20px] font-[600] text-prime px-4 mt-8 mb-4">
         All Questions on this Course
       </h1>
-      <p className="text-[14px] font-[600] text-[#3B5079] text-justify px-4 max-md:w-full">
+      <p className="text-[14px] font-[600] text-prime text-justify px-4 max-md:w-full">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus natus
         obcaecati quae repellendus sit voluptatem praesentium, quidem rem illo
         libero pariatur reprehenderit doloribus vero ratione nostrum tempora.

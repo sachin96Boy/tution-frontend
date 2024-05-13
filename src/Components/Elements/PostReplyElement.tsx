@@ -13,7 +13,7 @@ const PostReplyElement = () => {
           nulla exercitationem consequuntur! Iusto ut sint ex, eum sunt maiores
           quam? Provident nesciunt facere quisquam!
         </p>
-        <p className="text-[14px] font-[400] text-[#7383A1] text-justify mt-2 px-4">
+        <p className="text-[14px] font-[400] text-prime-alt text-justify mt-2 px-4">
           {"by " + "Lucia Greer"}
         </p>
       </div>

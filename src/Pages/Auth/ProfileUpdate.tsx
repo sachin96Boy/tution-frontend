@@ -20,7 +20,7 @@ const ProfileUpdate = () => {
   const [selfie, setSelfie] = useState(file);
 
   return (
-    <div className=" flex flex-row w-full min-h-screen bg-[#f2f6ff]">
+    <div className=" flex flex-row w-full min-h-screen bg-second">
       <div className="max-md:hidden min-h-full w-1/3 p-4 pr-0">
         <img
           style={{
@@ -32,12 +32,12 @@ const ProfileUpdate = () => {
           alt=""
         />
       </div>
-      <div className=" max-md:w-full min-h-full min-w-[340px] w-full bg-[#f2f6ff] flex flex-col justify-center items-center p-4">
+      <div className=" max-md:w-full min-h-full min-w-[340px] w-full bg-second flex flex-col justify-center items-center p-4">
         <form
           action=""
-          className="p-20 min-w-[340px] w-full min-h-full bg-[#FFFFFF] rounded-[10px] flex flex-col justify-start pt-12 items-left gap-y-4"
+          className="p-20 min-w-[340px] w-full min-h-full bg-second-alt rounded-[10px] flex flex-col justify-start pt-12 items-left gap-y-4"
         >
-          <h1 className=" font-[700] font-montserrat text-[30px] text-[#3B5079] text-left">
+          <h1 className=" font-[700] font-montserrat text-[30px] text-prime text-left">
             Profile Update
           </h1>
 
@@ -131,12 +131,12 @@ const ProfileUpdate = () => {
               }}
             />
 
-            <p className="font-[500] font-montserrat text-[13px] text-[#DE5353] w-[45%] max-md:w-[95%] text-left">
+            <p className="font-[500] font-montserrat text-[13px] text-tertiary-alt w-[45%] max-md:w-[95%] text-left">
               {}
             </p>
           </div>
           <div>
-            <p className="font-[500] font-montserrat text-[15px] text-[#647BA9] w-fit text-center ">
+            <p className="font-[500] font-montserrat text-[15px] text-prime-alt w-fit text-center ">
               Upload images
             </p>
             <div className="flex flex-row justify-start items-start gap-x-8 gap-y-4 w-full flex-wrap mt-2">
@@ -150,7 +150,7 @@ const ProfileUpdate = () => {
                     <section>
                       <div
                         {...getRootProps()}
-                        className="font-[500] font-montserrat text-[16px] w-[100px] h-[100px] text-[#647BA9] rounded-[10px] border-[1px] border-[#DCE3F0] focus:border-[#a7a7a7] focus:outline-none flex flex-col justify-center items-center"
+                        className="font-[500] font-montserrat text-[16px] w-[100px] h-[100px] text-prime-alt rounded-[10px] border-[1px] border-[#DCE3F0] focus:border-[#a7a7a7] focus:outline-none flex flex-col justify-center items-center"
                       >
                         <input {...getInputProps()} />
                         {!profilePic?.name ? (
@@ -166,7 +166,7 @@ const ProfileUpdate = () => {
                     </section>
                   )}
                 </Dropzone>
-                <p className="font-[500] font-montserrat text-[15px] text-[#647BA9] w-fit text-center ">
+                <p className="font-[500] font-montserrat text-[15px] text-prime-alt w-fit text-center ">
                   Profile Pic
                 </p>
               </div>
@@ -181,7 +181,7 @@ const ProfileUpdate = () => {
                     <section>
                       <div
                         {...getRootProps()}
-                        className="font-[500] font-montserrat text-[16px] w-[100px] h-[100px] text-[#647BA9] rounded-[10px] border-[1px] border-[#DCE3F0] focus:border-[#a7a7a7] focus:outline-none flex flex-col justify-center items-center"
+                        className="font-[500] font-montserrat text-[16px] w-[100px] h-[100px] text-prime-alt rounded-[10px] border-[1px] border-[#DCE3F0] focus:border-[#a7a7a7] focus:outline-none flex flex-col justify-center items-center"
                       >
                         <input {...getInputProps()} />
                         {!nicBack?.name ? (
@@ -197,7 +197,7 @@ const ProfileUpdate = () => {
                     </section>
                   )}
                 </Dropzone>
-                <p className="font-[500] font-montserrat text-[15px] text-[#647BA9] w-fit text-center ">
+                <p className="font-[500] font-montserrat text-[15px] text-prime-alt w-fit text-center ">
                   NIC Back
                 </p>
               </div>
@@ -212,7 +212,7 @@ const ProfileUpdate = () => {
                     <section>
                       <div
                         {...getRootProps()}
-                        className="font-[500] font-montserrat text-[16px] w-[100px] h-[100px] text-[#647BA9] rounded-[10px] border-[1px] border-[#DCE3F0] focus:border-[#a7a7a7] focus:outline-none flex flex-col justify-center items-center"
+                        className="font-[500] font-montserrat text-[16px] w-[100px] h-[100px] text-prime-alt rounded-[10px] border-[1px] border-[#DCE3F0] focus:border-[#a7a7a7] focus:outline-none flex flex-col justify-center items-center"
                       >
                         <input {...getInputProps()} />
                         {!nicFront?.name ? (
@@ -228,7 +228,7 @@ const ProfileUpdate = () => {
                     </section>
                   )}
                 </Dropzone>
-                <p className="font-[500] font-montserrat text-[15px] text-[#647BA9] w-fit text-center ">
+                <p className="font-[500] font-montserrat text-[15px] text-prime-alt w-fit text-center ">
                   NIC Front
                 </p>
               </div>
@@ -243,7 +243,7 @@ const ProfileUpdate = () => {
                     <section>
                       <div
                         {...getRootProps()}
-                        className="font-[500] font-montserrat text-[16px] w-[100px] h-[100px] text-[#647BA9] rounded-[10px] border-[1px] border-[#DCE3F0] focus:border-[#a7a7a7] focus:outline-none flex flex-col justify-center items-center"
+                        className="font-[500] font-montserrat text-[16px] w-[100px] h-[100px] text-prime-alt rounded-[10px] border-[1px] border-[#DCE3F0] focus:border-[#a7a7a7] focus:outline-none flex flex-col justify-center items-center"
                       >
                         <input {...getInputProps()} />
                         {!selfie?.name ? (
@@ -259,7 +259,7 @@ const ProfileUpdate = () => {
                     </section>
                   )}
                 </Dropzone>
-                <p className="font-[500] font-montserrat text-[15px] text-[#647BA9] w-fit text-center ">
+                <p className="font-[500] font-montserrat text-[15px] text-prime-alt w-fit text-center ">
                   Selfie with NIC
                 </p>
               </div>
@@ -268,7 +268,7 @@ const ProfileUpdate = () => {
 
           <button
             type="submit"
-            className=" mt-4 rounded-[5px] bg-[#DE5353] text-white font-montserrat text-[12px] max-w-[100%] font-[700] w-[396px] h-[50px]"
+            className=" mt-4 rounded-[5px] bg-tertiary-alt text-second-alt font-montserrat text-[12px] max-w-[100%] font-[700] w-[396px] h-[50px]"
           >
             UPDATE
           </button>
