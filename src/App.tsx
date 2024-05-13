@@ -36,6 +36,14 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="otp-verify" element={<OTPVerify />} />
         <Route path="profile-update" element={<ProfileUpdate />} />
+        <Route
+          path="*"
+          element={
+            <h1 className="text-3xl w-screen h-screen flex justify-center items-center">
+              404 Page Not Found
+            </h1>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
