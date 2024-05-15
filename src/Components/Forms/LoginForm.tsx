@@ -1,8 +1,14 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import TextInput from "../Elements/TextInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import UserContext from "../../contexts/UserContext";
+import { useContext } from "react";
+import axios from "axios";
+import { baseURL } from "../../const/const";
 const LoginForm = () => {
+  const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       phone_number: "",
@@ -12,8 +18,14 @@ const LoginForm = () => {
       phone_number: Yup.string().required("Required"),
       password: Yup.string().required("Required"),
     }),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      const result = await axios.post(baseURL + "/api/v1/auth/login", values);
+      if (result.status === 200) {
+        setUser(result.data);
+        navigate("/");
+      } else {
+        console.log(result);
+      }
     },
   });
   return (

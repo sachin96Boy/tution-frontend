@@ -1,10 +1,16 @@
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import TextInput from "../Elements/TextInput";
+import axios from "axios";
+import { baseURL } from "../../const/const";
+import UserContext from "../../contexts/UserContext";
 const RegisterForm = () => {
   const [error, setError] = useState("");
+  const [terms, setTerms] = useState(false);
+  const { setUser } = useContext(UserContext);
+  const navigator = useNavigate();
   const formik = useFormik({
     initialValues: {
       first_name: "",
@@ -22,8 +28,17 @@ const RegisterForm = () => {
       password: Yup.string().required("Required"),
       confirm_password: Yup.string().required("Required"),
     }),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      const result = await axios.post(
+        baseURL + "/api/v1/auth/register",
+        values
+      );
+      if (result.status === 200) {
+        setUser(result.data);
+        navigator("/");
+      } else {
+        setError(result.data.message);
+      }
     },
   });
   useEffect(() => {
@@ -33,9 +48,20 @@ const RegisterForm = () => {
       setError("");
     }
   }, [formik.values.password, formik.values.confirm_password]);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (formik.values.password !== formik.values.confirm_password) {
+      setError("Passwords do not match");
+    } else {
+      setError("");
+      if (terms) {
+        formik.handleSubmit();
+      }
+    }
+  };
   return (
     <form
-      onSubmit={formik.handleSubmit}
+      onSubmit={handleSubmit}
       action=""
       className="p-20 min-w-[340px] w-full min-h-full bg-second-alt rounded-[10px] flex flex-col justify-start pt-12 items-left gap-y-4"
     >
@@ -125,6 +151,7 @@ const RegisterForm = () => {
         <input
           type="checkbox"
           name="terms"
+          onChange={(e) => setTerms(e.target.checked)}
           id="terms"
           className="form-checkbox w-[21.31px] h-[21.31px] flex-shrink-0 border-[1px]"
         />{" "}
@@ -137,11 +164,18 @@ const RegisterForm = () => {
           <span className="font-[700]">Fees</span>
         </label>
       </div>
+      <p className="font-[500] font-montserrat text-[13px] text-tertiary-alt w-[45%] max-md:w-[95%] text-left">
+        {!terms && (
+          <span className="font-[500] text-tertiary-alt">
+            Please agree to the terms and conditions
+          </span>
+        )}
+      </p>
       <button
         type="submit"
         className=" mt-4 rounded-[5px] bg-tertiary-alt text-second-alt font-montserrat text-[12px] max-w-[100%] font-[700] w-[396px] h-[50px]"
       >
-        LOGIN
+        REGISTER
       </button>
       <div className="flex flex-col justify-start items-start gap-y-4 w-full">
         <p className="font-[500] font-montserrat text-[13px] text-prime-alt">

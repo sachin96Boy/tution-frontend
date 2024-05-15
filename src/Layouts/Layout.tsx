@@ -13,21 +13,22 @@ import logout_nav_icon from "../assets/Images/Logout_nav_icon.png";
 import bell_icon from "../assets/Images/Bell_icon.png";
 import shop_icon from "../assets/Images/shop_icon.png";
 import NavItems from "../Components/Elements/NavItems";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Counter from "../Components/Elements/Counter";
 import profile_pic from "../assets/Images/Profile_pic.png";
 import SearchBox from "../Components/Elements/SearchBox";
 import Profile from "../Components/Elements/Profile";
 import menu_icon from "../assets/Images/men_icon.png";
 import close_icon from "../assets/Images/close_icon.png";
+import UserContext from "../contexts/UserContext";
 
 const Layout = () => {
   const [notifications, setNotifications] = useState(5);
   const [shopCount, setShopCount] = useState(8);
   const [search, setSearch] = useState("");
-  const [user, setUser] = useState({ name: "Test User", image: profile_pic });
   const [active, setActive] = useState("active");
   const [mobileMenuActive, setMobileMenuActive] = useState(false);
+  const { user, setUser } = useContext(UserContext);
   return (
     <div className="flex flex-row min-h-screen w-full bg-second">
       <div className="max-md:hidden min-w-[120px] flex flex-col justify-start pt-[22px] items-center">
@@ -72,7 +73,19 @@ const Layout = () => {
               onClick={() => setActive("contact")}
             />
           </div>
-          <NavItems link="/logout" icon={logout_nav_icon} />
+          <NavItems
+            link="/"
+            icon={logout_nav_icon}
+            onClick={() => {
+              setUser({
+                first_name: "",
+                last_name: "",
+                email: "",
+                phone: "",
+                id: "",
+              });
+            }}
+          />
         </ul>
       </div>
       <div className="flex flex-col w-full h-full justify-between items-center pl-4 max-md:pl-1 bg-second">
@@ -92,7 +105,16 @@ const Layout = () => {
             />
             <Counter link="/shopping" icon={shop_icon} count={shopCount} />
           </div>
-          <Profile user={user} />
+          <Profile
+            user={
+              user.id !== ""
+                ? {
+                    name: user.first_name + " " + user.last_name,
+                    image: profile_pic,
+                  }
+                : { name: "Please Login", image: profile_pic }
+            }
+          />
         </div>
         <div
           id="mobile_nav"
@@ -208,7 +230,19 @@ const Layout = () => {
                 </p>
               </div>
               <div className="flex flex-row w-full p-2 h-fit items-center bg-second-alt rounded-[5px]">
-                <NavItems link="/logout" icon={logout_nav_icon} />
+                <NavItems
+                  link="/"
+                  icon={logout_nav_icon}
+                  onClick={() => {
+                    setUser({
+                      first_name: "",
+                      last_name: "",
+                      email: "",
+                      phone: "",
+                      id: "",
+                    });
+                  }}
+                />
                 <p className="text-prime text-[18px] ml-4 font-[600]">Logout</p>
               </div>
             </ul>
