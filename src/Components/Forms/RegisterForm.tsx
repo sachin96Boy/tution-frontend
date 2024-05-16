@@ -11,6 +11,33 @@ const RegisterForm = () => {
   const [terms, setTerms] = useState(false);
   const { setUser } = useContext(UserContext);
   const navigator = useNavigate();
+  const fsubmit = async (values: {
+    first_name: string;
+    last_name: string;
+    phone_number: string;
+    email: string;
+    password: string;
+    confirm_password: string;
+  }) => {
+    const result = await axios.post(baseURL + "/api/v1/auth/register", values);
+    if (result.status === 200) {
+      setUser(result.data);
+      navigator("/");
+    } else {
+      setError(result.data.message);
+    }
+  };
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (formik.values.password !== formik.values.confirm_password) {
+      setError("Passwords do not match");
+    } else {
+      setError("");
+      if (terms) {
+        formik.handleSubmit();
+      }
+    }
+  };
   const formik = useFormik({
     initialValues: {
       first_name: "",
@@ -28,18 +55,7 @@ const RegisterForm = () => {
       password: Yup.string().required("Required"),
       confirm_password: Yup.string().required("Required"),
     }),
-    onSubmit: async (values) => {
-      const result = await axios.post(
-        baseURL + "/api/v1/auth/register",
-        values
-      );
-      if (result.status === 200) {
-        setUser(result.data);
-        navigator("/");
-      } else {
-        setError(result.data.message);
-      }
-    },
+    onSubmit: fsubmit,
   });
   useEffect(() => {
     if (formik.values.password !== formik.values.confirm_password) {
@@ -48,17 +64,7 @@ const RegisterForm = () => {
       setError("");
     }
   }, [formik.values.password, formik.values.confirm_password]);
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (formik.values.password !== formik.values.confirm_password) {
-      setError("Passwords do not match");
-    } else {
-      setError("");
-      if (terms) {
-        formik.handleSubmit();
-      }
-    }
-  };
+
   return (
     <form
       onSubmit={handleSubmit}

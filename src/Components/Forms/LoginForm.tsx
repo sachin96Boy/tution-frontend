@@ -9,6 +9,18 @@ import { baseURL } from "../../const/const";
 const LoginForm = () => {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
+  const fsubmit = async (values: {
+    phone_number: string;
+    password: string;
+  }) => {
+    const result = await axios.post(baseURL + "/api/v1/auth/login", values);
+    if (result.status === 200) {
+      setUser(result.data);
+      navigate("/");
+    } else {
+      console.log(result);
+    }
+  };
   const formik = useFormik({
     initialValues: {
       phone_number: "",
@@ -18,16 +30,9 @@ const LoginForm = () => {
       phone_number: Yup.string().required("Required"),
       password: Yup.string().required("Required"),
     }),
-    onSubmit: async (values) => {
-      const result = await axios.post(baseURL + "/api/v1/auth/login", values);
-      if (result.status === 200) {
-        setUser(result.data);
-        navigate("/");
-      } else {
-        console.log(result);
-      }
-    },
+    onSubmit: fsubmit,
   });
+
   return (
     <form
       onSubmit={formik.handleSubmit}
