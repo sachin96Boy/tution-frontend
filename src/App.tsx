@@ -17,6 +17,7 @@ import UserContext from "./contexts/UserContext";
 import { useState } from "react";
 import TeacherLayout from "./Layouts/TeacherLayout";
 import AdminLogin from "./Pages/Auth/AdminLogin";
+import AdminLayout from "./Layouts/AdminLayout";
 
 function App() {
   const [user, setUser] = useState({
@@ -25,6 +26,7 @@ function App() {
     id: "",
     email: "",
     phone: "",
+    type: "",
   });
   return (
     <UserContext.Provider value={{ user, setUser }}>
@@ -46,7 +48,7 @@ function App() {
           </Route>
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
-          <Route path="otp-verify" element={<OTPVerify />} />
+          <Route path="otp" element={<OTPVerify />} />
           <Route path="profile-update" element={<ProfileUpdate />} />
 
           <Route path="/teacher" element={<TeacherLayout />}>
@@ -59,8 +61,12 @@ function App() {
             <Route path="notifications" element={<h1>Notifications</h1>} />
           </Route>
 
-          <Route path="/admin" element={<TeacherLayout />}>
+          <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<h1>Admin Home</h1>} />
+            <Route path="students" element={<h1>Students</h1>} />
+            <Route path="classes" element={<h1>Classess</h1>} />
+            <Route path="teachers" element={<h1>Teachers</h1>} />
+            <Route path="contact" element={<h1>Contact</h1>} />
           </Route>
           <Route path="/admin/login" element={<AdminLogin />} />
 

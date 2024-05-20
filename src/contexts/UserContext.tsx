@@ -7,6 +7,7 @@ const UserContext = createContext({
     last_name: "",
     email: "",
     phone: "",
+    type: "",
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setUser: (
@@ -17,6 +18,7 @@ const UserContext = createContext({
       last_name: string;
       email: string;
       phone: string;
+      type: string;
     }
   ) => {},
 });

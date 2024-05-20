@@ -1,12 +1,43 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import OTPInput, { ResendOTP } from "otp-input-react";
 import otp_clipArt from "../../assets/Images/OTP_clipArt.png";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import UserContext from "../../contexts/UserContext";
+import axios from "axios";
+import { baseURL } from "../../const/const";
+import { useNavigate } from "react-router";
 const OTPForm = () => {
+  axios.defaults.withCredentials = true;
   const [OTP, setOTP] = useState("");
   const [error, setError] = useState("");
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const phone = "9876543210";
+  const { user } = useContext(UserContext);
+  const navigate = useNavigate();
+  const phone = user.phone;
+  useEffect(() => {
+    axios.post(baseURL + "/user/sendOTP", { phone_number: phone });
+  }, []);
+  const fsubmit = async () => {
+    try {
+      const result = await axios.post(baseURL + "/user/verifyOTP", {
+        phone_number: phone,
+        otp: OTP,
+      });
+      if (result.status === 200) {
+        setError("");
+        if (user.type === "admin") {
+          navigate("/admin");
+        } else if (user.type === "student") {
+          navigate("/student");
+        } else if (user.type === "teacher") {
+          navigate("/teacher");
+        }
+      } else {
+        setError(result.data.message);
+      }
+    } catch (err: any) {
+      setError(err.response.data);
+    }
+  };
   return (
     <form
       action=""
@@ -26,7 +57,7 @@ const OTPForm = () => {
         value={OTP}
         onChange={setOTP}
         autoFocus
-        OTPLength={4}
+        OTPLength={6}
         otpType="number"
         disabled={false}
         inputClassName="text-[32px]  min-w-[65px] min-h-[65px]  bg-[#f2f6ff] rounded-[5px] border-[1px] border-[#DCE3F0] focus:border-[#a7a7a7] focus:outline-none "
@@ -44,8 +75,8 @@ const OTPForm = () => {
         type="submit"
         onClick={(e) => {
           e.preventDefault();
-          if (OTP.length == 4) {
-            console.log(OTP);
+          if (OTP.length == 6) {
+            fsubmit();
           } else {
             setError("Please Enter Correct OTP");
           }

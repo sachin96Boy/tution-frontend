@@ -11,6 +11,7 @@ import { Bounce, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const AdminLoginForm = () => {
+  axios.defaults.withCredentials = true;
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const fsubmit = async (values: { admin_id: string; password: string }) => {
@@ -18,7 +19,7 @@ const AdminLoginForm = () => {
       const result = await axios.post(baseURL + "/api/v1/admin/login", values);
       if (result.status === 200) {
         setUser(result.data);
-        navigate("/admin");
+        navigate("/otp");
       } else {
         console.log(result);
       }

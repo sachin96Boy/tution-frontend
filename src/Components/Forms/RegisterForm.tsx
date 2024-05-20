@@ -7,6 +7,7 @@ import axios from "axios";
 import { baseURL } from "../../const/const";
 import UserContext from "../../contexts/UserContext";
 const RegisterForm = () => {
+  axios.defaults.withCredentials = true;
   const [error, setError] = useState("");
   const [terms, setTerms] = useState(false);
   const { setUser } = useContext(UserContext);
@@ -22,7 +23,7 @@ const RegisterForm = () => {
     const result = await axios.post(baseURL + "/api/v1/auth/register", values);
     if (result.status === 200) {
       setUser(result.data);
-      navigator("/student");
+      navigator("/otp");
     } else {
       setError(result.data.message);
     }

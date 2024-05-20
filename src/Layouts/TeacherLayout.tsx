@@ -76,6 +76,7 @@ const TeacherLayout = () => {
                 email: "",
                 phone: "",
                 id: "",
+                type: "",
               });
             }}
           />
@@ -216,6 +217,7 @@ const TeacherLayout = () => {
                       email: "",
                       phone: "",
                       id: "",
+                      type: "",
                     });
                   }}
                 />
