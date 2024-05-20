@@ -15,6 +15,8 @@ import MyLesson from "./Pages/MyLesson/MyLesson";
 import Profile from "./Pages/Auth/Profile";
 import UserContext from "./contexts/UserContext";
 import { useState } from "react";
+import TeacherLayout from "./Layouts/TeacherLayout";
+import AdminLogin from "./Pages/Auth/AdminLogin";
 
 function App() {
   const [user, setUser] = useState({
@@ -28,7 +30,7 @@ function App() {
     <UserContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="/student" element={<Layout />}>
             <Route index element={<h1>Home</h1>} />
             <Route path="teachers" element={<Teachers />} />
             <Route path="teacher/:id" element={<Teacher />} />
@@ -42,10 +44,26 @@ function App() {
             <Route path="shopping" element={<Shopping />} />
             <Route path="notifications" element={<h1>Notifications</h1>} />
           </Route>
-          <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="login" element={<Login />} />
           <Route path="otp-verify" element={<OTPVerify />} />
           <Route path="profile-update" element={<ProfileUpdate />} />
+
+          <Route path="/teacher" element={<TeacherLayout />}>
+            <Route index element={<h1>Home</h1>} />
+            <Route path="students" element={<h1>Students</h1>} />
+            <Route path="student/:id" element={<h1>Student</h1>} />
+            <Route path="classes" element={<h1>Classess</h1>} />
+            <Route path="profile" element={<h1>Profile</h1>} />
+            <Route path="contact" element={<h1>Contact</h1>} />
+            <Route path="notifications" element={<h1>Notifications</h1>} />
+          </Route>
+
+          <Route path="/admin" element={<TeacherLayout />}>
+            <Route index element={<h1>Admin Home</h1>} />
+          </Route>
+          <Route path="/admin/login" element={<AdminLogin />} />
+
           <Route
             path="*"
             element={

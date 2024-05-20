@@ -11,7 +11,7 @@ const CourseCard = ({
   };
 }) => {
   return (
-    <Link to={"/course/" + course.id}>
+    <Link to={"/student/course/" + course.id}>
       <div className="w-[182px] h-[230px] shadow-md hover:scale-105 transition-all duration-200 bg-second-alt rounded-lg flex flex-col justify-start items-center p-2">
         <div className="w-[166px] h-[164px] object-cover rounded-lg bg-prime font-montserrat text-[20px] font-[700] text-second-alt flex flex-col justify-center items-center text-center px-4">
           {course.courseName}

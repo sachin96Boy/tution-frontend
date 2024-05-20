@@ -10,18 +10,15 @@ import { baseURL } from "../../const/const";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const LoginForm = () => {
+const AdminLoginForm = () => {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
-  const fsubmit = async (values: {
-    phone_number: string;
-    password: string;
-  }) => {
+  const fsubmit = async (values: { admin_id: string; password: string }) => {
     try {
-      const result = await axios.post(baseURL + "/api/v1/auth/login", values);
+      const result = await axios.post(baseURL + "/api/v1/admin/login", values);
       if (result.status === 200) {
         setUser(result.data);
-        navigate("/student");
+        navigate("/admin");
       } else {
         console.log(result);
       }
@@ -41,11 +38,11 @@ const LoginForm = () => {
   };
   const formik = useFormik({
     initialValues: {
-      phone_number: "",
+      admin_id: "",
       password: "",
     },
     validationSchema: Yup.object({
-      phone_number: Yup.string().required("Required"),
+      admin_id: Yup.string().required("Required"),
       password: Yup.string().required("Required"),
     }),
     onSubmit: fsubmit,
@@ -59,19 +56,16 @@ const LoginForm = () => {
     >
       <ToastContainer />
       <h1 className=" font-[700] font-montserrat text-[30px] text-prime text-center">
-        Welcome Back
+        Admin Login
       </h1>
-      <p className="font-[600] font-montserrat text-[15px] text-prime-alt max-w-[100%] w-[330px] text-center">
-        By logging into aPlus Academy, you agree to our Terms of use and Privacy
-        Policy.
-      </p>
+
       <TextInput
-        label="Phone Number"
-        name="phone_number"
-        value={formik.values.phone_number}
+        label="Admin ID"
+        name="admin_id"
+        value={formik.values.admin_id}
         onChange={formik.handleChange}
-        error={formik.errors.phone_number}
-        touched={formik.touched.phone_number}
+        error={formik.errors.admin_id}
+        touched={formik.touched.admin_id}
         onBlur={formik.handleBlur}
       />
 
@@ -92,15 +86,6 @@ const LoginForm = () => {
         LOGIN
       </button>
       <div className="flex flex-col justify-start items-center">
-        <p className="font-[500] font-montserrat text-[13px] text-prime-alt">
-          Don't have Account?{" "}
-          <Link
-            to="/register"
-            className="font-[700] font-montserrat text-[13px] text-tertiary-alt"
-          >
-            Sign up
-          </Link>
-        </p>
         <Link
           to="/forget-password"
           className="font-[700] font-montserrat text-[13px] text-tertiary-alt"
@@ -111,4 +96,4 @@ const LoginForm = () => {
     </form>
   );
 };
-export default LoginForm;
+export default AdminLoginForm;

@@ -6,7 +6,7 @@ const TeacherCard = ({
   teacher: { id: string; name: string; subject: string; image: string };
 }) => {
   return (
-    <Link to={"/teacher/" + teacher.id}>
+    <Link to={"/student/teacher/" + teacher.id}>
       <div className="w-[182px] h-[230px] shadow-md hover:scale-105 transition-all duration-200 bg-second-alt rounded-lg flex flex-col justify-start items-center p-2">
         <img
           src={teacher.image}

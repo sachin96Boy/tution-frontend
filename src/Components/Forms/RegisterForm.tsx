@@ -22,7 +22,7 @@ const RegisterForm = () => {
     const result = await axios.post(baseURL + "/api/v1/auth/register", values);
     if (result.status === 200) {
       setUser(result.data);
-      navigator("/");
+      navigator("/student");
     } else {
       setError(result.data.message);
     }
