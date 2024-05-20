@@ -1,4 +1,4 @@
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import home_nav_icon from "../assets/Images/Home_nav_icon.png";
 import teachers_nav_icon from "../assets/Images/teachers_nav_icon.png";
 import teachers_nav_icon_active from "../assets/Images/teachers_nav_icon_active.png";
@@ -6,20 +6,19 @@ import classes_nav_icon from "../assets/Images/Classes_nav_icon.png";
 import classes_nav_icon_active from "../assets/Images/Classess_nav_icon_active.png";
 import profile_nav_icon from "../assets/Images/Profile_nav_icon.png";
 import profile_nav_icon_active from "../assets/Images/profile_nav_icon_active.png";
-
 import contact_nav_icon from "../assets/Images/Contact_nav_icon.png";
 import logout_nav_icon from "../assets/Images/Logout_nav_icon.png";
 import bell_icon from "../assets/Images/Bell_icon.png";
-
 import NavItems from "../Components/Elements/NavItems";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Counter from "../Components/Elements/Counter";
-import profile_pic from "../assets/Images/Profile_pic.png";
 import SearchBox from "../Components/Elements/SearchBox";
 import Profile from "../Components/Elements/Profile";
 import menu_icon from "../assets/Images/men_icon.png";
 import close_icon from "../assets/Images/close_icon.png";
 import UserContext from "../contexts/UserContext";
+import axios from "axios";
+import { baseURL } from "../const/const";
 const AdminLayout = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [notifications, setNotifications] = useState(5);
@@ -27,6 +26,21 @@ const AdminLayout = () => {
   const [active, setActive] = useState("active");
   const [mobileMenuActive, setMobileMenuActive] = useState(false);
   const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
+  const logout = async () => {
+    const result = await axios.get(baseURL + "/api/v1/auth/logout", {
+      withCredentials: true,
+    });
+    if (result.status === 200) {
+      setUser(result.data);
+      navigate("/admin/login");
+    }
+  };
+  useEffect(() => {
+    if (!user.first_name) {
+      navigate("/admin/login");
+    }
+  });
 
   return (
     <div className="flex flex-row min-h-screen w-full bg-second">
@@ -68,17 +82,10 @@ const AdminLayout = () => {
             />
           </div>
           <NavItems
-            link="/"
+            link=""
             icon={logout_nav_icon}
             onClick={() => {
-              setUser({
-                first_name: "",
-                last_name: "",
-                email: "",
-                phone: "",
-                id: "",
-                type: "",
-              });
+              logout();
             }}
           />
         </ul>
@@ -99,16 +106,7 @@ const AdminLayout = () => {
               count={notifications}
             />
           </div>
-          <Profile
-            user={
-              user.id !== ""
-                ? {
-                    name: user.first_name + " " + user.last_name,
-                    image: profile_pic,
-                  }
-                : { name: "Please Login", image: profile_pic }
-            }
-          />
+          <Profile />
         </div>
         <div
           id="mobile_nav"
@@ -209,17 +207,10 @@ const AdminLayout = () => {
 
               <div className="flex flex-row w-full p-2 h-fit items-center bg-second-alt rounded-[5px]">
                 <NavItems
-                  link="/"
+                  link=""
                   icon={logout_nav_icon}
                   onClick={() => {
-                    setUser({
-                      first_name: "",
-                      last_name: "",
-                      email: "",
-                      phone: "",
-                      id: "",
-                      type: "",
-                    });
+                    logout();
                   }}
                 />
                 <p className="text-prime text-[18px] ml-4 font-[600]">Logout</p>
