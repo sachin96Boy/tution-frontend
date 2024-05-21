@@ -4,23 +4,33 @@ import TextInput from "../Elements/TextInput";
 import * as Yup from "yup";
 import axios from "axios";
 import { baseURL } from "../../const/const";
+import { useEffect } from "react";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-const CreateTeacherForm = () => {
+const UpdateTeacherForm = ({ id }: { id: string }) => {
   axios.defaults.withCredentials = true;
+
+  const getTeacher = async () => {
+    const result = await axios.get(baseURL + "/teachers/get/" + id);
+    if (result.status === 200) {
+      formic.setFieldValue("first_name", result.data.first_name);
+      formic.setFieldValue("last_name", result.data.last_name);
+      formic.setFieldValue("phone", result.data.phone);
+      formic.setFieldValue("email", result.data.email);
+      formic.setFieldValue("id", result.data.id);
+    }
+  };
   const formsubmit = async (values: {
+    id: string;
     first_name: string;
     last_name: string;
     phone: string;
     email: string;
-    password: string;
-    confirm_password: string;
   }) => {
     try {
-      const result = await axios.post(baseURL + "/teachers/add", values);
+      const result = await axios.put(baseURL + "/teachers/update", values);
       if (result.status === 200) {
-        toast.success("Teacher created successfully", {
+        toast.success("Teacher Updated successfully", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -50,27 +60,25 @@ const CreateTeacherForm = () => {
   };
   const formic = useFormik({
     initialValues: {
+      id: "",
       first_name: "",
       last_name: "",
       phone: "",
       email: "",
-      password: "",
-      confirm_password: "",
     },
     validationSchema: Yup.object({
       first_name: Yup.string().required("Required"),
       last_name: Yup.string().required("Required"),
       phone: Yup.string().required("Required"),
       email: Yup.string().email("Invalid email address").required("Required"),
-      password: Yup.string().required("Required"),
-      confirm_password: Yup.string()
-        .oneOf([Yup.ref("password")], "Passwords must match")
-        .required("Required"),
     }),
     onSubmit: (values) => {
       formsubmit(values);
     },
   });
+  useEffect(() => {
+    getTeacher();
+  }, []);
   return (
     <form
       onSubmit={formic.handleSubmit}
@@ -78,9 +86,8 @@ const CreateTeacherForm = () => {
     >
       <ToastContainer />
       <h1 className=" font-[700] font-montserrat text-[30px] text-prime text-left">
-        Create New Teacher
+        Update Teacher
       </h1>
-
       <div className="flex flex-row justify-start items-start gap-x-8 gap-y-4 w-full flex-wrap mt-2">
         <TextInput
           label="First Name"
@@ -122,26 +129,6 @@ const CreateTeacherForm = () => {
           error={formic.errors.email}
           touched={formic.touched.email}
         />
-        <TextInput
-          label="Password"
-          type="password"
-          name="password"
-          value={formic.values.password}
-          onChange={formic.handleChange}
-          onBlur={formic.handleBlur}
-          error={formic.errors.password}
-          touched={formic.touched.password}
-        />
-        <TextInput
-          label="Confirm Password"
-          type="password"
-          name="confirm_password"
-          value={formic.values.confirm_password}
-          onChange={formic.handleChange}
-          onBlur={formic.handleBlur}
-          error={formic.errors.confirm_password}
-          touched={formic.touched.confirm_password}
-        />
       </div>
 
       <button
@@ -153,4 +140,4 @@ const CreateTeacherForm = () => {
     </form>
   );
 };
-export default CreateTeacherForm;
+export default UpdateTeacherForm;

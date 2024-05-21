@@ -43,7 +43,7 @@ const TeacherLayout = () => {
       });
       if (result.status === 200) {
         setUser(result.data);
-        if (!result.data.first_name) {
+        if (result.data.type !== "teacher") {
           navigate("/teacher/login");
         }
       } else {

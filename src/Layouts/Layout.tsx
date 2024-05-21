@@ -48,7 +48,7 @@ const Layout = () => {
       });
       if (result.status === 200) {
         setUser(result.data);
-        if (!result.data.first_name) {
+        if (result.data.type !== "student") {
           navigate("/login");
         }
       } else {

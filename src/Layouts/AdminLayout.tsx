@@ -43,7 +43,7 @@ const AdminLayout = () => {
       });
       if (result.status === 200) {
         setUser(result.data);
-        if (!result.data.first_name) {
+        if (result.data.type !== "admin") {
           navigate("/admin/login");
         }
       } else {
