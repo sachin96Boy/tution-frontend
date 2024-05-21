@@ -19,7 +19,7 @@ const AdminLoginForm = () => {
       const result = await axios.post(baseURL + "/api/v1/admin/login", values);
       if (result.status === 200) {
         setUser(result.data);
-        navigate("/otp");
+        navigate("/admin");
       } else {
         console.log(result);
       }

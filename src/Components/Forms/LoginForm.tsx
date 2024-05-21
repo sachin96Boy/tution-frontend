@@ -22,7 +22,11 @@ const LoginForm = () => {
       const result = await axios.post(baseURL + "/api/v1/auth/login", values);
       if (result.status === 200) {
         setUser(result.data);
-        navigate("/otp");
+        if (result.data.validated) {
+          navigate("/student");
+        } else {
+          navigate("/otp");
+        }
       } else {
         console.log(result);
       }

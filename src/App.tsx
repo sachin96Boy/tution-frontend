@@ -18,6 +18,9 @@ import { useState } from "react";
 import TeacherLayout from "./Layouts/TeacherLayout";
 import AdminLogin from "./Pages/Auth/AdminLogin";
 import AdminLayout from "./Layouts/AdminLayout";
+import AllTeachers from "./Pages/AdminPages/Teachers/AllTeachers/AllTeachers";
+import CreateTeacher from "./Pages/AdminPages/Teachers/CreateTeacher/CreateTeacher";
+import EditTeacher from "./Pages/AdminPages/Teachers/EditTeacher/EditTeacher";
 
 function App() {
   const [user, setUser] = useState({
@@ -65,7 +68,9 @@ function App() {
             <Route index element={<h1>Admin Home</h1>} />
             <Route path="students" element={<h1>Students</h1>} />
             <Route path="classes" element={<h1>Classess</h1>} />
-            <Route path="teachers" element={<h1>Teachers</h1>} />
+            <Route path="teachers" element={<AllTeachers />} />
+            <Route path="teachers/create" element={<CreateTeacher />} />
+            <Route path="teachers/edit/:id" element={<EditTeacher />} />
             <Route path="contact" element={<h1>Contact</h1>} />
           </Route>
           <Route path="/admin/login" element={<AdminLogin />} />

@@ -7,11 +7,9 @@ import classes_nav_icon from "../assets/Images/Classes_nav_icon.png";
 import classes_nav_icon_active from "../assets/Images/Classess_nav_icon_active.png";
 import profile_nav_icon from "../assets/Images/Profile_nav_icon.png";
 import profile_nav_icon_active from "../assets/Images/profile_nav_icon_active.png";
-
 import contact_nav_icon from "../assets/Images/Contact_nav_icon.png";
 import logout_nav_icon from "../assets/Images/Logout_nav_icon.png";
 import bell_icon from "../assets/Images/Bell_icon.png";
-
 import NavItems from "../Components/Elements/NavItems";
 import { useContext, useEffect, useState } from "react";
 import Counter from "../Components/Elements/Counter";
@@ -38,11 +36,28 @@ const TeacherLayout = () => {
       navigate("/teacher/login");
     }
   };
-  useEffect(() => {
-    if (!user.first_name) {
+  const chechkSession = async () => {
+    try {
+      const result = await axios.get(baseURL + "/user/session", {
+        withCredentials: true,
+      });
+      if (result.status === 200) {
+        setUser(result.data);
+        if (!result.data.first_name) {
+          navigate("/teacher/login");
+        }
+      } else {
+        console.log("error");
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      console.log(err);
       navigate("/teacher/login");
     }
-  });
+  };
+  useEffect(() => {
+    chechkSession();
+  }, []);
   return (
     <div className="flex flex-row min-h-screen w-full bg-second">
       <div className="max-md:hidden min-w-[120px] flex flex-col justify-start pt-[22px] items-center">

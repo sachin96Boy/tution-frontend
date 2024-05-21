@@ -8,11 +8,16 @@ import { baseURL } from "../../const/const";
 const Profile = () => {
   const { user, setUser } = useContext(UserContext);
   const getsession = async () => {
-    const result = await axios.get(baseURL + "/user/session", {
-      withCredentials: true,
-    });
-    if (result.status === 200) {
-      setUser(result.data);
+    try {
+      const result = await axios.get(baseURL + "/user/session", {
+        withCredentials: true,
+      });
+      if (result.status === 200) {
+        setUser(result.data);
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      console.log(err);
     }
   };
   useEffect(() => {

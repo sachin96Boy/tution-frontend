@@ -30,7 +30,7 @@ const Layout = () => {
   const [search, setSearch] = useState("");
   const [active, setActive] = useState("active");
   const [mobileMenuActive, setMobileMenuActive] = useState(false);
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const logout = async () => {
     const result = await axios.get(baseURL + "/api/v1/auth/logout", {
@@ -41,11 +41,27 @@ const Layout = () => {
       navigate("/login");
     }
   };
-  useEffect(() => {
-    if (!user.first_name) {
+  const chechkSession = async () => {
+    try {
+      const result = await axios.get(baseURL + "/user/session", {
+        withCredentials: true,
+      });
+      if (result.status === 200) {
+        setUser(result.data);
+        if (!result.data.first_name) {
+          navigate("/login");
+        }
+      } else {
+        console.log("error");
+      }
+    } catch (err: any) {
+      console.log(err);
       navigate("/login");
     }
-  });
+  };
+  useEffect(() => {
+    chechkSession();
+  }, []);
   return (
     <div className="flex flex-row min-h-screen w-full bg-second">
       <div className="max-md:hidden min-w-[120px] flex flex-col justify-start pt-[22px] items-center">
@@ -61,6 +77,7 @@ const Layout = () => {
               }
               onClick={() => setActive("teachers")}
             />
+
             <NavItems
               link="/student/classes"
               icon={

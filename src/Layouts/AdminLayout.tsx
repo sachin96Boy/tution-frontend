@@ -25,7 +25,7 @@ const AdminLayout = () => {
   const [search, setSearch] = useState("");
   const [active, setActive] = useState("active");
   const [mobileMenuActive, setMobileMenuActive] = useState(false);
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const logout = async () => {
     const result = await axios.get(baseURL + "/api/v1/auth/logout", {
@@ -36,11 +36,28 @@ const AdminLayout = () => {
       navigate("/admin/login");
     }
   };
-  useEffect(() => {
-    if (!user.first_name) {
+  const chechkSession = async () => {
+    try {
+      const result = await axios.get(baseURL + "/user/session", {
+        withCredentials: true,
+      });
+      if (result.status === 200) {
+        setUser(result.data);
+        if (!result.data.first_name) {
+          navigate("/admin/login");
+        }
+      } else {
+        console.log("error");
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      console.log(err);
       navigate("/admin/login");
     }
-  });
+  };
+  useEffect(() => {
+    chechkSession();
+  }, []);
 
   return (
     <div className="flex flex-row min-h-screen w-full bg-second">

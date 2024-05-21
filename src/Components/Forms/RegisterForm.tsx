@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import TextInput from "../Elements/TextInput";
@@ -28,17 +28,7 @@ const RegisterForm = () => {
       setError(result.data.message);
     }
   };
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (formik.values.password !== formik.values.confirm_password) {
-      setError("Passwords do not match");
-    } else {
-      setError("");
-      if (terms) {
-        formik.handleSubmit();
-      }
-    }
-  };
+
   const formik = useFormik({
     initialValues: {
       first_name: "",
@@ -54,21 +44,16 @@ const RegisterForm = () => {
       phone_number: Yup.string().required("Required"),
       email: Yup.string().email("Invalid Email").required("Required"),
       password: Yup.string().required("Required"),
-      confirm_password: Yup.string().required("Required"),
+      confirm_password: Yup.string()
+        .oneOf([Yup.ref("password")], "Passwords must match")
+        .required("Required"),
     }),
     onSubmit: fsubmit,
   });
-  useEffect(() => {
-    if (formik.values.password !== formik.values.confirm_password) {
-      setError("Passwords do not match");
-    } else {
-      setError("");
-    }
-  }, [formik.values.password, formik.values.confirm_password]);
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={formik.handleSubmit}
       action=""
       className="p-20 min-w-[340px] w-full min-h-full bg-second-alt rounded-[10px] flex flex-col justify-start pt-12 items-left gap-y-4"
     >
