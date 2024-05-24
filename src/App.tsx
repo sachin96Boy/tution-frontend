@@ -44,6 +44,7 @@ function App() {
             <Route path="mycourse/:id" element={<MyClass />} />
             <Route path="mylessons/:id" element={<MyLesson />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="update-profile" element={<ProfileUpdate />} />
             <Route path="payment" element={<h1>Payment</h1>} />
             <Route path="contact" element={<h1>Contact</h1>} />
             <Route path="shopping" element={<Shopping />} />
@@ -52,7 +53,6 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
           <Route path="otp" element={<OTPVerify />} />
-          <Route path="profile-update" element={<ProfileUpdate />} />
 
           <Route path="/teacher" element={<TeacherLayout />}>
             <Route index element={<h1>Home</h1>} />
