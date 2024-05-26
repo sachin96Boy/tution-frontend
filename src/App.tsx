@@ -21,6 +21,9 @@ import AdminLayout from "./Layouts/AdminLayout";
 import AllTeachers from "./Pages/AdminPages/Teachers/AllTeachers/AllTeachers";
 import CreateTeacher from "./Pages/AdminPages/Teachers/CreateTeacher/CreateTeacher";
 import EditTeacher from "./Pages/AdminPages/Teachers/EditTeacher/EditTeacher";
+import AllSubjects from "./Pages/AdminPages/Subjects/AllSubjects/AllSubjects";
+import CreateSubject from "./Pages/AdminPages/Subjects/CreateSubject/CreateSubject";
+import Attendence from "./Pages/AdminPages/Subjects/AttendenceMarking/Attendence";
 
 function App() {
   const [user, setUser] = useState({
@@ -67,7 +70,9 @@ function App() {
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<h1>Admin Home</h1>} />
             <Route path="students" element={<h1>Students</h1>} />
-            <Route path="classes" element={<h1>Classess</h1>} />
+            <Route path="subjects" element={<AllSubjects />} />
+            <Route path="subjects/create" element={<CreateSubject />} />
+            <Route path="subjects/attendence/:id" element={<Attendence />} />
             <Route path="teachers" element={<AllTeachers />} />
             <Route path="teachers/create" element={<CreateTeacher />} />
             <Route path="teachers/edit/:id" element={<EditTeacher />} />

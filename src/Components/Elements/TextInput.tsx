@@ -3,7 +3,7 @@ interface TextInputProps {
   label: string;
   name: string;
   placeholder?: string;
-  value: string;
+  value: string | number;
   classNameD?: string;
   classNameL?: string;
   classNameI?: string;

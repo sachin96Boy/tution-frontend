@@ -66,7 +66,7 @@ const AdminLayout = () => {
           <NavItems link="/admin" icon={home_nav_icon} />
           <div className="flex flex-col items-center h-[50%] justify-between">
             <NavItems
-              link="/admin/classes"
+              link="/admin/subjects"
               icon={
                 active === "classes"
                   ? classes_nav_icon_active
@@ -158,7 +158,7 @@ const AdminLayout = () => {
 
               <div className="flex flex-row w-full p-2 h-fit items-center bg-second-alt rounded-[5px]">
                 <NavItems
-                  link="/admin/classes"
+                  link="/admin/subjects"
                   icon={
                     active === "classes"
                       ? classes_nav_icon_active

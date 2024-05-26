@@ -5,7 +5,14 @@ import axios from "axios";
 import { baseURL } from "../const/const";
 
 const AllTeachersTable = () => {
-  const [teachers, setTeachers] = useState([]);
+  type Teacher = {
+    id: string;
+    first_name: string;
+    last_name: string;
+    phone: string;
+    email: string;
+  };
+  const [teachers, setTeachers] = useState<Teacher[]>([]);
   const getTeachers = async () => {
     const result = await axios.get(baseURL + "/teachers/get");
     if (result.status === 200) {
