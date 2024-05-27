@@ -3,11 +3,9 @@ import Dropzone from "react-dropzone";
 const Dzone = ({
   setData,
   fileData,
-  error,
 }: {
   setData: (e: File) => void;
   fileData: File | null;
-  error: string;
 }) => {
   return (
     <div className="flex flex-col justify-center items-center gap-x-4 w-fit">
@@ -34,9 +32,6 @@ const Dzone = ({
       </Dropzone>
       <p className="font-[500] font-montserrat text-[15px] text-prime-alt w-fit text-center ">
         Profile Pic
-      </p>
-      <p className="font-[500] font-montserrat text-[13px] text-tertiary-alt">
-        {error}
       </p>
     </div>
   );

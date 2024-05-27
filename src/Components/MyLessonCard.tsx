@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const MyLessonCard = () => {
   return (
-    <Link to={"/mylessons/1"}>
+    <Link to={"/student/mylessons/1"}>
       <div className="w-[375px] h-[112px] bg-second-alt rounded-[10px] shadow-md flex flex-row justify-start items-center p-2 max-md:flex-wrap max-md:h-fit">
         <div className="min-w-[95px] h-[95px] bg-tertiary rounded-[10px] flex justify-center items-center text-second-alt text-[16px] font-[500] mr-2">
           January

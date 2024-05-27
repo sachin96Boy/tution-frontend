@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Outlet, useNavigate } from "react-router";
 import home_nav_icon from "../assets/Images/Home_nav_icon.png";
 import teachers_nav_icon from "../assets/Images/teachers_nav_icon.png";
@@ -8,11 +6,9 @@ import classes_nav_icon from "../assets/Images/Classes_nav_icon.png";
 import classes_nav_icon_active from "../assets/Images/Classess_nav_icon_active.png";
 import profile_nav_icon from "../assets/Images/Profile_nav_icon.png";
 import profile_nav_icon_active from "../assets/Images/profile_nav_icon_active.png";
-import payment_nav_icon from "../assets/Images/payment_nav_icon.png";
 import contact_nav_icon from "../assets/Images/Contact_nav_icon.png";
 import logout_nav_icon from "../assets/Images/Logout_nav_icon.png";
 import bell_icon from "../assets/Images/Bell_icon.png";
-import shop_icon from "../assets/Images/shop_icon.png";
 import NavItems from "../Components/Elements/NavItems";
 import { useContext, useEffect, useState } from "react";
 import Counter from "../Components/Elements/Counter";
@@ -21,12 +17,11 @@ import Profile from "../Components/Elements/Profile";
 import menu_icon from "../assets/Images/men_icon.png";
 import close_icon from "../assets/Images/close_icon.png";
 import UserContext from "../contexts/UserContext";
-import { baseURL } from "../const/const";
 import axios from "axios";
-
-const Layout = () => {
+import { baseURL } from "../const/const";
+const AdminLayout = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [notifications, setNotifications] = useState(5);
-  const [shopCount, setShopCount] = useState(8);
   const [search, setSearch] = useState("");
   const [active, setActive] = useState("active");
   const [mobileMenuActive, setMobileMenuActive] = useState(false);
@@ -38,7 +33,7 @@ const Layout = () => {
     });
     if (result.status === 200) {
       setUser(result.data);
-      navigate("/login");
+      navigate("/admin/login");
     }
   };
   const chechkSession = async () => {
@@ -48,38 +43,30 @@ const Layout = () => {
       });
       if (result.status === 200) {
         setUser(result.data);
-        if (result.data.type !== "student") {
-          navigate("/login");
+        if (result.data.type !== "admin") {
+          navigate("/admin/login");
         }
       } else {
         console.log("error");
       }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.log(err);
-      navigate("/login");
+      navigate("/admin/login");
     }
   };
   useEffect(() => {
     chechkSession();
   }, []);
+
   return (
     <div className="flex flex-row min-h-screen w-full bg-second">
       <div className="max-md:hidden min-w-[120px] flex flex-col justify-start pt-[22px] items-center">
         <ul className="max-md:hidden py-8 flex flex-col items-center w-[80px] bg-second-alt rounded-[5px] h-[95vh] justify-between fixed">
-          <NavItems link="/student" icon={home_nav_icon} />
+          <NavItems link="/admin" icon={home_nav_icon} />
           <div className="flex flex-col items-center h-[50%] justify-between">
             <NavItems
-              link="/student/teachers"
-              icon={
-                active === "teachers"
-                  ? teachers_nav_icon_active
-                  : teachers_nav_icon
-              }
-              onClick={() => setActive("teachers")}
-            />
-
-            <NavItems
-              link="/student/classes"
+              link="/admin/subjects"
               icon={
                 active === "classes"
                   ? classes_nav_icon_active
@@ -88,21 +75,25 @@ const Layout = () => {
               onClick={() => setActive("classes")}
             />
             <NavItems
-              link="/student/profile"
+              link="/admin/teachers"
               icon={
-                active === "profile"
+                active === "teachers"
                   ? profile_nav_icon_active
                   : profile_nav_icon
               }
-              onClick={() => setActive("profile")}
+              onClick={() => setActive("teachers")}
             />
             <NavItems
-              link="/student/payment"
-              icon={active === "payment" ? payment_nav_icon : payment_nav_icon}
-              onClick={() => setActive("payment")}
+              link="/admin/students"
+              icon={
+                active === "students"
+                  ? teachers_nav_icon_active
+                  : teachers_nav_icon
+              }
+              onClick={() => setActive("students")}
             />
             <NavItems
-              link="/student/contact"
+              link="/admin/contact"
               icon={active === "contact" ? contact_nav_icon : contact_nav_icon}
               onClick={() => setActive("contact")}
             />
@@ -127,14 +118,9 @@ const Layout = () => {
               }}
             />
             <Counter
-              link="/student/notifications"
+              link="/admin/notifications"
               icon={bell_icon}
               count={notifications}
-            />
-            <Counter
-              link="/student/shopping"
-              icon={shop_icon}
-              count={shopCount}
             />
           </div>
           <Profile />
@@ -166,26 +152,13 @@ const Layout = () => {
               }
             >
               <div className="flex flex-row w-full items-center p-2 h-fit bg-second-alt rounded-[5px]">
-                <NavItems link="/student" icon={home_nav_icon} />
+                <NavItems link="/admin" icon={home_nav_icon} />
                 <p className="text-prime text-[18px] ml-4 font-[600]">Home</p>
               </div>
+
               <div className="flex flex-row w-full p-2 h-fit items-center bg-second-alt rounded-[5px]">
                 <NavItems
-                  link="/student/teachers"
-                  icon={
-                    active === "teachers"
-                      ? teachers_nav_icon_active
-                      : teachers_nav_icon
-                  }
-                  onClick={() => setActive("teachers")}
-                />
-                <p className="text-prime text-[18px] ml-4 font-[600]">
-                  Teachers
-                </p>
-              </div>
-              <div className="flex flex-row w-full p-2 h-fit items-center bg-second-alt rounded-[5px]">
-                <NavItems
-                  link="/student/classes"
+                  link="/admin/subjects"
                   icon={
                     active === "classes"
                       ? classes_nav_icon_active
@@ -199,13 +172,13 @@ const Layout = () => {
               </div>
               <div className="flex flex-row w-full p-2 h-fit items-center bg-second-alt rounded-[5px]">
                 <NavItems
-                  link="/student/profile"
+                  link="/admin/teachers"
                   icon={
-                    active === "profile"
+                    active === "teachers"
                       ? profile_nav_icon_active
                       : profile_nav_icon
                   }
-                  onClick={() => setActive("profile")}
+                  onClick={() => setActive("teachers")}
                 />
                 <p className="text-prime text-[18px] ml-4 font-[600]">
                   My Profile
@@ -213,19 +186,21 @@ const Layout = () => {
               </div>
               <div className="flex flex-row w-full p-2 h-fit items-center bg-second-alt rounded-[5px]">
                 <NavItems
-                  link="/student/payment"
+                  link="/admin/students"
                   icon={
-                    active === "payment" ? payment_nav_icon : payment_nav_icon
+                    active === "students"
+                      ? teachers_nav_icon_active
+                      : teachers_nav_icon
                   }
-                  onClick={() => setActive("payment")}
+                  onClick={() => setActive("students")}
                 />
                 <p className="text-prime text-[18px] ml-4 font-[600]">
-                  Payment
+                  Students
                 </p>
               </div>
               <div className="flex flex-row w-full p-2 h-fit items-center bg-second-alt rounded-[5px]">
                 <NavItems
-                  link="/student/contact"
+                  link="/admin/contact"
                   icon={
                     active === "contact" ? contact_nav_icon : contact_nav_icon
                   }
@@ -238,7 +213,7 @@ const Layout = () => {
 
               <div className="flex flex-row w-full p-2 h-fit items-center bg-second-alt rounded-[5px]">
                 <Counter
-                  link="/student/notifications"
+                  link="admin/notifications"
                   icon={bell_icon}
                   count={notifications}
                 />
@@ -246,16 +221,7 @@ const Layout = () => {
                   Notifications
                 </p>
               </div>
-              <div className="flex flex-row w-full p-2 h-fit items-center bg-second-alt rounded-[5px]">
-                <Counter
-                  link="/student/shopping"
-                  icon={shop_icon}
-                  count={shopCount}
-                />
-                <p className="text-prime text-[18px] ml-1 font-[600]">
-                  Shopping Cart
-                </p>
-              </div>
+
               <div className="flex flex-row w-full p-2 h-fit items-center bg-second-alt rounded-[5px]">
                 <NavItems
                   link=""
@@ -274,4 +240,4 @@ const Layout = () => {
     </div>
   );
 };
-export default Layout;
+export default AdminLayout;
