@@ -2,62 +2,18 @@
 import { useFormik } from "formik";
 import TextInput from "../Elements/TextInput";
 import * as Yup from "yup";
-import axios from "axios";
-import { baseURL } from "../../const/const";
-import { Bounce, toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import SelectInput from "../Elements/SelectInput";
+import { Teacher, ValuesType } from "../../types/types.form.CreateSubject";
+import axiosInstance from "../../utils/axiosInstance";
+import toaster from "../Elements/Toaster";
 const CreateSubjectForm = () => {
-  type Teacher = {
-    id: string;
-    first_name: string;
-    last_name: string;
-    phone: string;
-    email: string;
-  };
   const [teachers, setTeachers] = useState<Teacher[]>([]);
-  axios.defaults.withCredentials = true;
-  const formSubmit = async (values: {
-    subject_id: string;
-    subject_name: string;
-    grade: number;
-    year: number;
-    teacher_id: string;
-  }) => {
-    try {
-      const result = await axios.post(baseURL + "/subjects/add", values);
-      if (result.status === 200) {
-        toast.success("Teacher created successfully", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
-      } else {
-        console.log("Error Error");
-      }
-    } catch (error: any) {
-      toast.error(error.response.data.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-    }
-  };
+
   const getTeachers = async () => {
-    const result = await axios.get(baseURL + "/teachers/get");
+    const result = await axiosInstance.get("/teachers/get");
     if (result.status === 200) {
       setTeachers(result.data);
     }
@@ -67,30 +23,41 @@ const CreateSubjectForm = () => {
     getTeachers();
   }, []);
 
+  const initialValues = {
+    subject_id: "",
+    subject_name: "",
+    grade: 1,
+    year: 2023,
+    teacher_id: "",
+  };
+  const validationSchema = Yup.object({
+    subject_id: Yup.string().required("Required"),
+    subject_name: Yup.string().required("Required"),
+    grade: Yup.number()
+      .required("Required")
+      .lessThan(14, "Must be less than 14")
+      .moreThan(0, "Must be greater than 0"),
+    year: Yup.number()
+      .required("Required")
+      .moreThan(2023, "Must be greater than 2023"),
+    teacher_id: Yup.string().required("Required"),
+  });
+  const formSubmit = async (values: ValuesType) => {
+    try {
+      const result = await axiosInstance.post("/subjects/add", values);
+      if (result.status === 200) {
+        toaster("success", "Subject created successfully");
+      } else {
+        toaster("error", "Something went wrong");
+      }
+    } catch (error: any) {
+      toaster("error", error.response.data.message);
+    }
+  };
   const formik = useFormik({
-    initialValues: {
-      subject_id: "",
-      subject_name: "",
-      grade: 1,
-      year: 2023,
-      teacher_id: "",
-    },
-
-    validationSchema: Yup.object({
-      subject_id: Yup.string().required("Required"),
-      subject_name: Yup.string().required("Required"),
-      grade: Yup.number()
-        .required("Required")
-        .lessThan(14, "Must be less than 14")
-        .moreThan(0, "Must be greater than 0"),
-      year: Yup.number()
-        .required("Required")
-        .moreThan(2023, "Must be greater than 2023"),
-      teacher_id: Yup.string().required("Required"),
-    }),
-    onSubmit: (values) => {
-      formSubmit(values);
-    },
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: formSubmit,
   });
 
   return (
@@ -148,7 +115,6 @@ const CreateSubjectForm = () => {
         <SelectInput
           label="Teacher"
           name="teacher_id"
-          id="teacher_id"
           value={formik.values.teacher_id}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}

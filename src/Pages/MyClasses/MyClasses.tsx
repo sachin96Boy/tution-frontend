@@ -1,28 +1,20 @@
 import { useEffect, useState } from "react";
-import MyClassCard from "../../Components/MyClassCard";
-import axios from "axios";
-import { baseURL } from "../../const/const";
 import CourseCard from "../../Components/CourseCard";
+import { Subject } from "../../types/types.MyClasses";
+import axiosInstance from "../../utils/axiosInstance";
 
 const MyClasses = () => {
-  type Subject = {
-    id: string;
-    subject_id: string;
-    subject_name: string;
-    grade: string;
-    year: string;
-  };
   const [enrolledList, setEnrolledList] = useState<Subject[]>([]);
-  axios.defaults.withCredentials = true;
+  const [refresh, setRefresh] = useState(false);
   const getEnrolledList = async () => {
-    const result = await axios.get(baseURL + "/subjects/get/enrolled/");
+    const result = await axiosInstance.get("/subjects/get/enrolled/");
     if (result.status === 200) {
       setEnrolledList(result.data);
     }
   };
   useEffect(() => {
     getEnrolledList();
-  }, []);
+  }, [refresh]);
   return (
     <div className=" font-montserrat flex flex-col items-start h-full w-full">
       <h1 className="text-[30px] font-[700] text-prime">My Classes</h1>
@@ -33,6 +25,8 @@ const MyClasses = () => {
               link={"/student/mycourse/"}
               subject={subject}
               key={index}
+              refresh={refresh}
+              setRefresh={setRefresh}
               enrolled={
                 enrolledList.find((ensubject) => ensubject.id === subject.id)
                   ? true

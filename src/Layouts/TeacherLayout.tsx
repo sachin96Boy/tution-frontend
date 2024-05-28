@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Outlet, useNavigate } from "react-router";
 import home_nav_icon from "../assets/Images/Home_nav_icon.png";
@@ -18,8 +19,9 @@ import Profile from "../Components/Elements/Profile";
 import menu_icon from "../assets/Images/men_icon.png";
 import close_icon from "../assets/Images/close_icon.png";
 import UserContext from "../contexts/UserContext";
-import { baseURL } from "../const/const";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
+import toaster from "../Components/Elements/Toaster";
+import { ToastContainer } from "react-toastify";
 const TeacherLayout = () => {
   const [notifications, setNotifications] = useState(5);
   const [search, setSearch] = useState("");
@@ -28,30 +30,32 @@ const TeacherLayout = () => {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const logout = async () => {
-    const result = await axios.get(baseURL + "/api/v1/auth/logout", {
-      withCredentials: true,
-    });
-    if (result.status === 200) {
-      setUser(result.data);
-      navigate("/teacher/login");
+    try {
+      const result = await axiosInstance.get("/api/v1/auth/logout");
+      if (result.status === 200) {
+        setUser(result.data);
+        navigate("/teacher/login");
+      } else {
+        toaster("error", result.data.message);
+      }
+    } catch (err: any) {
+      toaster("error", err.response.data.message);
     }
   };
   const chechkSession = async () => {
     try {
-      const result = await axios.get(baseURL + "/user/session", {
-        withCredentials: true,
-      });
+      const result = await axiosInstance.get("/user/session");
       if (result.status === 200) {
         setUser(result.data);
         if (result.data.type !== "teacher") {
           navigate("/teacher/login");
         }
       } else {
-        console.log("error");
+        toaster("error", result.data.message);
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      console.log(err);
+      toaster("error", err.response.data.message);
       navigate("/teacher/login");
     }
   };
@@ -124,6 +128,7 @@ const TeacherLayout = () => {
           </div>
           <Profile />
         </div>
+        <ToastContainer />
         <div
           id="mobile_nav"
           className="hidden max-md:flex flex-col w-full h-[100px] justify-between items-center pl-4 max-md:pl-1"

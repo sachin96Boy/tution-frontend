@@ -2,24 +2,17 @@
 import { useParams } from "react-router";
 import { Html5QrcodeScanner } from "html5-qrcode";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { baseURL } from "../../../../const/const";
-import { Bounce, toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import axiosInstance from "../../../../utils/axiosInstance";
+import toaster from "../../../../Components/Elements/Toaster";
+import { User } from "../../../../types/types.app";
+import { Subject } from "../../../../types/type.Attendence";
 const Attendence = () => {
-  axios.defaults.withCredentials = true;
   const { id } = useParams();
-  const [user, setUser] = useState<any>();
+  const [user, setUser] = useState<User>();
   const [subject, setSubject] = useState<Subject>();
   const [refresh, setRefresh] = useState(false);
 
-  type Subject = {
-    id: string;
-    subject_id: string;
-    subject_name: string;
-    grade: string;
-    year: string;
-    teacher: any;
-  };
   const markAttendance = async () => {
     const values = {
       student_id: user?.id,
@@ -27,40 +20,20 @@ const Attendence = () => {
       time: new Date(),
     };
     try {
-      const result = await axios.post(baseURL + "/attendance/add", values);
+      const result = await axiosInstance.post("/attendance/add", values);
       if (result.status === 200) {
-        toast.success("Attendence Marked Successfully", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
+        toaster("success", result.data.message);
       } else {
-        console.log("Error Error");
+        toaster("error", result.data.message);
       }
     } catch (error: any) {
-      toast.error(error.response.data.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      toaster("error", error.response.data.message);
     }
   };
 
   useEffect(() => {
     const getSubject = async () => {
-      const result = await axios.get(baseURL + "/subjects/get/" + id);
+      const result = await axiosInstance.get("/subjects/get/" + id);
       if (result.status === 200) {
         setSubject(result.data);
       }
@@ -78,12 +51,14 @@ const Attendence = () => {
     );
     async function getUser(id: string) {
       try {
-        const result = await axios.get(baseURL + "/users/get/" + id);
+        const result = await axiosInstance.get("/users/get/" + id);
         if (result.status === 200) {
           setUser(result.data);
+        } else {
+          toaster("error", result.data.message);
         }
       } catch (error: any) {
-        console.log(error);
+        toaster("error", error.response.data.message);
       }
     }
     function success(result: any) {
@@ -203,7 +178,7 @@ const Attendence = () => {
           <button
             onClick={() => {
               setRefresh(!refresh);
-              setUser({});
+              setUser({} as User);
             }}
             className="w-full h-[52px] bg-tertiary-alt text-[15px] font-[500] text-second-alt rounded-[10px] shadow-md hover:scale-105 transition-all duration-200"
           >

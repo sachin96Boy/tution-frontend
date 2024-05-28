@@ -1,45 +1,31 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import CourseCard from "../../Components/CourseCard";
-import { baseURL } from "../../const/const";
-import axios from "axios";
+import { Subject, TeacherType } from "../../types/types.Teacher";
+import axiosInstance from "../../utils/axiosInstance";
 
 const Teacher = () => {
   const { id } = useParams();
-  type Subject = {
-    id: string;
-    subject_id: string;
-    subject_name: string;
-    grade: string;
-    year: string;
-  };
-  type Teacher = {
-    id: string;
-    first_name: string;
-    last_name: string;
-    phone: string;
-    email: string;
-  };
-  const [teacher, setTeacher] = useState<Teacher>();
+
+  const [teacher, setTeacher] = useState<TeacherType>();
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [enrolledList, setEnrolledList] = useState<Subject[]>([]);
-  axios.defaults.withCredentials = true;
+  const [refresh, setRefresh] = useState(false);
+
   const getSubjects = async () => {
-    const result = await axios.get(baseURL + "/subjects/get/byteacher/" + id);
+    const result = await axiosInstance.get("/subjects/get/byteacher/" + id);
     if (result.status === 200) {
       setSubjects(result.data);
     }
   };
   const getTeacher = async () => {
-    const result = await axios.get(baseURL + "/teachers/get/" + id);
+    const result = await axiosInstance.get("/teachers/get/" + id);
     if (result.status === 200) {
       setTeacher(result.data);
     }
   };
   const getEnrolledList = async () => {
-    const result = await axios.get(baseURL + "/subjects/get/enrolled/");
+    const result = await axiosInstance.get("/subjects/get/enrolled/");
     if (result.status === 200) {
       setEnrolledList(result.data);
     }
@@ -49,7 +35,7 @@ const Teacher = () => {
     getSubjects();
     getTeacher();
     getEnrolledList();
-  }, []);
+  }, [refresh]);
 
   return (
     <div className=" font-montserrat flex flex-col items-start h-full w-full">
@@ -69,6 +55,8 @@ const Teacher = () => {
               link={"/student/course/"}
               subject={subject}
               key={index}
+              refresh={refresh}
+              setRefresh={setRefresh}
               enrolled={
                 enrolledList.find((ensubject) => ensubject.id === subject.id)
                   ? true

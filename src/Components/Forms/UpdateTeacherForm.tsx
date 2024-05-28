@@ -2,16 +2,15 @@
 import { useFormik } from "formik";
 import TextInput from "../Elements/TextInput";
 import * as Yup from "yup";
-import axios from "axios";
-import { baseURL } from "../../const/const";
 import { useEffect } from "react";
-import { Bounce, toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axiosInstance from "../../utils/axiosInstance";
+import toaster from "../Elements/Toaster";
+import { ValuesType } from "../../types/type.form.UpdateTeacher";
 const UpdateTeacherForm = ({ id }: { id: string }) => {
-  axios.defaults.withCredentials = true;
-
   const getTeacher = async () => {
-    const result = await axios.get(baseURL + "/teachers/get/" + id);
+    const result = await axiosInstance.get("/teachers/get/" + id);
     if (result.status === 200) {
       formic.setFieldValue("first_name", result.data.first_name);
       formic.setFieldValue("last_name", result.data.last_name);
@@ -20,61 +19,36 @@ const UpdateTeacherForm = ({ id }: { id: string }) => {
       formic.setFieldValue("id", result.data.id);
     }
   };
-  const formsubmit = async (values: {
-    id: string;
-    first_name: string;
-    last_name: string;
-    phone: string;
-    email: string;
-  }) => {
+
+  const initialValues = {
+    id: "",
+    first_name: "",
+    last_name: "",
+    phone: "",
+    email: "",
+  };
+  const validationSchema = Yup.object({
+    first_name: Yup.string().required("Required"),
+    last_name: Yup.string().required("Required"),
+    phone: Yup.string().required("Required"),
+    email: Yup.string().email("Invalid email address").required("Required"),
+  });
+  const formsubmit = async (values: ValuesType) => {
     try {
-      const result = await axios.put(baseURL + "/teachers/update", values);
+      const result = await axiosInstance.put("/teachers/update", values);
       if (result.status === 200) {
-        toast.success("Teacher Updated successfully", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
+        toaster("success", "Teacher updated successfully");
       } else {
-        console.log("Error Error");
+        toaster("error", "Something went wrong");
       }
     } catch (error: any) {
-      toast.error(error.response.data.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      toaster("error", error.response.data.message);
     }
   };
   const formic = useFormik({
-    initialValues: {
-      id: "",
-      first_name: "",
-      last_name: "",
-      phone: "",
-      email: "",
-    },
-    validationSchema: Yup.object({
-      first_name: Yup.string().required("Required"),
-      last_name: Yup.string().required("Required"),
-      phone: Yup.string().required("Required"),
-      email: Yup.string().email("Invalid email address").required("Required"),
-    }),
-    onSubmit: (values) => {
-      formsubmit(values);
-    },
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: formsubmit,
   });
   useEffect(() => {
     getTeacher();

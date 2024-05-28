@@ -4,8 +4,8 @@ import otp_clipArt from "../../assets/Images/OTP_clipArt.png";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import axios from "axios";
-import { baseURL } from "../../const/const";
 import { useNavigate } from "react-router";
+import axiosInstance from "../../utils/axiosInstance";
 const OTPForm = () => {
   axios.defaults.withCredentials = true;
   const [OTP, setOTP] = useState("");
@@ -14,11 +14,11 @@ const OTPForm = () => {
   const navigate = useNavigate();
   const phone = user.phone;
   useEffect(() => {
-    axios.post(baseURL + "/user/sendOTP", { phone_number: phone });
+    axiosInstance.post("/user/sendOTP", { phone_number: phone });
   }, []);
   const fsubmit = async () => {
     try {
-      const result = await axios.post(baseURL + "/user/verifyOTP", {
+      const result = await axiosInstance.post("/user/verifyOTP", {
         phone_number: phone,
         otp: OTP,
       });
@@ -41,7 +41,7 @@ const OTPForm = () => {
   return (
     <form
       action=""
-      className=" max-w-[80%] p-6 min-w-[340px] w-[486px] min-h-[576px] bg-second-alt rounded-[10px] flex flex-col justify-start pt-12 items-center gap-y-4"
+      className=" p-6 min-w-[340px] w-[100%] min-h-[100%] bg-second-alt rounded-[10px] flex flex-col justify-start pt-12 items-center gap-y-4"
     >
       <img src={otp_clipArt} alt="" />
       <h1 className=" font-[700] font-montserrat text-[30px] text-prime text-center">
@@ -60,7 +60,7 @@ const OTPForm = () => {
         OTPLength={6}
         otpType="number"
         disabled={false}
-        inputClassName="text-[32px]  min-w-[65px] min-h-[65px]  bg-[#f2f6ff] rounded-[5px] border-[1px] border-[#DCE3F0] focus:border-[#a7a7a7] focus:outline-none "
+        inputClassName="text-[32px]  min-w-[32px] min-h-[32px]  bg-[#f2f6ff] rounded-[5px] border-[1px] border-[#DCE3F0] focus:border-[#a7a7a7] focus:outline-none "
         secure
       />
       <p className="font-[500] font-montserrat text-[15px] text-prime-alt max-w-[100%] w-[330px] text-center">

@@ -1,20 +1,11 @@
-import axios from "axios";
 import TeacherCard from "../../Components/TeacherCard";
 import { useEffect, useState } from "react";
-import { baseURL } from "../../const/const";
-
+import { Teacher } from "../../types/types.Teachers";
+import axiosInstance from "../../utils/axiosInstance";
 const Teachers = () => {
-  type Teacher = {
-    id: string;
-    first_name: string;
-    last_name: string;
-    phone: string;
-    email: string;
-  };
   const [teachers, setTeachers] = useState<Teacher[]>([]);
-  axios.defaults.withCredentials = true;
   const getTeachers = async () => {
-    const result = await axios.get(baseURL + "/teachers/get");
+    const result = await axiosInstance.get("/teachers/get");
     if (result.status === 200) {
       setTeachers(result.data);
     }

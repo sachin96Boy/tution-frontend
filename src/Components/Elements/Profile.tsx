@@ -1,21 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect } from "react";
 import UserContext from "../../contexts/UserContext";
 import profile_pic from "../../assets/Images/Profile_pic.png";
-import axios from "axios";
-import { baseURL } from "../../const/const";
+import axiosInstance from "../../utils/axiosInstance";
 
 const Profile = () => {
   const { user, setUser } = useContext(UserContext);
   const getsession = async () => {
     try {
-      const result = await axios.get(baseURL + "/user/session", {
-        withCredentials: true,
-      });
+      const result = await axiosInstance.get("/user/session");
       if (result.status === 200) {
         setUser(result.data);
       }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.log(err);
     }

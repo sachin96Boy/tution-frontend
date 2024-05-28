@@ -1,16 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import profile_pic from "../../assets/Images/Profile_photo.png";
-import axios from "axios";
-import { baseURL } from "../../const/const";
 import { Link, useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import axiosInstance from "../../utils/axiosInstance";
+import { User } from "../../types/types.app";
 
 const Profile = () => {
-  axios.defaults.withCredentials = true;
-  const [user, setUser] = useState<any>({});
+  const [user, setUser] = useState<User>({} as User);
   const navigate = useNavigate();
   const downloadQRCode = () => {
     const input: HTMLElement =
@@ -23,9 +22,7 @@ const Profile = () => {
     });
   };
   const logout = async () => {
-    const result = await axios.get(baseURL + "/api/v1/auth/logout", {
-      withCredentials: true,
-    });
+    const result = await axiosInstance.get("/api/v1/auth/logout");
     if (result.status === 200) {
       setUser(result.data);
       navigate("/login");
@@ -33,7 +30,7 @@ const Profile = () => {
   };
   const deleteProfile = async () => {
     try {
-      const result = await axios.delete(baseURL + "/api/v1/auth/user");
+      const result = await axiosInstance.delete("/api/v1/auth/user");
       if (result.status === 200) {
         logout();
       }
@@ -43,7 +40,7 @@ const Profile = () => {
   };
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(baseURL + "/api/v1/auth/user");
+      const result = await axiosInstance.get("/api/v1/auth/user");
       if (result.status === 200) {
         setUser(result.data);
       }

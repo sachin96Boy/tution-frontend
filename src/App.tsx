@@ -24,16 +24,10 @@ import EditTeacher from "./Pages/AdminPages/Teachers/EditTeacher/EditTeacher";
 import AllSubjects from "./Pages/AdminPages/Subjects/AllSubjects/AllSubjects";
 import CreateSubject from "./Pages/AdminPages/Subjects/CreateSubject/CreateSubject";
 import Attendence from "./Pages/AdminPages/Subjects/AttendenceMarking/Attendence";
+import { User } from "./types/types.app";
 
 function App() {
-  const [user, setUser] = useState({
-    first_name: "",
-    last_name: "",
-    id: "",
-    email: "",
-    phone: "",
-    type: "",
-  });
+  const [user, setUser] = useState<User>({} as User);
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
@@ -66,6 +60,8 @@ function App() {
             <Route path="contact" element={<h1>Contact</h1>} />
             <Route path="notifications" element={<h1>Notifications</h1>} />
           </Route>
+
+          <Route path="/teacher/login" element={<h1>Teacher Login</h1>} />
 
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<h1>Admin Home</h1>} />

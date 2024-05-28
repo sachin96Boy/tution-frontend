@@ -4,19 +4,18 @@ import TextInput from "../../Components/Elements/TextInput";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Dzone from "../Dzone";
-import axios from "axios";
-import { baseURL } from "../../const/const";
-import { Bounce, toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import axiosInstance from "../../utils/axiosInstance";
+import toaster from "../Elements/Toaster";
 const ProfileUpdateForm = () => {
   const [profilePic, setProfilePic] = useState<File | null>(null);
   const [nicBack, setNicBack] = useState<File | null>(null);
   const [nicFront, setNicFront] = useState<File | null>(null);
   const [selfie, setSelfie] = useState<File | null>(null);
-  axios.defaults.withCredentials = true;
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(baseURL + "/api/v1/auth/user");
+      const result = await axiosInstance.get("/api/v1/auth/user");
       if (result.status === 200) {
         formik.setFieldValue("first_name", result.data.first_name || "");
         formik.setFieldValue("last_name", result.data.last_name || "");
@@ -36,77 +35,56 @@ const ProfileUpdateForm = () => {
     };
     fetchData();
   }, []);
+
+  const initialValues = {
+    first_name: "",
+    last_name: "",
+    phone: "",
+    email: "",
+    password: "",
+    confirm_password: "",
+    school: "",
+    subject_stream: "",
+    exam_year: "",
+    district: "",
+    address: "",
+    nic: "",
+    parent_mobile: "",
+  };
+  const validationSchema = Yup.object({
+    first_name: Yup.string().required("Required"),
+    last_name: Yup.string().required("Required"),
+    phone: Yup.string().required("Required"),
+    email: Yup.string().required("Required"),
+    password: Yup.string(),
+    confirm_password: Yup.string().oneOf(
+      [Yup.ref("password")],
+      "Passwords must match"
+    ),
+    school: Yup.string().required("Required"),
+    subject_stream: Yup.string().required("Required"),
+    exam_year: Yup.number().required("Required"),
+    district: Yup.string().required("Required"),
+    address: Yup.string().required("Required"),
+    nic: Yup.string().required("Required"),
+    parent_mobile: Yup.string().required("Required"),
+  });
   const formsubmit = async (values: any) => {
     try {
-      const result = await axios.put(baseURL + "/api/v1/auth/user", values);
+      const result = await axiosInstance.put("/api/v1/auth/user", values);
       if (result.status === 200) {
-        toast.success("Teacher Updated successfully", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
+        toaster("success", "Profile updated successfully");
       } else {
-        console.log("Error Error");
+        toaster("error", "Something went wrong");
       }
     } catch (error: any) {
-      toast.error(error.response.data.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      toaster("error", error.response.data.message);
     }
   };
-
   const formik = useFormik({
-    initialValues: {
-      first_name: "",
-      last_name: "",
-      phone: "",
-      email: "",
-      password: "",
-      confirm_password: "",
-      school: "",
-      subject_stream: "",
-      exam_year: "",
-      district: "",
-      address: "",
-      nic: "",
-      parent_mobile: "",
-    },
-    validationSchema: Yup.object({
-      first_name: Yup.string().required("Required"),
-      last_name: Yup.string().required("Required"),
-      phone: Yup.string().required("Required"),
-      email: Yup.string().required("Required"),
-      password: Yup.string(),
-      confirm_password: Yup.string().oneOf(
-        [Yup.ref("password")],
-        "Passwords must match"
-      ),
-      school: Yup.string().required("Required"),
-      subject_stream: Yup.string().required("Required"),
-      exam_year: Yup.number().required("Required"),
-      district: Yup.string().required("Required"),
-      address: Yup.string().required("Required"),
-      nic: Yup.string().required("Required"),
-      parent_mobile: Yup.string().required("Required"),
-    }),
-    onSubmit: (values) => {
-      console.log(values);
-      formsubmit(values);
-    },
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: formsubmit,
   });
   return (
     <form

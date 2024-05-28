@@ -21,8 +21,9 @@ import Profile from "../Components/Elements/Profile";
 import menu_icon from "../assets/Images/men_icon.png";
 import close_icon from "../assets/Images/close_icon.png";
 import UserContext from "../contexts/UserContext";
-import { baseURL } from "../const/const";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
+import toaster from "../Components/Elements/Toaster";
+import { ToastContainer } from "react-toastify";
 
 const Layout = () => {
   const [notifications, setNotifications] = useState(5);
@@ -33,29 +34,31 @@ const Layout = () => {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const logout = async () => {
-    const result = await axios.get(baseURL + "/api/v1/auth/logout", {
-      withCredentials: true,
-    });
-    if (result.status === 200) {
-      setUser(result.data);
-      navigate("/login");
+    try {
+      const result = await axiosInstance.get("/api/v1/auth/logout");
+      if (result.status === 200) {
+        setUser(result.data);
+        navigate("/login");
+      } else {
+        toaster("error", result.data.message);
+      }
+    } catch (err: any) {
+      toaster("error", err.response.data.message);
     }
   };
   const chechkSession = async () => {
     try {
-      const result = await axios.get(baseURL + "/user/session", {
-        withCredentials: true,
-      });
+      const result = await axiosInstance.get("/user/session");
       if (result.status === 200) {
         setUser(result.data);
         if (result.data.type !== "student") {
           navigate("/login");
         }
       } else {
-        console.log("error");
+        toaster("error", result.data.message);
       }
     } catch (err: any) {
-      console.log(err);
+      toaster("error", err.response.data.message);
       navigate("/login");
     }
   };
@@ -139,6 +142,7 @@ const Layout = () => {
           </div>
           <Profile />
         </div>
+        <ToastContainer />
         <div
           id="mobile_nav"
           className="hidden max-md:flex flex-col w-full h-[100px] justify-between items-center pl-4 max-md:pl-1"

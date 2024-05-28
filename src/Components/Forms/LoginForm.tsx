@@ -5,21 +5,29 @@ import TextInput from "../Elements/TextInput";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
 import { useContext } from "react";
-import axios from "axios";
-import { baseURL } from "../../const/const";
-import { Bounce, toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axiosInstance from "../../utils/axiosInstance";
+import toaster from "../Elements/Toaster";
 
 const LoginForm = () => {
-  axios.defaults.withCredentials = true;
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
-  const fsubmit = async (values: {
+  type ValuesType = {
     phone_number: string;
     password: string;
-  }) => {
+  };
+  const initialValues = {
+    phone_number: "",
+    password: "",
+  };
+  const validationSchema = Yup.object({
+    phone_number: Yup.string().required("Required"),
+    password: Yup.string().required("Required"),
+  });
+  const fsubmit = async (values: ValuesType) => {
     try {
-      const result = await axios.post(baseURL + "/api/v1/auth/login", values);
+      const result = await axiosInstance.post("/api/v1/auth/login", values);
       if (result.status === 200) {
         setUser(result.data);
         if (result.data.validated) {
@@ -28,31 +36,16 @@ const LoginForm = () => {
           navigate("/otp");
         }
       } else {
-        console.log(result);
+        toaster("error", result.data.message);
       }
     } catch (err: any) {
-      toast.error(err.response.data, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      toaster("error", err.response.data.message);
+      console.log(err.response.data.message);
     }
   };
   const formik = useFormik({
-    initialValues: {
-      phone_number: "",
-      password: "",
-    },
-    validationSchema: Yup.object({
-      phone_number: Yup.string().required("Required"),
-      password: Yup.string().required("Required"),
-    }),
+    initialValues: initialValues,
+    validationSchema: validationSchema,
     onSubmit: fsubmit,
   });
 

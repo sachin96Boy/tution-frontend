@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-const SelectInput = (props: any) => {
+import { SelectInputProps } from "../../types/types.component.SelectInput";
+
+const SelectInput = (props: SelectInputProps) => {
   return (
     <div
       className={
@@ -23,6 +25,7 @@ const SelectInput = (props: any) => {
         name={props.name}
         value={props.value}
         onChange={props.onChange}
+        onBlur={props.onBlur}
         className={
           "w-[100%] max-w-[396px] h-[50px] border border-solid  rounded-[5px] text-center font-[500] font-montserrat text-[15px] text-prime bg-second-alt focus:outline-none " +
           props.classNameI
