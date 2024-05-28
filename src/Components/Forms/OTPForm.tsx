@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import OTPInput, { ResendOTP } from "otp-input-react";
 import otp_clipArt from "../../assets/Images/OTP_clipArt.png";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import axiosInstance from "../../utils/axiosInstance";
+import toaster from "../Elements/Toaster";
+import { ToastContainer } from "react-toastify";
 const OTPForm = () => {
   axios.defaults.withCredentials = true;
   const [OTP, setOTP] = useState("");
@@ -13,8 +15,15 @@ const OTPForm = () => {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const phone = user.phone;
+  const sendOTP = async () => {
+    try {
+      await axiosInstance.post("/user/sendOTP", { phone_number: phone });
+    } catch (error: any) {
+      toaster("error", error.response.data.message);
+    }
+  };
   useEffect(() => {
-    axiosInstance.post("/user/sendOTP", { phone_number: phone });
+    sendOTP();
   }, []);
   const fsubmit = async () => {
     try {
@@ -32,10 +41,10 @@ const OTPForm = () => {
           navigate("/teacher");
         }
       } else {
-        setError(result.data.message);
+        toaster("error", result.data.message);
       }
     } catch (err: any) {
-      setError(err.response.data);
+      toaster("error", err.response.data.message);
     }
   };
   return (
@@ -43,6 +52,7 @@ const OTPForm = () => {
       action=""
       className=" p-6 min-w-[340px] w-[100%] min-h-[100%] bg-second-alt rounded-[10px] flex flex-col justify-start pt-12 items-center gap-y-4"
     >
+      <ToastContainer />
       <img src={otp_clipArt} alt="" />
       <h1 className=" font-[700] font-montserrat text-[30px] text-prime text-center">
         OTP Verification

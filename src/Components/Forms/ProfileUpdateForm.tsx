@@ -26,7 +26,7 @@ const ProfileUpdateForm = () => {
           "subject_stream",
           result.data.subject_stream || ""
         );
-        formik.setFieldValue("exam_year", result.data.year || "");
+        formik.setFieldValue("exam_year", result.data.exam_year || "");
         formik.setFieldValue("district", result.data.district || "");
         formik.setFieldValue("address", result.data.address || "");
         formik.setFieldValue("nic", result.data.nic || "");

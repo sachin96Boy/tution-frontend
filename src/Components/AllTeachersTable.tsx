@@ -27,8 +27,8 @@ const AllTeachersTable = () => {
     <div>
       <ToastContainer />
       <div className="flex flex-crow flex-wrap justify-start gap-8 items-center h-full w-full">
-        {teachers.map((teacher) => (
-          <AdminTeacherCard teacher={teacher} key={teacher.id} />
+        {teachers.map((teacher, index) => (
+          <AdminTeacherCard teacher={teacher} key={index} />
         ))}
       </div>
     </div>

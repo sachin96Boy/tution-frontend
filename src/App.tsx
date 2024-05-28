@@ -1,7 +1,5 @@
 import Login from "./Pages/Auth/login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import Layout from "./Layouts/Layout";
 import Register from "./Pages/Auth/register";
 import OTPVerify from "./Pages/Auth/OTPVerify";
 import Teachers from "./Pages/Teachers/Teachers";
@@ -25,6 +23,7 @@ import AllSubjects from "./Pages/AdminPages/Subjects/AllSubjects/AllSubjects";
 import CreateSubject from "./Pages/AdminPages/Subjects/CreateSubject/CreateSubject";
 import Attendence from "./Pages/AdminPages/Subjects/AttendenceMarking/Attendence";
 import { User } from "./types/types.app";
+import StudentLayout from "./Layouts/StudentLayout";
 
 function App() {
   const [user, setUser] = useState<User>({} as User);
@@ -32,7 +31,7 @@ function App() {
     <UserContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
         <Routes>
-          <Route path="/student" element={<Layout />}>
+          <Route path="/student" element={<StudentLayout />}>
             <Route index element={<h1>Home</h1>} />
             <Route path="teachers" element={<Teachers />} />
             <Route path="teacher/:id" element={<Teacher />} />
