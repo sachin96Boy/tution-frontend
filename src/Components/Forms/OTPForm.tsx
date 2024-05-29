@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import OTPInput, { ResendOTP } from "otp-input-react";
 import otp_clipArt from "../../assets/Images/OTP_clipArt.png";
@@ -14,17 +15,42 @@ const OTPForm = () => {
   const [error, setError] = useState("");
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
-  const phone = user.phone;
-  const sendOTP = async () => {
+  const [phone, setPhone] = useState(user.phone);
+  const sendOTP = useCallback(async () => {
     try {
       await axiosInstance.post("/user/sendOTP", { phone_number: phone });
     } catch (error: any) {
       toaster("error", error.response.data.message);
     }
-  };
-  useEffect(() => {
-    sendOTP();
   }, []);
+  const setPhoneSession = useCallback(async () => {
+    try {
+      await axiosInstance.post("/user/setPhoneSession", {
+        phone_number: phone,
+      });
+    } catch (error: any) {
+      toaster("error", error.response.data.message);
+    }
+  }, []);
+  const getPhoneSession = useCallback(async () => {
+    try {
+      const result = await axiosInstance.get("/user/getPhoneSession");
+      if (result.status === 200) {
+        setPhone(result.data.phone_number);
+      } else {
+        toaster("error", result.data.message);
+      }
+    } catch (error: any) {
+      toaster("error", error.response.data.message);
+    }
+  }, [setPhone]);
+  useEffect(() => {
+    if (phone) {
+      sendOTP().finally(() => setPhoneSession());
+    } else {
+      getPhoneSession();
+    }
+  }, [sendOTP, setPhoneSession, getPhoneSession]);
   const fsubmit = async () => {
     try {
       const result = await axiosInstance.post("/user/verifyOTP", {
@@ -77,7 +103,10 @@ const OTPForm = () => {
         Didn't Recieve OTP ?
         <ResendOTP
           className="font-[700] font-montserrat text-[13px] text-tertiary-alt"
-          onResendClick={() => console.log("Resend clicked")}
+          onResendClick={() => {
+            sendOTP();
+            console.log("resend clicked");
+          }}
         />
       </p>
 

@@ -7,7 +7,6 @@ import classes_nav_icon from "../assets/Images/Classes_nav_icon.png";
 import classes_nav_icon_active from "../assets/Images/Classess_nav_icon_active.png";
 import profile_nav_icon from "../assets/Images/Profile_nav_icon.png";
 import profile_nav_icon_active from "../assets/Images/profile_nav_icon_active.png";
-import payment_nav_icon from "../assets/Images/payment_nav_icon.png";
 import contact_nav_icon from "../assets/Images/Contact_nav_icon.png";
 import logout_nav_icon from "../assets/Images/Logout_nav_icon.png";
 import UserContext from "../contexts/UserContext";
@@ -16,12 +15,11 @@ import toaster from "../Components/Elements/Toaster";
 import { ToastContainer } from "react-toastify";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
-
 type Props = {
   active: string;
   setActive: React.Dispatch<React.SetStateAction<string>>;
 };
-const UserNav = (props: Props) => {
+const AdminNav = (props: Props) => {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const logout = async () => {
@@ -38,26 +36,13 @@ const UserNav = (props: Props) => {
     }
   };
   return (
-    <div
-      id="Left-Side-Bar"
-      className="max-md:hidden min-w-[120px] flex flex-col justify-start pt-[22px] items-center"
-    >
+    <div className="max-md:hidden min-w-[120px] flex flex-col justify-start pt-[22px] items-center">
       <ul className="max-md:hidden py-8 flex flex-col items-center w-[80px] bg-second-alt rounded-[5px] h-[95vh] justify-between fixed">
         <ToastContainer />
-        <NavItems link="/student" icon={home_nav_icon} />
+        <NavItems link="/admin" icon={home_nav_icon} />
         <div className="flex flex-col items-center h-[50%] justify-between">
           <NavItems
-            link="/student/teachers"
-            icon={
-              props.active === "teachers"
-                ? teachers_nav_icon_active
-                : teachers_nav_icon
-            }
-            onClick={() => props.setActive("teachers")}
-          />
-
-          <NavItems
-            link="/student/classes"
+            link="/admin/subjects"
             icon={
               props.active === "classes"
                 ? classes_nav_icon_active
@@ -66,23 +51,25 @@ const UserNav = (props: Props) => {
             onClick={() => props.setActive("classes")}
           />
           <NavItems
-            link="/student/profile"
+            link="/admin/teachers"
             icon={
-              props.active === "profile"
+              props.active === "teachers"
                 ? profile_nav_icon_active
                 : profile_nav_icon
             }
-            onClick={() => props.setActive("profile")}
+            onClick={() => props.setActive("teachers")}
           />
           <NavItems
-            link="/student/payment"
+            link="/admin/students"
             icon={
-              props.active === "payment" ? payment_nav_icon : payment_nav_icon
+              props.active === "students"
+                ? teachers_nav_icon_active
+                : teachers_nav_icon
             }
-            onClick={() => props.setActive("payment")}
+            onClick={() => props.setActive("students")}
           />
           <NavItems
-            link="/student/contact"
+            link="/admin/contact"
             icon={
               props.active === "contact" ? contact_nav_icon : contact_nav_icon
             }
@@ -100,4 +87,4 @@ const UserNav = (props: Props) => {
     </div>
   );
 };
-export default UserNav;
+export default AdminNav;
