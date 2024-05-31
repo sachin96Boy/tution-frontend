@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import CourseCard from "../../Components/CourseCard";
 import { Subject, TeacherType } from "../../types/types.Teacher";
@@ -12,30 +13,30 @@ const Teacher = () => {
   const [enrolledList, setEnrolledList] = useState<Subject[]>([]);
   const [refresh, setRefresh] = useState(false);
 
-  const getSubjects = async () => {
+  const getSubjects = useCallback(async () => {
     const result = await axiosInstance.get("/subjects/get/byteacher/" + id);
     if (result.status === 200) {
       setSubjects(result.data);
     }
-  };
-  const getTeacher = async () => {
+  }, []);
+  const getTeacher = useCallback(async () => {
     const result = await axiosInstance.get("/teachers/get/" + id);
     if (result.status === 200) {
       setTeacher(result.data);
     }
-  };
-  const getEnrolledList = async () => {
+  }, []);
+  const getEnrolledList = useCallback(async () => {
     const result = await axiosInstance.get("/subjects/get/enrolled/");
     if (result.status === 200) {
       setEnrolledList(result.data);
     }
-  };
+  }, []);
 
   useEffect(() => {
     getSubjects();
     getTeacher();
     getEnrolledList();
-  }, [refresh]);
+  }, [refresh, getSubjects, getTeacher, getEnrolledList]);
 
   return (
     <div className=" font-montserrat flex flex-col items-start h-full w-full">

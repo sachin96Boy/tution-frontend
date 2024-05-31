@@ -24,6 +24,10 @@ import CreateSubject from "./Pages/AdminPages/Subjects/CreateSubject/CreateSubje
 import Attendence from "./Pages/AdminPages/Subjects/AttendenceMarking/Attendence";
 import { User } from "./types/types.app";
 import StudentLayout from "./Layouts/StudentLayout";
+import EditSubject from "./Pages/AdminPages/Subjects/EditSubject/EditSubject";
+import AllStudents from "./Pages/AdminPages/Students/AllStudents/AllStudents";
+import CreateStudent from "./Pages/AdminPages/Students/CreateStudent/CreateStudent";
+import EnrollStudent from "./Pages/AdminPages/Students/EnrollStudent/EnrollStudent";
 
 function App() {
   const [user, setUser] = useState<User>({} as User);
@@ -64,10 +68,13 @@ function App() {
 
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<h1>Admin Home</h1>} />
-            <Route path="students" element={<h1>Students</h1>} />
+            <Route path="students" element={<AllStudents />} />
+            <Route path="students/create" element={<CreateStudent />} />
+            <Route path="students/enroll/:id" element={<EnrollStudent />} />
             <Route path="subjects" element={<AllSubjects />} />
             <Route path="subjects/create" element={<CreateSubject />} />
             <Route path="subjects/attendence/:id" element={<Attendence />} />
+            <Route path="subjects/edit/:id" element={<EditSubject />} />
             <Route path="teachers" element={<AllTeachers />} />
             <Route path="teachers/create" element={<CreateTeacher />} />
             <Route path="teachers/edit/:id" element={<EditTeacher />} />

@@ -16,6 +16,7 @@ const AdminSubjectCard = (props: Props) => {
 
       if (result.status === 200) {
         toaster("success", "Subject deleted successfully");
+        window.location.reload();
       } else {
         toaster("error", "Something went wrong");
       }
@@ -49,11 +50,14 @@ const AdminSubjectCard = (props: Props) => {
             onClick={() =>
               navigate("/admin/subjects/attendence/" + props.subject.id)
             }
-            className="w-fit px-3 h-[52px] bg-tertiary text-[15px] font-[500] text-second-alt rounded-[10px] shadow-md hover:scale-105 transition-all duration-200"
+            className="w-fit px-3 h-[52px] bg-prime-alt text-[15px] font-[500] text-second-alt rounded-[10px] shadow-md hover:scale-105 transition-all duration-200"
           >
             Attendence
           </button>
-          <button className="w-full h-[52px] bg-prime text-[15px] font-[500] text-second-alt rounded-[10px] shadow-md hover:scale-105 transition-all duration-200">
+          <button
+            onClick={() => navigate("/admin/subjects/edit/" + props.subject.id)}
+            className="w-full h-[52px] bg-tertiary text-[15px] font-[500] text-second-alt rounded-[10px] shadow-md hover:scale-105 transition-all duration-200"
+          >
             Edit
           </button>
           <button

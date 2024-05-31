@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useParams } from "react-router";
 import { Html5QrcodeScanner } from "html5-qrcode";

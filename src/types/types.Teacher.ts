@@ -4,6 +4,7 @@ type Subject = {
   subject_name: string;
   grade: string;
   year: string;
+  price: number;
 };
 type TeacherType = {
   id: string;

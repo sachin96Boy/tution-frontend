@@ -3,23 +3,28 @@ import { useEffect, useState } from "react";
 import profile_pic from "../../assets/Images/Profile_photo.png";
 import { Link, useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+import html2canvas from "html2canvas-pro";
 import axiosInstance from "../../utils/axiosInstance";
 import { User } from "../../types/types.app";
+import toaster from "../../Components/Elements/Toaster";
+import { ToastContainer } from "react-toastify";
 
 const Profile = () => {
   const [user, setUser] = useState<User>({} as User);
   const navigate = useNavigate();
-  const downloadQRCode = () => {
-    const input: HTMLElement =
-      document.getElementById("qrcode") || document.createElement("div");
-    html2canvas(input).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF();
-      pdf.addImage(imgData, "PNG", 0, 0, 256, 256);
-      pdf.save("downloaded-file.pdf");
-    });
+  const handleDownloadImage = async () => {
+    const element: HTMLElement =
+        document.getElementById("print") || document.body,
+      canvas = await html2canvas(element),
+      data = canvas.toDataURL("image/jpg"),
+      link = document.createElement("a");
+
+    link.href = data;
+    link.download = "downloaded-image.jpg";
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
   const logout = async () => {
     const result = await axiosInstance.get("/api/v1/auth/logout");
@@ -30,12 +35,12 @@ const Profile = () => {
   };
   const deleteProfile = async () => {
     try {
-      const result = await axiosInstance.delete("/api/v1/auth/user");
+      const result = await axiosInstance.delete("/users/delete/" + user.id);
       if (result.status === 200) {
         logout();
       }
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      toaster("error", err.response.data.message);
     }
   };
   useEffect(() => {
@@ -50,6 +55,7 @@ const Profile = () => {
   return (
     <div className=" font-montserrat flex flex-col items-start h-full w-full">
       <h1 className="text-[30px] font-[700] text-prime">My Profile</h1>
+      <ToastContainer />
       <div className="flex flex-row justify-start gap-4 items-center h-full w-full mt-12 pr-4 max-md:flex-col">
         <div className="min-w-[250px] h-[719px] max-md:h-fit max-md:w-full pb-8 bg-second-alt rounded-[10px] flex flex-col justify-start shadow-md items-center pt-8 px-6">
           <img
@@ -171,7 +177,7 @@ const Profile = () => {
                   QR Code
                 </div>
                 <div
-                  id="qrcode"
+                  id="print"
                   style={{
                     height: "auto",
                     margin: "0 auto",
@@ -189,7 +195,7 @@ const Profile = () => {
               </div>
               <button
                 className="flex flex-row justify-center items-center mt-4 rounded-[5px] bg-tertiary text-second-alt font-montserrat text-[12px] max-w-[100%] font-[700] w-[148px] h-[50px]"
-                onClick={() => downloadQRCode()}
+                onClick={() => handleDownloadImage()}
               >
                 Download QRCode
               </button>

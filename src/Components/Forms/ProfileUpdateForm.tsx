@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import TextInput from "../../Components/Elements/TextInput";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -7,34 +8,49 @@ import Dzone from "../Dzone";
 import { ToastContainer } from "react-toastify";
 import axiosInstance from "../../utils/axiosInstance";
 import toaster from "../Elements/Toaster";
+type ValuesType = {
+  first_name: string;
+  last_name: string;
+  phone: string;
+  email: string;
+  school: string;
+  subject_stream: string;
+  exam_year: string;
+  district: string;
+  address: string;
+  nic: string;
+  nic_back?: File;
+  nic_front?: File;
+  selfie?: File;
+  profile_pic?: File;
+  parent_mobile: string;
+  password: string;
+  confirm_password: string;
+};
 const ProfileUpdateForm = () => {
   const [profilePic, setProfilePic] = useState<File | null>(null);
   const [nicBack, setNicBack] = useState<File | null>(null);
   const [nicFront, setNicFront] = useState<File | null>(null);
   const [selfie, setSelfie] = useState<File | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axiosInstance.get("/api/v1/auth/user");
-      if (result.status === 200) {
-        formik.setFieldValue("first_name", result.data.first_name || "");
-        formik.setFieldValue("last_name", result.data.last_name || "");
-        formik.setFieldValue("phone", result.data.phone || "");
-        formik.setFieldValue("email", result.data.email || "");
-        formik.setFieldValue("school", result.data.school || "");
-        formik.setFieldValue(
-          "subject_stream",
-          result.data.subject_stream || ""
-        );
-        formik.setFieldValue("exam_year", result.data.exam_year || "");
-        formik.setFieldValue("district", result.data.district || "");
-        formik.setFieldValue("address", result.data.address || "");
-        formik.setFieldValue("nic", result.data.nic || "");
-        formik.setFieldValue("parent_mobile", result.data.parent_mobile || "");
-      }
-    };
-    fetchData();
+  const fetchData = useCallback(async () => {
+    const result = await axiosInstance.get("/api/v1/auth/user");
+    if (result.status === 200) {
+      formik.setFieldValue("first_name", result.data.first_name || "");
+      formik.setFieldValue("last_name", result.data.last_name || "");
+      formik.setFieldValue("phone", result.data.phone || "");
+      formik.setFieldValue("email", result.data.email || "");
+      formik.setFieldValue("school", result.data.school || "");
+      formik.setFieldValue("subject_stream", result.data.subject_stream || "");
+      formik.setFieldValue("exam_year", result.data.exam_year || "");
+      formik.setFieldValue("district", result.data.district || "");
+      formik.setFieldValue("address", result.data.address || "");
+      formik.setFieldValue("nic", result.data.nic || "");
+      formik.setFieldValue("parent_mobile", result.data.parent_mobile || "");
+    }
   }, []);
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const initialValues = {
     first_name: "",
@@ -69,7 +85,7 @@ const ProfileUpdateForm = () => {
     nic: Yup.string().required("Required"),
     parent_mobile: Yup.string().required("Required"),
   });
-  const formsubmit = async (values: any) => {
+  const formsubmit = async (values: ValuesType) => {
     try {
       const result = await axiosInstance.put("/api/v1/auth/user", values);
       if (result.status === 200) {

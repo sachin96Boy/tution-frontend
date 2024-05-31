@@ -59,7 +59,7 @@ const CourseCard = (props: Props) => {
         <div>
           <button
             onClick={() => {
-              unenroll();
+              confirm("Are you sure you want to unenroll?") && unenroll();
               // window.location.reload();
             }}
             className="w-full h-[52px] bg-tertiary-alt text-[15px] font-[500] text-second-alt rounded-[10px] shadow-md hover:scale-105 transition-all duration-200 mt-4"
@@ -76,7 +76,7 @@ const CourseCard = (props: Props) => {
             }}
             className="w-full h-[52px] bg-tertiary text-[15px] font-[500] text-second-alt rounded-[10px] shadow-md hover:scale-105 transition-all duration-200 mt-4"
           >
-            Enroll
+            Enroll for {props.subject.price}.00/=
           </button>
         </div>
       )}

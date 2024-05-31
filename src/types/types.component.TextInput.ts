@@ -1,14 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 type TextInputProps = {
   type?: string;
   label: string;
   name: string;
   placeholder?: string;
-  value: string | number;
+  value: any;
   classNameD?: string;
   classNameL?: string;
   classNameI?: string;
-  error?: string;
-  touched?: boolean;
+  error?: any;
+  touched?: any;
   onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
