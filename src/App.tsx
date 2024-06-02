@@ -28,6 +28,10 @@ import EditSubject from "./Pages/AdminPages/Subjects/EditSubject/EditSubject";
 import AllStudents from "./Pages/AdminPages/Students/AllStudents/AllStudents";
 import CreateStudent from "./Pages/AdminPages/Students/CreateStudent/CreateStudent";
 import EnrollStudent from "./Pages/AdminPages/Students/EnrollStudent/EnrollStudent";
+import AllMonths from "./Pages/AdminPages/Subjects/SingleSubject/Months/AllMonths/AllMonths";
+import AllLEctures from "./Pages/AdminPages/Subjects/SingleSubject/Months/SingleMonth/Lectures/AllLectures/AllLectures";
+import CreateLecture from "./Pages/AdminPages/Subjects/SingleSubject/Months/SingleMonth/Lectures/CreateLecture/CreateLecture";
+import UpdateLecture from "./Pages/AdminPages/Subjects/SingleSubject/Months/SingleMonth/Lectures/UpdateLecture/UpdateLecture";
 
 function App() {
   const [user, setUser] = useState<User>({} as User);
@@ -72,9 +76,23 @@ function App() {
             <Route path="students/create" element={<CreateStudent />} />
             <Route path="students/enroll/:id" element={<EnrollStudent />} />
             <Route path="subjects" element={<AllSubjects />} />
+            <Route path="subjects/:id" element={<AllMonths />} />
+            <Route
+              path="subjects/:id/months/:month_id"
+              element={<AllLEctures />}
+            />
+            <Route
+              path="subjects/:id/months/:month _id/lectures/create"
+              element={<CreateLecture />}
+            />
+            <Route
+              path="months/:month_id/lectures/:lec_id/edit"
+              element={<UpdateLecture />}
+            />
             <Route path="subjects/create" element={<CreateSubject />} />
             <Route path="subjects/attendence/:id" element={<Attendence />} />
             <Route path="subjects/edit/:id" element={<EditSubject />} />
+
             <Route path="teachers" element={<AllTeachers />} />
             <Route path="teachers/create" element={<CreateTeacher />} />
             <Route path="teachers/edit/:id" element={<EditTeacher />} />

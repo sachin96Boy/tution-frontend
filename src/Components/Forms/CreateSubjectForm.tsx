@@ -29,7 +29,10 @@ const CreateSubjectForm = () => {
     grade: 1,
     year: 2023,
     teacher_id: "",
-    price: 0,
+    enrollment_fee: 0,
+    start_date: undefined,
+    end_date: undefined,
+    monthly_fee: 0,
   };
   const validationSchema = Yup.object({
     subject_id: Yup.string().required("Required"),
@@ -42,7 +45,10 @@ const CreateSubjectForm = () => {
       .required("Required")
       .moreThan(2023, "Must be greater than 2023"),
     teacher_id: Yup.string().required("Required"),
-    price: Yup.number().required("Required"),
+    start_date: Yup.date().required("Required"),
+    end_date: Yup.date().required("Required"),
+    enrollment_fee: Yup.number().required("Required"),
+    monthly_fee: Yup.number().required("Required"),
   });
   const formSubmit = async (values: ValuesType) => {
     try {
@@ -114,14 +120,24 @@ const CreateSubjectForm = () => {
           touched={formik.touched.year}
         />
         <TextInput
-          label="Price"
+          label="Enrollment Fee"
           type="number"
-          name="price"
-          value={formik.values.price}
+          name="enrollment_fee"
+          value={formik.values.enrollment_fee}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={formik.errors.price}
-          touched={formik.touched.price}
+          error={formik.errors.enrollment_fee}
+          touched={formik.touched.enrollment_fee}
+        />
+        <TextInput
+          label="Monthly Fee"
+          type="number"
+          name="monthly_fee"
+          value={formik.values.monthly_fee}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.errors.monthly_fee}
+          touched={formik.touched.monthly_fee}
         />
 
         <SelectInput
@@ -140,6 +156,26 @@ const CreateSubjectForm = () => {
             </option>
           ))}
         </SelectInput>
+        <TextInput
+          label="Start Date"
+          type="date"
+          name="start_date"
+          value={formik.values.start_date}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.errors.start_date}
+          touched={formik.touched.start_date}
+        />
+        <TextInput
+          label="End Date"
+          type="date"
+          name="end_date"
+          value={formik.values.end_date}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.errors.end_date}
+          touched={formik.touched.end_date}
+        />
       </div>
 
       <button

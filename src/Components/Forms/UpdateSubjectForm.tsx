@@ -25,7 +25,10 @@ const UpdateSubjectForm = () => {
     grade: number;
     year: number;
     teacher_id: string;
-    price: number;
+    enrollment_fee: number;
+    start_date: Date;
+    end_date: Date;
+    monthly_fee: number;
   };
 
   const [teachers, setTeachers] = useState<Teacher[]>([]);
@@ -63,6 +66,26 @@ const UpdateSubjectForm = () => {
         formik.setFieldValue("year", result.data.year);
         formik.setFieldValue("teacher_id", result.data.teacher_id);
         formik.setFieldValue("price", result.data.price);
+        formik.setFieldValue("enrollment_fee", result.data.enrollment_fee);
+        formik.setFieldValue("monthly_fee", result.data.monthly_fee);
+        formik.setFieldValue(
+          "start_date",
+          new Date(result.data.start_date).getFullYear() +
+            "-" +
+            ("0" + (new Date(result.data.start_date).getMonth() + 1)).slice(
+              -2
+            ) +
+            "-" +
+            ("0" + new Date(result.data.start_date).getDate()).slice(-2)
+        );
+        formik.setFieldValue(
+          "end_date",
+          new Date(result.data.end_date).getFullYear() +
+            "-" +
+            ("0" + (new Date(result.data.end_date).getMonth() + 1)).slice(-2) +
+            "-" +
+            ("0" + new Date(result.data.end_date).getDate()).slice(-2)
+        );
       } else {
         toaster("error", result.data.message);
       }
@@ -84,6 +107,10 @@ const UpdateSubjectForm = () => {
       year: 2023,
       teacher_id: "",
       price: 0,
+      start_date: new Date(),
+      end_date: new Date(),
+      enrollment_fee: 0,
+      monthly_fee: 0,
     },
 
     validationSchema: Yup.object({
@@ -97,7 +124,8 @@ const UpdateSubjectForm = () => {
         .required("Required")
         .moreThan(2023, "Must be greater than 2023"),
       teacher_id: Yup.string().required("Required"),
-      price: Yup.number().required("Required"),
+      enrollment_fee: Yup.number().required("Required"),
+      monthly_fee: Yup.number().required("Required"),
     }),
     onSubmit: (values) => {
       formSubmit(values);
@@ -112,7 +140,6 @@ const UpdateSubjectForm = () => {
       <h1 className=" font-[700] font-montserrat text-[30px] text-prime text-left">
         Update Subject
       </h1>
-
       <div className="flex flex-row justify-start items-start gap-x-8 gap-y-4 w-full flex-wrap mt-2">
         <TextInput
           label="Subject ID"
@@ -155,14 +182,24 @@ const UpdateSubjectForm = () => {
           touched={formik.touched.year}
         />
         <TextInput
-          label="Price"
+          label="Enrollment Fee"
           type="number"
-          name="price"
-          value={formik.values.price}
+          name="enrollment_fee"
+          value={formik.values.enrollment_fee}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={formik.errors.price}
-          touched={formik.touched.price}
+          error={formik.errors.enrollment_fee}
+          touched={formik.touched.enrollment_fee}
+        />
+        <TextInput
+          label="Monthly Fee"
+          type="number"
+          name="monthly_fee"
+          value={formik.values.monthly_fee}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.errors.monthly_fee}
+          touched={formik.touched.monthly_fee}
         />
 
         <SelectInput
@@ -181,6 +218,26 @@ const UpdateSubjectForm = () => {
             </option>
           ))}
         </SelectInput>
+        <TextInput
+          label="Start Date"
+          type="date"
+          name="start_date"
+          value={formik.values.start_date}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.errors.start_date}
+          touched={formik.touched.start_date}
+        />
+        <TextInput
+          label="End Date"
+          type="date"
+          name="end_date"
+          value={formik.values.end_date}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.errors.end_date}
+          touched={formik.touched.end_date}
+        />
       </div>
 
       <button
