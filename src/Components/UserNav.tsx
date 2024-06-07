@@ -57,13 +57,13 @@ const UserNav = (props: Props) => {
           />
 
           <NavItems
-            link="/student/classes"
+            link="/student/subjects"
             icon={
-              props.active === "classes"
+              props.active === "subjects"
                 ? classes_nav_icon_active
                 : classes_nav_icon
             }
-            onClick={() => props.setActive("classes")}
+            onClick={() => props.setActive("subjects")}
           />
           <NavItems
             link="/student/profile"

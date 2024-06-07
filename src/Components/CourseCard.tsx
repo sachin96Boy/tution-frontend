@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import axiosInstance from "../utils/axiosInstance";
 import toaster from "./Elements/Toaster";
 import { Props } from "../types/type.component.courseCard";
 
 const CourseCard = (props: Props) => {
+  const navigate = useNavigate();
   const enroll = async () => {
     try {
       const result = await axiosInstance.post("/subjects/enroll", {
@@ -40,21 +41,33 @@ const CourseCard = (props: Props) => {
   return (
     <div>
       <ToastContainer />
-      <Link to={props.link + props.subject.id}>
-        <div className="w-[182px] h-[230px] shadow-md hover:scale-105 transition-all duration-200 bg-second-alt rounded-lg flex flex-col justify-start items-center p-2">
-          <div className="w-[166px] h-[164px] object-cover rounded-lg bg-prime font-montserrat text-[20px] font-[700] text-second-alt flex flex-col justify-center items-center text-center px-4">
-            {props.subject.subject_name} {props.subject.grade}
-          </div>
-          <div className="flex flex-col justify-start items-start w-full pt-2 text-prime">
-            <p className=" font-montserrat text-[14px] font-[600]">
-              {props.subject.year}
-            </p>
-            <p className=" font-montserrat text-[12px] font-[400]">
-              {props.subject.subject_id}
-            </p>
-          </div>
+      <div
+        onClick={() => {
+          props.enrolled
+            ? navigate(props.link + props.subject.id)
+            : toaster(
+                "error",
+                "You have to Enroll first to view the content of this Subject"
+              );
+        }}
+        className="w-[182px] h-[230px] shadow-md hover:scale-105 transition-all duration-200 bg-second-alt rounded-lg flex flex-col justify-start items-center p-2"
+      >
+        <div className="w-[166px] h-[164px] object-cover rounded-lg bg-prime font-montserrat text-[20px] font-[700] text-second-alt flex flex-col justify-center items-center text-center px-4">
+          {props.subject.subject_name} {props.subject.grade}
         </div>
-      </Link>
+        <div className="flex flex-col justify-start items-start w-full pt-2 text-prime">
+          <p className=" font-montserrat text-[14px] font-[600]">
+            {props.subject.year}
+          </p>
+          <p className=" font-montserrat text-[12px] font-[400]">
+            {props.subject.subject_id}
+          </p>
+          <p className=" font-montserrat text-[12px] font-[400]">
+            {props.subject.monthly_fee}.00/= Monthly
+          </p>
+        </div>
+      </div>
+
       {props.enrolled ? (
         <div>
           <button
@@ -76,7 +89,7 @@ const CourseCard = (props: Props) => {
             }}
             className="w-full h-[52px] bg-tertiary text-[15px] font-[500] text-second-alt rounded-[10px] shadow-md hover:scale-105 transition-all duration-200 mt-4"
           >
-            Enroll for {props.subject.price}.00/=
+            Enroll for {props.subject.enrollment_fee}.00/=
           </button>
         </div>
       )}

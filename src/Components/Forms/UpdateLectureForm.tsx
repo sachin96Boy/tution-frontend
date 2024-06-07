@@ -94,7 +94,6 @@ const UpdateLectureForm = () => {
         Update Lecture of {month.month_name} of {month.year}
       </h1>
       <div className="flex flex-row justify-start items-start gap-x-8 gap-y-4 w-full flex-wrap mt-2">
-        <pre>{JSON.stringify(formik.values, null, 2)}</pre>
         <TextInput
           name="title"
           label="Title"

@@ -92,7 +92,7 @@ const MobileUserNav = (props: Props) => {
           />
 
           <MobileNavItems
-            link="/student/classes"
+            link="/student/subjects"
             icon={
               props.active === "classes"
                 ? classes_nav_icon_active

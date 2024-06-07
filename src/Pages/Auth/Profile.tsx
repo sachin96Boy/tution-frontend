@@ -183,6 +183,8 @@ const Profile = () => {
                     margin: "0 auto",
                     maxWidth: 64,
                     width: "100%",
+                    backgroundColor: "white",
+                    padding: "5px",
                   }}
                 >
                   <QRCode

@@ -1,15 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
-import CourseCard from "../../Components/CourseCard";
-import { Subject } from "../../types/types.MyClasses";
-import axiosInstance from "../../utils/axiosInstance";
+import CourseCard from "../../../../Components/CourseCard";
+import axiosInstance from "../../../../utils/axiosInstance";
 
-const MyClasses = () => {
-  const [enrolledList, setEnrolledList] = useState<Subject[]>([]);
+const AllEnrolledSubjects = () => {
+  const [enrolledList, setEnrolledList] = useState<any[]>([]);
   const [refresh, setRefresh] = useState(false);
   const getEnrolledList = async () => {
     const result = await axiosInstance.get("/subjects/get/enrolled/");
     if (result.status === 200) {
-      setEnrolledList(result.data);
+      setEnrolledList(result.data.Subject);
     }
   };
   useEffect(() => {
@@ -22,8 +22,8 @@ const MyClasses = () => {
         {enrolledList.map((subject, index) => {
           return (
             <CourseCard
-              link={"/student/mycourse/"}
-              subject={subject}
+              link={"/student/subject/"}
+              subject={subject.subject}
               key={index}
               refresh={refresh}
               setRefresh={setRefresh}
@@ -39,4 +39,4 @@ const MyClasses = () => {
     </div>
   );
 };
-export default MyClasses;
+export default AllEnrolledSubjects;

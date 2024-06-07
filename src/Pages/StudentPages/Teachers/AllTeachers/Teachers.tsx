@@ -1,7 +1,7 @@
-import TeacherCard from "../../Components/TeacherCard";
+import TeacherCard from "../../../../Components/TeacherCard";
 import { useEffect, useState } from "react";
-import { Teacher } from "../../types/types.Teachers";
-import axiosInstance from "../../utils/axiosInstance";
+import { Teacher } from "../../../../types/types.Teachers";
+import axiosInstance from "../../../../utils/axiosInstance";
 const Teachers = () => {
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const getTeachers = async () => {

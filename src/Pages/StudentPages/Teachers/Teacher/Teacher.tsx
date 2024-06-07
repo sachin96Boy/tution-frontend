@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router";
-import CourseCard from "../../Components/CourseCard";
-import { Subject, TeacherType } from "../../types/types.Teacher";
-import axiosInstance from "../../utils/axiosInstance";
+import CourseCard from "../../../../Components/CourseCard";
+import { Subject, TeacherType } from "../../../../types/types.Teacher";
+import axiosInstance from "../../../../utils/axiosInstance";
 
 const Teacher = () => {
   const { id } = useParams();
@@ -28,7 +28,7 @@ const Teacher = () => {
   const getEnrolledList = useCallback(async () => {
     const result = await axiosInstance.get("/subjects/get/enrolled/");
     if (result.status === 200) {
-      setEnrolledList(result.data);
+      setEnrolledList(result.data.Subject);
     }
   }, []);
 
@@ -53,13 +53,15 @@ const Teacher = () => {
         {subjects.map((subject, index) => {
           return (
             <CourseCard
-              link={"/student/course/"}
+              link={"/student/subject/"}
               subject={subject}
               key={index}
               refresh={refresh}
               setRefresh={setRefresh}
               enrolled={
-                enrolledList.find((ensubject) => ensubject.id === subject.id)
+                enrolledList.find(
+                  (ensubject) => ensubject.subject_id === subject.id
+                )
                   ? true
                   : false
               }

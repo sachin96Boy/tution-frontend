@@ -49,7 +49,30 @@ const AdminLectureCard = (props: Props) => {
         </Link>
         <div className="flex flex-col  p-2 gap-2">
           <button
-            onClick={() => {}}
+            onClick={() => {
+              const today = new Date().toLocaleString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              });
+              const lecture_day = new Date(props.lecture.date).toLocaleString(
+                "en-US",
+                {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                }
+              );
+
+              if (today === lecture_day) {
+                navigate("/admin/attendence/" + props.lecture.id);
+              } else {
+                toaster(
+                  "error",
+                  "You can only mark attendance for  this day unless it is today's lecture"
+                );
+              }
+            }}
             className="w-fit px-3 h-[52px] bg-prime-alt text-[15px] font-[500] text-second-alt rounded-[10px] shadow-md hover:scale-105 transition-all duration-200"
           >
             Attendence
