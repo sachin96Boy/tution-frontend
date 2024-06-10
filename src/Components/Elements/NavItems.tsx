@@ -1,22 +1,15 @@
 import { Link } from "react-router-dom";
+import { Props } from "../../types/types.component.navItems";
 
-const NavItems = ({
-  link,
-  icon,
-  onClick,
-}: {
-  link: string;
-  icon: string;
-  onClick?: () => void;
-}) => {
+const NavItems = (props: Props) => {
   return (
     <li>
-      <Link to={link}>
+      <Link to={props.link}>
         <img
           className="w-[45px] hover:w-[50px] transition-all duration-200"
-          src={icon}
+          src={props.icon}
           alt=""
-          onClick={onClick}
+          onClick={props.onClick}
         />
       </Link>
     </li>

@@ -5,18 +5,21 @@ import TextInput from "../Elements/TextInput";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
 import { useContext } from "react";
-import axios from "axios";
-import { baseURL } from "../../const/const";
-import { Bounce, toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axiosInstance from "../../utils/axiosInstance";
+import toaster from "../Elements/Toaster";
 
 const AdminLoginForm = () => {
-  axios.defaults.withCredentials = true;
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
-  const fsubmit = async (values: { admin_id: string; password: string }) => {
+  type ValuesType = {
+    admin_id: string;
+    password: string;
+  };
+  const fsubmit = async (values: ValuesType) => {
     try {
-      const result = await axios.post(baseURL + "/api/v1/admin/login", values);
+      const result = await axiosInstance.post("/api/v1/admin/login", values);
       if (result.status === 200) {
         setUser(result.data);
         navigate("/admin");
@@ -24,28 +27,20 @@ const AdminLoginForm = () => {
         console.log(result);
       }
     } catch (err: any) {
-      toast.error(err.response.data, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      toaster("error", err.response.data);
     }
   };
+  const initialValues = {
+    admin_id: "",
+    password: "",
+  };
+  const validationSchema = Yup.object({
+    admin_id: Yup.string().required("Required"),
+    password: Yup.string().required("Required"),
+  });
   const formik = useFormik({
-    initialValues: {
-      admin_id: "",
-      password: "",
-    },
-    validationSchema: Yup.object({
-      admin_id: Yup.string().required("Required"),
-      password: Yup.string().required("Required"),
-    }),
+    initialValues: initialValues,
+    validationSchema: validationSchema,
     onSubmit: fsubmit,
   });
 

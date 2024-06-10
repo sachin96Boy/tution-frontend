@@ -2,74 +2,47 @@
 import { useFormik } from "formik";
 import TextInput from "../Elements/TextInput";
 import * as Yup from "yup";
-import axios from "axios";
-import { baseURL } from "../../const/const";
-import { Bounce, toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ValuesType } from "../../types/types.form.CreateTeacher";
+import axiosInstance from "../../utils/axiosInstance";
+import toaster from "../Elements/Toaster";
 
 const CreateTeacherForm = () => {
-  axios.defaults.withCredentials = true;
-  const formsubmit = async (values: {
-    first_name: string;
-    last_name: string;
-    phone: string;
-    email: string;
-    password: string;
-    confirm_password: string;
-  }) => {
+  const initialValues = {
+    first_name: "",
+    last_name: "",
+    phone: "",
+    email: "",
+    password: "",
+    confirm_password: "",
+  };
+  const validationSchema = Yup.object({
+    first_name: Yup.string().required("Required"),
+    last_name: Yup.string().required("Required"),
+    phone: Yup.string().required("Required"),
+    email: Yup.string().email("Invalid email address").required("Required"),
+    password: Yup.string().required("Required"),
+    confirm_password: Yup.string()
+      .oneOf([Yup.ref("password")], "Passwords must match")
+      .required("Required"),
+  });
+  const formsubmit = async (values: ValuesType) => {
     try {
-      const result = await axios.post(baseURL + "/teachers/add", values);
+      const result = await axiosInstance.post("/teachers/add", values);
       if (result.status === 200) {
-        toast.success("Teacher created successfully", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
+        toaster("success", "Teacher created successfully");
       } else {
-        console.log("Error Error");
+        toaster("error", "Something went wrong");
       }
     } catch (error: any) {
-      toast.error(error.response.data.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      toaster("error", error.response.data.message);
     }
   };
   const formic = useFormik({
-    initialValues: {
-      first_name: "",
-      last_name: "",
-      phone: "",
-      email: "",
-      password: "",
-      confirm_password: "",
-    },
-    validationSchema: Yup.object({
-      first_name: Yup.string().required("Required"),
-      last_name: Yup.string().required("Required"),
-      phone: Yup.string().required("Required"),
-      email: Yup.string().email("Invalid email address").required("Required"),
-      password: Yup.string().required("Required"),
-      confirm_password: Yup.string()
-        .oneOf([Yup.ref("password")], "Passwords must match")
-        .required("Required"),
-    }),
-    onSubmit: (values) => {
-      formsubmit(values);
-    },
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: formsubmit,
   });
   return (
     <form

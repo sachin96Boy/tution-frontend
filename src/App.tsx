@@ -1,17 +1,11 @@
 import Login from "./Pages/Auth/login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import Layout from "./Layouts/Layout";
 import Register from "./Pages/Auth/register";
 import OTPVerify from "./Pages/Auth/OTPVerify";
-import Teachers from "./Pages/Teachers/Teachers";
-import Teacher from "./Pages/Teacher/Teacher";
-import Course from "./Pages/Course/Course";
+import Teachers from "./Pages/StudentPages/Teachers/AllTeachers/Teachers";
+import Teacher from "./Pages/StudentPages/Teachers/Teacher/Teacher";
 import Shopping from "./Pages/Shopping/Shopping";
 import ProfileUpdate from "./Pages/Auth/ProfileUpdate";
-import MyClasses from "./Pages/MyClasses/MyClasses";
-import MyClass from "./Pages/MyClass/MyClass";
-import MyLesson from "./Pages/MyLesson/MyLesson";
 import Profile from "./Pages/Auth/Profile";
 import UserContext from "./contexts/UserContext";
 import { useState } from "react";
@@ -23,29 +17,32 @@ import CreateTeacher from "./Pages/AdminPages/Teachers/CreateTeacher/CreateTeach
 import EditTeacher from "./Pages/AdminPages/Teachers/EditTeacher/EditTeacher";
 import AllSubjects from "./Pages/AdminPages/Subjects/AllSubjects/AllSubjects";
 import CreateSubject from "./Pages/AdminPages/Subjects/CreateSubject/CreateSubject";
-import Attendence from "./Pages/AdminPages/Subjects/AttendenceMarking/Attendence";
+import Attendence from "./Pages/AdminPages/Subjects/SingleSubject/Months/SingleMonth/Lectures/SingleLecture/Attendence/Attendence";
+import { User } from "./types/types.app";
+import StudentLayout from "./Layouts/StudentLayout";
+import EditSubject from "./Pages/AdminPages/Subjects/EditSubject/EditSubject";
+import AllStudents from "./Pages/AdminPages/Students/AllStudents/AllStudents";
+import CreateStudent from "./Pages/AdminPages/Students/CreateStudent/CreateStudent";
+import EnrollStudent from "./Pages/AdminPages/Students/EnrollStudent/EnrollStudent";
+import AllMonths from "./Pages/AdminPages/Subjects/SingleSubject/Months/AllMonths/AllMonths";
+import AllLEctures from "./Pages/AdminPages/Subjects/SingleSubject/Months/SingleMonth/Lectures/AllLectures/AllLectures";
+import CreateLecture from "./Pages/AdminPages/Subjects/SingleSubject/Months/SingleMonth/Lectures/CreateLecture/CreateLecture";
+import UpdateLecture from "./Pages/AdminPages/Subjects/SingleSubject/Months/SingleMonth/Lectures/UpdateLecture/UpdateLecture";
+import AllEnrolledSubjects from "./Pages/StudentPages/Subjects/AllEnrolledSubjects/AllEnrolledSubjects";
+import EnrolledSubject from "./Pages/StudentPages/Subjects/EnrolledSubject/EnrolledSubject";
 
 function App() {
-  const [user, setUser] = useState({
-    first_name: "",
-    last_name: "",
-    id: "",
-    email: "",
-    phone: "",
-    type: "",
-  });
+  const [user, setUser] = useState<User>({} as User);
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
         <Routes>
-          <Route path="/student" element={<Layout />}>
+          <Route path="/student" element={<StudentLayout />}>
             <Route index element={<h1>Home</h1>} />
             <Route path="teachers" element={<Teachers />} />
             <Route path="teacher/:id" element={<Teacher />} />
-            <Route path="course/:id" element={<Course />} />
-            <Route path="classes" element={<MyClasses />} />
-            <Route path="mycourse/:id" element={<MyClass />} />
-            <Route path="mylessons/:id" element={<MyLesson />} />
+            <Route path="subjects" element={<AllEnrolledSubjects />} />
+            <Route path="subject/:id" element={<EnrolledSubject />} />
             <Route path="profile" element={<Profile />} />
             <Route path="update-profile" element={<ProfileUpdate />} />
             <Route path="payment" element={<h1>Payment</h1>} />
@@ -67,12 +64,31 @@ function App() {
             <Route path="notifications" element={<h1>Notifications</h1>} />
           </Route>
 
+          <Route path="/teacher/login" element={<h1>Teacher Login</h1>} />
+
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<h1>Admin Home</h1>} />
-            <Route path="students" element={<h1>Students</h1>} />
+            <Route path="students" element={<AllStudents />} />
+            <Route path="students/create" element={<CreateStudent />} />
+            <Route path="students/enroll/:id" element={<EnrollStudent />} />
             <Route path="subjects" element={<AllSubjects />} />
+            <Route path="subjects/:id" element={<AllMonths />} />
+            <Route
+              path="subjects/:id/months/:month_id"
+              element={<AllLEctures />}
+            />
+            <Route
+              path="subjects/:id/months/:month_id/lectures/create"
+              element={<CreateLecture />}
+            />
+            <Route
+              path="months/:month_id/lectures/:lec_id/edit"
+              element={<UpdateLecture />}
+            />
             <Route path="subjects/create" element={<CreateSubject />} />
-            <Route path="subjects/attendence/:id" element={<Attendence />} />
+            <Route path="attendence/:id" element={<Attendence />} />
+            <Route path="subjects/edit/:id" element={<EditSubject />} />
+
             <Route path="teachers" element={<AllTeachers />} />
             <Route path="teachers/create" element={<CreateTeacher />} />
             <Route path="teachers/edit/:id" element={<EditTeacher />} />

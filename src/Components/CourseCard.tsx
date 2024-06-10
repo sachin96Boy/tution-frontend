@@ -1,118 +1,79 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import axios from "axios";
-import { Link } from "react-router-dom";
-import { baseURL } from "../const/const";
-import { Bounce, toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import axiosInstance from "../utils/axiosInstance";
+import toaster from "./Elements/Toaster";
+import { Props } from "../types/type.component.courseCard";
 
-const CourseCard = ({
-  subject,
-  link,
-  enrolled,
-}: {
-  subject: {
-    id: string;
-    subject_id: string;
-    subject_name: string;
-    grade: string;
-    year: string;
-  };
-  link: string;
-  enrolled?: boolean;
-}) => {
-  axios.defaults.withCredentials = true;
+const CourseCard = (props: Props) => {
+  const navigate = useNavigate();
   const enroll = async () => {
     try {
-      const result = await axios.post(baseURL + "/subjects/enroll", {
-        id: subject.id,
+      const result = await axiosInstance.post("/subjects/enroll", {
+        id: props.subject.id,
       });
       if (result.status === 200) {
-        toast.success("Teacher created successfully", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
+        props.setRefresh && props.setRefresh(!props.refresh);
+        toaster("success", "Enrolled successfully");
       } else {
-        console.log("Error Error");
+        toaster("error", "Something went wrong");
       }
     } catch (error: any) {
-      toast.error(error.response.data.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      toaster("error", error.response.data.message);
     }
   };
 
   const unenroll = async () => {
     try {
-      const result = await axios.post(baseURL + "/subjects/unenroll", {
-        id: subject.id,
+      const result = await axiosInstance.post("/subjects/unenroll", {
+        id: props.subject.id,
       });
       if (result.status === 200) {
-        toast.success("Teacher created successfully", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
+        props.setRefresh && props.setRefresh(!props.refresh);
+        toaster("success", "Unenrolled successfully");
       } else {
-        console.log("Error Error");
+        toaster("error", "Something went wrong");
       }
     } catch (error: any) {
-      toast.error(error.response.data.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      toaster("error", error.response.data.message);
     }
   };
   return (
     <div>
       <ToastContainer />
-      <Link to={link + subject.id}>
-        <div className="w-[182px] h-[230px] shadow-md hover:scale-105 transition-all duration-200 bg-second-alt rounded-lg flex flex-col justify-start items-center p-2">
-          <div className="w-[166px] h-[164px] object-cover rounded-lg bg-prime font-montserrat text-[20px] font-[700] text-second-alt flex flex-col justify-center items-center text-center px-4">
-            {subject.subject_name} {subject.grade}
-          </div>
-          <div className="flex flex-col justify-start items-start w-full pt-2 text-prime">
-            <p className=" font-montserrat text-[14px] font-[600]">
-              {subject.year}
-            </p>
-            <p className=" font-montserrat text-[12px] font-[400]">
-              {subject.subject_id}
-            </p>
-          </div>
+      <div
+        onClick={() => {
+          props.enrolled
+            ? navigate(props.link + props.subject.id)
+            : toaster(
+                "error",
+                "You have to Enroll first to view the content of this Subject"
+              );
+        }}
+        className="w-[182px] h-[230px] shadow-md hover:scale-105 transition-all duration-200 bg-second-alt rounded-lg flex flex-col justify-start items-center p-2"
+      >
+        <div className="w-[166px] h-[164px] object-cover rounded-lg bg-prime font-montserrat text-[20px] font-[700] text-second-alt flex flex-col justify-center items-center text-center px-4">
+          {props.subject.subject_name} {props.subject.grade}
         </div>
-      </Link>
-      {enrolled ? (
+        <div className="flex flex-col justify-start items-start w-full pt-2 text-prime">
+          <p className=" font-montserrat text-[14px] font-[600]">
+            {props.subject.year}
+          </p>
+          <p className=" font-montserrat text-[12px] font-[400]">
+            {props.subject.subject_id}
+          </p>
+          <p className=" font-montserrat text-[12px] font-[400]">
+            {props.subject.monthly_fee}.00/= Monthly
+          </p>
+        </div>
+      </div>
+
+      {props.enrolled ? (
         <div>
           <button
             onClick={() => {
-              unenroll();
-              window.location.reload();
+              confirm("Are you sure you want to unenroll?") && unenroll();
+              // window.location.reload();
             }}
             className="w-full h-[52px] bg-tertiary-alt text-[15px] font-[500] text-second-alt rounded-[10px] shadow-md hover:scale-105 transition-all duration-200 mt-4"
           >
@@ -124,11 +85,11 @@ const CourseCard = ({
           <button
             onClick={() => {
               enroll();
-              window.location.reload();
+              // window.location.reload();
             }}
             className="w-full h-[52px] bg-tertiary text-[15px] font-[500] text-second-alt rounded-[10px] shadow-md hover:scale-105 transition-all duration-200 mt-4"
           >
-            Enroll
+            Enroll for {props.subject.enrollment_fee}.00/=
           </button>
         </div>
       )}

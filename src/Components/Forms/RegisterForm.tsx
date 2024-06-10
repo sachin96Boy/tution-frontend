@@ -1,42 +1,41 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useFormik } from "formik";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import TextInput from "../Elements/TextInput";
-
 import UserContext from "../../contexts/UserContext";
 import axiosInstance from "../../utils/axiosInstance";
 import { IRegisterForm } from "../../types/types.registerForm";
+import toaster from "../Elements/Toaster";
+import { ToastContainer } from "react-toastify";
 const RegisterForm = () => {
-  const [error, setError] = useState("");
   const [terms, setTerms] = useState(false);
   const { setUser } = useContext(UserContext);
 
   const navigator = useNavigate();
 
   const fsubmit = async (values: IRegisterForm) => {
-    const result = await axiosInstance.post("/api/v1/auth/register", values);
-    if (result.status === 200) {
-      setUser(result.data);
-      navigator("/otp");
-    } else {
-      setError(result.data.message);
+    try {
+      console.log(values);
+      const result = await axiosInstance.post("/api/v1/auth/register", values);
+      if (result.status === 200) {
+        setUser(result.data);
+        navigator("/otp");
+      } else {
+        toaster("error", result.data.message);
+      }
+    } catch (err: any) {
+      toaster("error", err.response.data.message);
     }
   };
 
-  const initialValues: IRegisterForm = {
-    first_name: "",
-    last_name: "",
-    phone_number: "",
-    email: "",
-    password: "",
-    confirm_password: "",
-  };
+  const initialValues: IRegisterForm = {} as IRegisterForm;
 
   const validationSchema = Yup.object({
     first_name: Yup.string().required("Required"),
     last_name: Yup.string().required("Required"),
-    phone_number: Yup.string().required("Required"),
+    phone: Yup.string().required("Required"),
     email: Yup.string().email("Invalid Email").required("Required"),
     password: Yup.string().required("Required"),
     confirm_password: Yup.string()
@@ -56,6 +55,7 @@ const RegisterForm = () => {
       action=""
       className="p-20 min-w-[340px] w-full min-h-full bg-second-alt rounded-[10px] flex flex-col justify-start pt-12 items-left gap-y-4"
     >
+      <ToastContainer />
       <h1 className=" font-[700] font-montserrat text-[30px] text-prime text-left">
         Register
       </h1>
@@ -89,10 +89,10 @@ const RegisterForm = () => {
         />
         <TextInput
           label="Phone Number"
-          name="phone_number"
-          value={formik.values.phone_number}
-          error={formik.errors.phone_number}
-          touched={formik.touched.phone_number}
+          name="phone"
+          value={formik.values.phone}
+          error={formik.errors.phone}
+          touched={formik.touched.phone}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           classNameD="min-w-[360px] max-md:min-w-[100%]"
@@ -134,9 +134,6 @@ const RegisterForm = () => {
           classNameD="min-w-[360px] max-md:min-w-[100%]"
           classNameI="min-w-[360px] max-md:min-w-[100%]"
         />
-        <p className="font-[500] font-montserrat text-[13px] text-tertiary-alt w-[45%] max-md:w-[95%] text-left">
-          {error}
-        </p>
       </div>
       <div className="flex flex-row justify-start items-center gap-x-8 gap-y-4 w-full">
         <input
